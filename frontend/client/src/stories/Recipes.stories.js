@@ -8,3 +8,8 @@ import RecipeItem from "../components/Recipes/RecipeItem";
 
 export const RecipeListComponent = () => <RecipeList />
 export const RecipeItemComponent = () => <RecipeItem />
+
+export default {
+  title: "Components/RecipeList",
+  component: RecipeList
+};
