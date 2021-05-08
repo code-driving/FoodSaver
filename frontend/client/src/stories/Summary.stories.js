@@ -9,3 +9,7 @@ import SummaryItem from "../components/Summary/SummaryItem";
 export const SummaryListComponent = () => <SummaryList />
 export const SummaryItemComponent = () => <SummaryItem />
 
+export default {
+  title: "Components/SummaryList",
+  component: SummaryList
+};
