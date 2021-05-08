@@ -4,6 +4,7 @@ const router = express.Router();
 
 module.exports = ({ getUsers, getUserByEmail, addUser }) => {
   /* GET users listing. */
+  // login route gives user if exist
   router.get("/", (req, res) => {
     getUsers()
       .then((users) => res.json(users))
@@ -14,6 +15,7 @@ module.exports = ({ getUsers, getUserByEmail, addUser }) => {
       );
   });
 
+  //register route
   router.post("/", (req, res) => {
     const { name, email, password, phone_number } = req.body;
 

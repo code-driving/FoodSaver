@@ -15,13 +15,13 @@ VALUES ('potato', '2021-08-01', 1),
 
 INSERT INTO saved_recipes (user_id, recipe_id)
 VALUES (1, 1),
-VALUES (1, 2),
-VALUES (2, 3),
-VALUES (2, 4),
-VALUES (3, 5);
+(1, 2),
+(2, 3),
+(2, 4),
+(3, 5);
 
 
 INSERT INTO quantities (product_id, quantity_grams, quantity_units, grams_wasted, units_wasted, grams_saved, units_saved)
 VALUES (1, 5, 7, 10, 15, 3, 5),
-VALUES (2, 3, 2, 7, 6, 4, 6),
-VALUES (3, 4, 3, 8, 4, 9, 7);
+(2, 3, 2, 7, 6, 4, 6),
+(3, 4, 3, 8, 4, 9, 7);

@@ -16,5 +16,19 @@ module.exports = ({ getUserProducts }) => {
       );
   });
 
+  router.post("/", (req, res) => {
+    getUserProducts()
+      .then((usersProducts) => {
+        const formattedProducts = getProductsByUsers(usersProducts);
+        res.json(formattedProducts);
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
+
   return router;
 };

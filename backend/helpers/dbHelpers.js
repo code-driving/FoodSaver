@@ -22,10 +22,10 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const addUser = (name, email, password) => {
+  const addUser = (name, email, password, phone_number) => {
     const query = {
-      text: `INSERT INTO users (name, email, password) VALUES ($1, $2, $3, $4) RETURNING *`,
-      values: [name, email, password],
+      text: `INSERT INTO users (name, email, password, phone_number) VALUES ($1, $2, $3, $4) RETURNING *`,
+      values: [name, email, password, phone_number],
     };
 
     return db
@@ -47,10 +47,24 @@ module.exports = (db) => {
         .then((result) => result.rows)
         .catch((err) => err);
   };
+
+  // const postUserProducts = (name, expiration_date, user_id) => {
+  //   const query = {
+  //     text: `INSERT INTO products (name, expiration_date, user_id) VALUES ($1, $2, $3) RETURNING *`,
+  //     values: [name, expiration_date, user_id],
+  //   };
+
+  //   return db
+  //       .query(query)
+  //       .then((result) => result.rows)
+  //       .catch((err) => err);
+  // };
+
+
+
   return {
     getUsers,
     getUserByEmail,
     addUser,
-    getUserProducts,
   };
 };

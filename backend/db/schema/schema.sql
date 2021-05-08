@@ -31,7 +31,7 @@ CREATE TABLE quantities (
   quantity_grams float,
   quantity_units INTEGER,
   grams_wasted float, 
-  units_wasted INTEGER
+  units_wasted INTEGER,
   grams_saved float, 
   units_saved INTEGER
 );

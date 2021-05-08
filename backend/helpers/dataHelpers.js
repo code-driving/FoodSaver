@@ -1,3 +1,5 @@
+const { getMaxListeners } = require("node:process");
+
 const getProductsByUsers = (usersProducts) => {
   const productsByUsers = {};
 
@@ -24,3 +26,18 @@ const getProductsByUsers = (usersProducts) => {
 module.exports = {
   getProductsByUsers
 };
+
+
+// 1 : {
+//   userid:1,
+//   name:getMaxListeners
+//   email:asd@getMaxListeners,
+//   products: [
+//     potatos : {
+//       quantity:2,
+//     },
+//     tomatos,
+//     cheese
+//   ],
+//   recipes:{}
+// }
