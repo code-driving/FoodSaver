@@ -2,36 +2,29 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
+
+import NavBar from "./NavBar/NavBarItem"
+import ProductList from "./Products/ProductList"
+import RecipeList from "./Recipes/RecipeList"
+import SummaryList from "./Summary/SummaryList"
+
 
 export default function Application(props) {
   return (
     <Router>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Products</Link>
-            </li>
-            <li>
-              <Link to="/recipes">Recipes</Link>
-            </li>
-            <li>
-              <Link to="/quantities">Summary</Link>
-            </li>
-          </ul>
-        </nav>
+        <NavBar />
         <Switch>
           <Route exact path="/">
-            <Products />
+            <ProductList />
           </Route>
           <Route path="/recipes">
-            <Recipes />
+            <RecipeList />
           </Route>
           <Route path="/quantities">
-            <Quantities />
+            <SummaryList />
           </Route>
         </Switch>
       </div>
@@ -39,14 +32,3 @@ export default function Application(props) {
   );
 }
 
-function Products() {
-  return <h2>Home page with all products</h2>;
-}
-
-function Recipes() {
-  return <h2>Recipes</h2>;
-}
-
-function Quantities() {
-  return <h2>Quantities</h2>;
-}
