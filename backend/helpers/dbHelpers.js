@@ -37,7 +37,7 @@ module.exports = (db) => {
   const getUserProducts = () => {
     const query = {
       text: `SELECT users.id as user_id,users.name,email,password,phone_number,products.id as product_id, products.name as product_name, 
-              expiration_date , quantity_grams , quantity_units 
+              expiration_date , quantity_grams , quantity_units, grams_wasted, units_wasted, grams_saved, units_saved
         FROM users
         INNER JOIN products ON users.id = products.user_id`,
     };
