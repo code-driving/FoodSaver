@@ -8,6 +8,7 @@ const dbHelpers = require('./helpers/dbHelpers')(db);
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
+const recipeRouter = require('./routes/recipe');
 
 const app = express();
 
@@ -20,5 +21,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter(dbHelpers));
 app.use('/api/products', productsRouter(dbHelpers));
+app.use('/api/recipes', recipeRouter(dbHelpers));
 
 module.exports = app;

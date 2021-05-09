@@ -1,5 +1,3 @@
-// const { getMaxListeners } = require("node:process");
-
 const getProductsByUsers = (usersProducts) => {
   const productsByUsers = {};
 
@@ -10,34 +8,58 @@ const getProductsByUsers = (usersProducts) => {
               name: product.name,
               email: product.email,
               products: [],
+              recipes:[],
+              summary:[]
           };
       }
 
       productsByUsers[product.user_id].products.push({
-          name: product.name,
-          expiration_date : product.expiration_date
+          product_id : product.product_id,
+          name: product.product_name,
+          expiration_date : product.expiration_date,
+          quantity_grams: product.quantity_grams,
+          quantity_unit : product.quantity_unit
       });
+
 
   }
 
   return Object.values(productsByUsers);
 };
 
-module.exports = {
-  getProductsByUsers
+const AppendRecipes = (savedRecipe,formattedProducts) => {
+  
+  console.log('inside')
+  for (let productsobject of formattedProducts) {
+     for (let recipe of savedRecipe) {
+       if (productsobject.userId === recipe.user_id)
+       productsobject['recipes'].push({
+        recipie_name: recipe.recipie_name,
+        recipe_id: recipe.recipe_id
+       })
+     }
+  }
+  console.log(newformattedProducts)
+  return formattedProducts
 };
 
 
-// 1 : {
-//   userid:1,
-//   name:getMaxListeners
-//   email:asd@getMaxListeners,
-//   products: [
-//     potatos : {
-//       quantity:2,
-//     },
-//     tomatos,
-//     cheese
-//   ],
-//   recipes:{}
-// }
+
+module.exports = {
+  getProductsByUsers,
+  AppendRecipes
+};
+
+
+///api/products
+
+// [{id:1,name:asdasd,products:[{id,name,expirationdate,quantites_of_individual_ingrede}],recipes[id],summary},
+// {id:1,name:asdasd,products:[id,name,expirationdate]},
+
+// ]
+
+///api/savedrecipies
+//[id: {recipes}]
+
+//api/quanties
+// [productid :[qun]]

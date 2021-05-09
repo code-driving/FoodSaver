@@ -36,10 +36,10 @@ module.exports = (db) => {
 
   const getUserProducts = () => {
     const query = {
-      text: `SELECT *
+      text: `SELECT users.id as user_id,users.name,email,password,phone_number,products.id as product_id, products.name as product_name, 
+              expiration_date , quantity_grams , quantity_units 
         FROM users
-        INNER JOIN products
-        ON users.id = products.user_id`,
+        INNER JOIN products ON users.id = products.user_id`,
     };
 
     return db
@@ -47,6 +47,31 @@ module.exports = (db) => {
         .then((result) => result.rows)
         .catch((err) => err);
   };
+
+  const getSavedRecipes = () => {
+    const query = {
+      text: `SELECT * FROM saved_recipes;`,
+    };
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
+
+  const Summary = () => {
+    const query = {
+      text: `SELECT * FROM quantities;`,
+    };
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
+
+
+  
+
+
 
   // const postUserProducts = (name, expiration_date, user_id) => {
   //   const query = {
@@ -66,5 +91,8 @@ module.exports = (db) => {
     getUsers,
     getUserByEmail,
     addUser,
+    getUserProducts,
+    getSavedRecipes,
+    Summary
   };
 };

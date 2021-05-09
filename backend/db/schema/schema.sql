@@ -16,11 +16,14 @@ CREATE TABLE products (
   id SERIAL PRIMARY KEY NOT NULL,
   name varchar(255) NOT NULL,
   expiration_date DATE NOT NULL,
+  quantity_grams float,
+  quantity_units INTEGER,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE saved_recipes (
   id SERIAL PRIMARY KEY NOT NULL,
+  recipie_name varchar(255) NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   recipe_id INTEGER NOT NULL
 );
@@ -28,8 +31,6 @@ CREATE TABLE saved_recipes (
 CREATE TABLE quantities (
   id SERIAL PRIMARY KEY NOT NULL,
   product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
-  quantity_grams float,
-  quantity_units INTEGER,
   grams_wasted float, 
   units_wasted INTEGER,
   grams_saved float, 
