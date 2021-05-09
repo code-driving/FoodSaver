@@ -9,7 +9,8 @@ CREATE TABLE users (
   name varchar(255) NOT NULL,
   email varchar(255) NOT NULL,
   password varchar(255) NOT NULL,
-  phone_number bigint NOT NULL
+  phone_number bigint NOT NULL,
+  score INTEGER NOT NULL
 );
 
 CREATE TABLE products (
@@ -18,10 +19,6 @@ CREATE TABLE products (
   expiration_date DATE NOT NULL,
   quantity_grams float,
   quantity_units INTEGER,
-  grams_wasted float, 
-  units_wasted INTEGER,
-  grams_saved float, 
-  units_saved INTEGER,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -32,8 +29,11 @@ CREATE TABLE saved_recipes (
   recipe_id INTEGER NOT NULL
 );
 
--- CREATE TABLE quantities (
---   id SERIAL PRIMARY KEY NOT NULL,
---   product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
- 
--- );
+CREATE TABLE quantities (
+  id SERIAL PRIMARY KEY NOT NULL,
+   grams_wasted float, 
+  units_wasted INTEGER,
+  grams_saved float, 
+  units_saved INTEGER,
+  product_id INTEGER REFERENCES products(id) ON DELETE CASCADE 
+);

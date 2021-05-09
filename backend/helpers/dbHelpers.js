@@ -38,7 +38,7 @@ module.exports = (db) => {
   const getUserProducts = () => {
     const query = {
       text: `SELECT users.id as user_id,users.name,email,password,phone_number,products.id as product_id, products.name as product_name, 
-              expiration_date , quantity_grams , quantity_units, grams_wasted, units_wasted, grams_saved, units_saved
+              expiration_date , quantity_grams , quantity_units
         FROM users
         INNER JOIN products ON users.id = products.user_id`,
     };
@@ -60,13 +60,11 @@ module.exports = (db) => {
   };
 
   const postProduct = (name, expiration_date, user_id, quantity_grams, quantity_units, 
-                      grams_wasted, units_wasted, grams_saved, units_saved) => {
+                      grams_wasted) => {
     const query = {
-      text: `INSERT INTO products (name, expiration_date, user_id, quantity_grams, quantity_units, 
-             grams_wasted, units_wasted, grams_saved, units_saved)
-             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;`,
-             values: [name, expiration_date, user_id, quantity_grams, quantity_units, 
-                      grams_wasted, units_wasted, grams_saved, units_saved],
+      text: `INSERT INTO products (name, expiration_date, user_id, quantity_grams, quantity_units)
+             VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+             values: [name, expiration_date, user_id, quantity_grams, quantity_units],
     };
     return db
         .query(query)
@@ -74,15 +72,12 @@ module.exports = (db) => {
         .catch((err) => err);
   };
 
-  const editProduct = (name, expiration_date, product_id, quantity_grams, quantity_units, 
-                      grams_wasted, units_wasted, grams_saved, units_saved) => {
+  const editProduct = (name, expiration_date, product_id, quantity_grams, quantity_units) => {
     const query = {
       text: `UPDATE products
-             SET name = $1, expiration_date = $2, quantity_grams = $4, quantity_units = $5, grams_wasted = $6,
-             units_wasted = $7 ,  grams_saved = $8 , units_saved = $9
+             SET name = $1, expiration_date = $2, quantity_grams = $4, quantity_units = $5
              WHERE id = $3`,
-             values: [name, expiration_date, product_id, quantity_grams, quantity_units, 
-                      grams_wasted, units_wasted, grams_saved, units_saved],
+             values: [name, expiration_date, product_id, quantity_grams, quantity_units],
     };
     return db
         .query(query)

@@ -24,7 +24,7 @@ module.exports = ({ getUserProducts,  getSavedRecipes, postProduct, editProduct}
   router.post("/", (req, res) => {
     const {name, expiration_date, user_id, quantity_grams, quantity_units, 
             grams_wasted, units_wasted, grams_saved, units_saved} = req.body;
-       postProduct(name, expiration_date, user_id, quantity_grams, quantity_units, grams_wasted, units_wasted, grams_saved, units_saved)
+       postProduct(name, expiration_date, user_id, quantity_grams, quantity_units)
       .then((data) => {
         res.status(200).send('Posted')
       })
@@ -38,9 +38,8 @@ module.exports = ({ getUserProducts,  getSavedRecipes, postProduct, editProduct}
   router.put("/:id", (req, res) => {
     const product_id = Number(req.params.id) 
     console.log(product_id)
-    const {name, expiration_date, quantity_grams, quantity_units, 
-            grams_wasted, units_wasted, grams_saved, units_saved} = req.body;
-      editProduct(name, expiration_date, product_id, quantity_grams, quantity_units, grams_wasted, units_wasted, grams_saved, units_saved)
+    const {name, expiration_date, quantity_grams, quantity_units} = req.body;
+      editProduct(name, expiration_date, product_id, quantity_grams, quantity_units)
       .then((data) => {
         res.status(200).send('Edited')
       })

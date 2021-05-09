@@ -8,7 +8,8 @@ const getProductsByUsers = (usersProducts) => {
               name: product.name,
               email: product.email,
               products: [],
-              recipes:[]
+              recipes:[],
+              summary:[]
           };
       }
 
@@ -17,11 +18,7 @@ const getProductsByUsers = (usersProducts) => {
           name: product.product_name,
           expiration_date : product.expiration_date,
           quantity_grams: product.quantity_grams,
-          quantity_unit : product.quantity_unit,
-          grams_wasted : product.grams_wasted,
-          units_wasted : product. units_wasted,
-          grams_saved : product.grams_saved,
-          units_saved: product.units_saved
+          quantity_unit : product.quantity_unit
       });
 
 
@@ -44,6 +41,23 @@ const AppendRecipes = (savedRecipe,formattedProducts) => {
   }
   return formattedProducts
 };
+
+const AppendSummary = (savedRecipe,formattedProducts) => {
+  
+ 
+  for (let productsobject of formattedProducts) {
+     for (let recipe of savedRecipe) {
+       if (productsobject.userId === recipe.user_id)
+       productsobject['recipes'].push({
+        recipie_name: recipe.recipie_name,
+        recipe_id: recipe.recipe_id
+       })
+     }
+  }
+  return formattedProducts
+};
+
+
 
 
 
