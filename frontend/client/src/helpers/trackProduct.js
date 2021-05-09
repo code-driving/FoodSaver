@@ -1,0 +1,2 @@
+//javascript function to check if the expiration date of the product is less then today's date, then the product is expired. It can return true or false.
+// We will use this helper in useApplicationData
