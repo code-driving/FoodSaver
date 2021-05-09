@@ -89,6 +89,30 @@ module.exports = (db) => {
         .catch((err) => err);
   };
 
+  const addRecipe = (recipie_name, user_id, recipe_id) => {
+    const query = {
+      text: `INSERT INTO saved_recipes (recipie_name, user_id, recipe_id)
+              VALUES ($1,$2, $3)`,
+             values: [recipie_name, user_id, recipe_id],
+    };
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
+
+  const deleteRecipe = (id) => {
+    const query = {
+      text: `DELETE FROM saved_recipes WHERE id = $1`,
+             values: [id],
+    };
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
+
+
 
 
   return {
@@ -98,7 +122,8 @@ module.exports = (db) => {
     getUserProducts,
     getSavedRecipes,
     postProduct,
-    editProduct
-    
+    editProduct,
+    addRecipe,
+    deleteRecipe
   };
 };
