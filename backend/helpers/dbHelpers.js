@@ -58,9 +58,14 @@ module.exports = (db) => {
         .catch((err) => err);
   };
 
-  const Summary = () => {
+  const postProduct = (name, expiration_date, user_id, quantity_grams, quantity_units, 
+                      grams_wasted, units_wasted, grams_saved, units_saved) => {
     const query = {
-      text: `SELECT * FROM quantities;`,
+      text: `INSERT INTO products (name, expiration_date, user_id, quantity_grams, quantity_units, 
+             grams_wasted, units_wasted, grams_saved, units_saved)
+             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;`,
+             values: [name, expiration_date, user_id, quantity_grams, quantity_units, 
+                      grams_wasted, units_wasted, grams_saved, units_saved],
     };
     return db
         .query(query)
@@ -68,22 +73,18 @@ module.exports = (db) => {
         .catch((err) => err);
   };
 
-
-  
-
-
-
-  // const postUserProducts = (name, expiration_date, user_id) => {
-  //   const query = {
-  //     text: `INSERT INTO products (name, expiration_date, user_id) VALUES ($1, $2, $3) RETURNING *`,
-  //     values: [name, expiration_date, user_id],
-  //   };
-
-  //   return db
-  //       .query(query)
-  //       .then((result) => result.rows)
-  //       .catch((err) => err);
-  // };
+  const deleteProduct = (name, expiration_date, user_id, quantity_grams, quantity_units, 
+                      grams_wasted, units_wasted, grams_saved, units_saved) => {
+    const query = {
+      text: `DELETE FROM products WHERE name = $1`,
+             values: [name, expiration_date, user_id, quantity_grams, quantity_units, 
+                      grams_wasted, units_wasted, grams_saved, units_saved],
+    };
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
 
 
 
