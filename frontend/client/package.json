@@ -20,12 +20,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-<<<<<<< HEAD
-    "db:reset": "node ./db/reset.js"
-=======
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
->>>>>>> c1f4993ed91674fd246e54732cfd5058f8642c0c
   },
   "eslintConfig": {
     "extends": [

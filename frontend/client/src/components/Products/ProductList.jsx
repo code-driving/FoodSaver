@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { Fragment, useEffect } from "react";
+import ProductForm from "./ProductForm";
 
-export default function ProductList() {
+export default function ProductList(props) {
   return (
-    <div>
-      ProductList
-    </div>
+    <Fragment>
+      <article>
+        <ProductForm 
+          name={props.name}
+          onSubmit={onSubmit}
+        />
+      </article>
+    </Fragment>
   )
 }
