@@ -23,6 +23,7 @@ module.exports = (db) => {
   };
 
   const addUser = (name, email, password, phone_number) => {
+    console.log(name, email, password, phone_number)
     const query = {
       text: `INSERT INTO users (name, email, password, phone_number) VALUES ($1, $2, $3, $4) RETURNING *`,
       values: [name, email, password, phone_number],

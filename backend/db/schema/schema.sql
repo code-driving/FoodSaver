@@ -9,7 +9,7 @@ CREATE TABLE users (
   name varchar(255) NOT NULL,
   email varchar(255) NOT NULL,
   password varchar(255) NOT NULL,
-  phone_number INTEGER NOT NULL
+  phone_number bigint NOT NULL
 );
 
 CREATE TABLE products (

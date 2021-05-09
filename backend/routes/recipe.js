@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const { getProductsByUsers } = require("../helpers/dataHelpers");
 
 module.exports = ({ getSavedRecipes, addRecipe, deleteRecipe }) => {
   router.get("/", (req, res) => {
