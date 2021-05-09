@@ -52,16 +52,3 @@ module.exports = {
   AppendRecipes
 };
 
-
-///api/products
-
-// [{id:1,name:asdasd,products:[{id,name,expirationdate,quantites_of_individual_ingrede}],recipes[id],summary},
-// {id:1,name:asdasd,products:[id,name,expirationdate]},
-
-// ]
-
-///api/savedrecipies
-//[id: {recipes}]
-
-//api/quanties
-// [productid :[qun]]

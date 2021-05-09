@@ -73,14 +73,14 @@ module.exports = (db) => {
         .catch((err) => err);
   };
 
-  const editProduct = (name, expiration_date, user_id, quantity_grams, quantity_units, 
+  const editProduct = (name, expiration_date, product_id, quantity_grams, quantity_units, 
                       grams_wasted, units_wasted, grams_saved, units_saved) => {
     const query = {
       text: `UPDATE products
              SET name = $1, expiration_date = $2, quantity_grams = $4, quantity_units = $5, grams_wasted = $6,
              units_wasted = $7 ,  grams_saved = $8 , units_saved = $9
-             WHERE user_id = $3 AND name = $1`,
-             values: [name, expiration_date, user_id, quantity_grams, quantity_units, 
+             WHERE id = $3`,
+             values: [name, expiration_date, product_id, quantity_grams, quantity_units, 
                       grams_wasted, units_wasted, grams_saved, units_saved],
     };
     return db
@@ -97,7 +97,8 @@ module.exports = (db) => {
     addUser,
     getUserProducts,
     getSavedRecipes,
-    postProduct
+    postProduct,
+    editProduct
     
   };
 };
