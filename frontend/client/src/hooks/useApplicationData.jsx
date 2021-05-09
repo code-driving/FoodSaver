@@ -4,15 +4,27 @@ export default function useApplicationData() {
   const [state, setState] = useState({
     products: [],
     recipes: [],
-    
+    summaries: [], //keep track of the expired and saved products
+    score: 100
   })
-  const { products, recipes } = state
+  const { products, recipes, score } = state
   
+  // ? create a function to keep track of the Score
   
-  //in here we will have for now:
-  //1.setProduct
-  //2.setRecipe
-  //3.
+  //in here we will 
+  //1.createProduct
+  //2.deleteProduct
+  //use Axios request to create or delete
+  
+  //3.setRecipe
+  //4.deleteRecipe
+  //use Axios request to create or delete
+  
+  //5. in useEffect make axios get requests to all endpoints
+  
+  //6. create handleIncrement, handleDecrement, handleReset to update the score based on the product_saved, product_expired
+  //IF SCORE == 0 THEN HE WILL HAVE TO DONATE TO FOODBANK AND HAVE A POSSIBILITY TO RESET A SCORE
+  
 }
 
 
@@ -114,4 +126,40 @@ export default function useApplicationData() {
     });
   }, []);
   return { state, setDay, bookInterview, cancelInterview, numberOfSpots };
+}
+
+this.state = {
+  counters: [
+      { id: 1, value: 0 },
+      { id: 2, value: 0 },
+      { id: 3, value: 0 },
+      { id: 4, value: 0 },
+      { id: 5, value: 0 }
+  ],
+  total: 0
+};
+handleIncrement(counter) {
+  const total = this.state.total + 1;
+  const counters = [...this.state.counters];
+  const index = counters.indexOf(counter);
+  counters[index] = { ...counter };
+  counters[index].value++;
+  this.setState({ counters: counters, total: total });
+}
+
+handleDecrement(counter) {
+  const total = this.state.total - 1;
+  const counters = [...this.state.counters];
+  const index = counters.indexOf(counter);
+  counters[index] = { ...counter };
+  counters[index].value--;
+  this.setState({ counters: counters, total: total });
+}
+handleReset() {
+  const total = 0;
+  const counters = this.state.counters.map(c => {
+      c.value = 0;
+      return c;
+  });
+  this.setState({ counters: counters, total: total });
 }

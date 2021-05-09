@@ -14,7 +14,7 @@ export default function ProductForm(props) {
   const classes = useStyles();
   const [formData, setFormData] = useState({
     product: "",
-    expiration_date: Date.now(),
+    expiration_date: new Date().toLocaleDateString,
     quantity: 0,
     price: 0
   })

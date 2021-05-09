@@ -7,14 +7,17 @@ import RecipeList from './RecipeList'
 export default function Recipes(props) {
   //const { product, setProduct } = props
   //const { recipeData, setRecipeData } = useRecipeData(product)
-  onSubmit = (formData) => {
-    setProduct(formData.product)
-    setRecipeData(formData.product)
-  }
+  
+  // onSubmit = (formData) => {
+  //   setProduct(formData.product)
+  //   setRecipeData(formData.product)
+  // }
+  
   //setProduct((prev) => ... prev, formData.product)
   // setRecipeData((prev) => ...formData.product)
   return (
     <section>
+    hello from Recipes
       {/* <RecipeList product={product} recipeData={recipeData} onSubmit={onSubmit} /> */}
     </section>
   )
