@@ -18,7 +18,7 @@ const getProductsByUsers = (usersProducts) => {
           name: product.product_name,
           expiration_date : product.expiration_date,
           quantity_grams: product.quantity_grams,
-          quantity_unit : product.quantity_unit
+          quantity_unit : product.quantity_units
           
       });
 
@@ -29,9 +29,7 @@ const getProductsByUsers = (usersProducts) => {
 };
 
 const AppendRecipes = (savedRecipe,formattedProducts) => {
-  console.log(savedRecipe)
-  console.log(formattedProducts)
- 
+  
   for (let productsobject of formattedProducts) {
      for (let recipe of savedRecipe) {
        if (productsobject.user_Id === recipe.user_id)

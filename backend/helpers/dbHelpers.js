@@ -121,6 +121,18 @@ module.exports = (db) => {
         .catch((err) => err);
   };
 
+  const addSummary= (user_id, product_id, grams_wasted, units_wasted, grams_saved, units_saved) => {
+    const query = {
+      text: `INSERT INTO product_summary (user_id, product_id, grams_wasted, units_wasted, grams_saved, units_saved)
+              VALUES ($1,$2, $3, $4, $5, $6)`,
+             values: [user_id, product_id, grams_wasted, units_wasted, grams_saved, units_saved],
+    };
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
+
 
 
 
@@ -134,6 +146,7 @@ module.exports = (db) => {
     editProduct,
     addRecipe,
     deleteRecipe,
-    getSummary
+    getSummary,
+    addSummary
   };
 };

@@ -10,6 +10,7 @@ const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
 const recipeRouter = require('./routes/recipe');
 const authRouter = require('./routes/auth');
+const summaryRouter = require('./routes/summary');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use('/', indexRouter);
 app.use('/api/users', usersRouter(dbHelpers));
 app.use('/api/products', productsRouter(dbHelpers));
 app.use('/api/recipes', recipeRouter(dbHelpers));
-app.use('/api/', authRouter(dbHelpers));
+app.use('/api', authRouter(dbHelpers));
+app.use('/api/summary', summaryRouter(dbHelpers));
 
 module.exports = app;
