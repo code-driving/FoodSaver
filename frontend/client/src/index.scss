@@ -8,12 +8,24 @@
   box-sizing: border-box;
 }
 
-// body {
-  
-// }
+body, html {
+  min-height: 100vh;
+  overflow: auto;
+}
+
+body {
+  background-color: $moreLighter-background;
+  // font-family: $font;
+  font-size: 20px;
+  line-height: 1.6;
+  height: 100%;
+}
+
 .layout {
   display: flex;
-  min-height: 100vh;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 @media only screen and (max-width: 960px) {

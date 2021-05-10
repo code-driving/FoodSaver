@@ -5,7 +5,7 @@ import {
   Route
 } from "react-router-dom";
 
-import NavBarItem from "./NavBar/NavBarItem"
+import NavBar from "./NavBar"
 import Products from "./Products"
 import Recipes from "./Recipes"
 import Summary from "./Summary"
@@ -18,7 +18,7 @@ export default function Application(props) {
     <main className="layout">
     <Router>
       {/* <div> */}
-        <NavBarItem />
+        <NavBar />
         <Switch>
         
           <PrivateRoute exact path="/">
