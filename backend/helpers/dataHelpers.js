@@ -1,12 +1,12 @@
 const getProductsByUsers = (usersProducts) => {
   const productsByUsers = {};
- console.log(usersProducts)
   for (let product of usersProducts) {
       if (!productsByUsers[product.user_id]) {
           productsByUsers[product.user_id] = {
-              userId: product.user_id,
+              user_Id: product.user_id,
               name: product.name,
               email: product.email,
+              score:product.score,
               products: [],
               recipes:[],
               summary:[]
@@ -19,6 +19,7 @@ const getProductsByUsers = (usersProducts) => {
           expiration_date : product.expiration_date,
           quantity_grams: product.quantity_grams,
           quantity_unit : product.quantity_unit
+          
       });
 
 
@@ -28,12 +29,13 @@ const getProductsByUsers = (usersProducts) => {
 };
 
 const AppendRecipes = (savedRecipe,formattedProducts) => {
-  
+  console.log(savedRecipe)
+  console.log(formattedProducts)
  
   for (let productsobject of formattedProducts) {
      for (let recipe of savedRecipe) {
-       if (productsobject.userId === recipe.user_id)
-       productsobject['recipes'].push({
+       if (productsobject.user_Id === recipe.user_id)
+        productsobject['recipes'].push({
         recipie_name: recipe.recipie_name,
         recipe_id: recipe.recipe_id
        })
@@ -42,19 +44,24 @@ const AppendRecipes = (savedRecipe,formattedProducts) => {
   return formattedProducts
 };
 
-const AppendSummary = (savedRecipe,formattedProducts) => {
-  
+const AppendSummary = (Summaries,combinedData) => {
  
-  for (let productsobject of formattedProducts) {
-     for (let recipe of savedRecipe) {
-       if (productsobject.userId === recipe.user_id)
-       productsobject['recipes'].push({
-        recipie_name: recipe.recipie_name,
-        recipe_id: recipe.recipe_id
-       })
-     }
+  for (let productsobject of combinedData) {
+     for (let summary of Summaries) {
+       if (productsobject.user_Id === summary.user_id) {
+          productsobject['summary'].push({
+          id: summary.id,
+          name: summary.name,
+          grams_wasted: summary.grams_wasted,
+          units_wasted: summary.units_wasted,
+          grams_saved: summary.grams_saved,
+          units_saved: summary.units_saved,
+          product_id: summary.product_id
+          })
+        }
+      }
   }
-  return formattedProducts
+  return combinedData
 };
 
 
@@ -63,6 +70,7 @@ const AppendSummary = (savedRecipe,formattedProducts) => {
 
 module.exports = {
   getProductsByUsers,
-  AppendRecipes
+  AppendRecipes,
+  AppendSummary
 };
 

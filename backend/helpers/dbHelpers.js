@@ -38,7 +38,7 @@ module.exports = (db) => {
   const getUserProducts = () => {
     const query = {
       text: `SELECT users.id as user_id,users.name,email,password,phone_number,products.id as product_id, products.name as product_name, 
-              expiration_date , quantity_grams , quantity_units
+              expiration_date , quantity_grams , quantity_units, score
         FROM users
         INNER JOIN products ON users.id = products.user_id`,
     };
@@ -108,6 +108,19 @@ module.exports = (db) => {
         .catch((err) => err);
   };
 
+  const getSummary = () => {
+    const query = {
+      text: `SELECT product_summary.user_id,product_id, grams_wasted, units_wasted, grams_saved, 
+             units_saved , name
+             FROM product_summary
+             INNER JOIN products ON products.id = product_summary.product_id;`,
+    };
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
+
 
 
 
@@ -120,6 +133,7 @@ module.exports = (db) => {
     postProduct,
     editProduct,
     addRecipe,
-    deleteRecipe
+    deleteRecipe,
+    getSummary
   };
 };

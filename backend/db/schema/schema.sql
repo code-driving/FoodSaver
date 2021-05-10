@@ -29,11 +29,12 @@ CREATE TABLE saved_recipes (
   recipe_id INTEGER NOT NULL
 );
 
-CREATE TABLE quantities (
+CREATE TABLE product_summary (
   id SERIAL PRIMARY KEY NOT NULL,
-   grams_wasted float, 
+  grams_wasted float, 
   units_wasted INTEGER,
   grams_saved float, 
   units_saved INTEGER,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   product_id INTEGER REFERENCES products(id) ON DELETE CASCADE 
 );
