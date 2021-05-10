@@ -49,6 +49,30 @@ module.exports = (db) => {
         .catch((err) => err);
   };
 
+  const getPaticularUserProducts = (id) => {
+    const query = {
+      text: `SELECT * FROM products
+             WHERE user_id = ${id}`,
+    };
+
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
+
+
+  const getUserSavedRecipes = (id) => {
+    const query = {
+      text: `SELECT * FROM saved_recipes
+             WHERE user_id = ${id};`,
+    };
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
+
   const getSavedRecipes = () => {
     const query = {
       text: `SELECT * FROM saved_recipes;`,
@@ -108,12 +132,34 @@ module.exports = (db) => {
         .catch((err) => err);
   };
 
+
+  const getOnlySummary = () => {
+    const query = {
+      text: `SELECT * FROM product_summary;`,
+    };
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
+
   const getSummary = () => {
     const query = {
       text: `SELECT product_summary.user_id,product_id, grams_wasted, units_wasted, grams_saved, 
              units_saved , name
              FROM product_summary
              INNER JOIN products ON products.id = product_summary.product_id;`,
+    };
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
+
+  const getUserSummary = (id) => {
+    const query = {
+      text: `SELECT * FROM product_summary
+             WHERE user_id = ${id};`,
     };
     return db
         .query(query)
@@ -147,6 +193,10 @@ module.exports = (db) => {
     addRecipe,
     deleteRecipe,
     getSummary,
-    addSummary
+    addSummary,
+    getOnlySummary,
+    getPaticularUserProducts,
+    getUserSavedRecipes,
+    getUserSummary
   };
 };

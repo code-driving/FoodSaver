@@ -1,9 +1,22 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = ({ getSavedRecipes, addRecipe, deleteRecipe }) => {
+module.exports = ({ getSavedRecipes, addRecipe, deleteRecipe ,getUserSavedRecipes}) => {
   router.get("/", (req, res) => {
     getSavedRecipes()
+      .then((usersRecipies) => {
+        console.log(usersRecipies)
+        res.json(usersRecipies)
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
+  router.get("/:id", (req, res) => {
+    getUserSavedRecipes(req.params.id)
       .then((usersRecipies) => {
         console.log(usersRecipies)
         res.json(usersRecipies)

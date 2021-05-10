@@ -13,8 +13,35 @@ module.exports = ({
   postProduct,
   editProduct,
   getSummary,
+  getPaticularUserProducts,
 }) => {
   router.get("/", (req, res) => {
+    getUserProducts()
+      .then((usersProducts) => {
+        res.json(usersProducts);
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
+  router.get("/:id", (req, res) => {
+    const id = Number(req.params.id);
+    console.log(id);
+    getPaticularUserProducts(id)
+      .then((userProducts) => {
+        res.json(userProducts);
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
+  router.get("/all", (req, res) => {
     getUserProducts()
       .then((usersProducts) => {
         console.log(usersProducts);
