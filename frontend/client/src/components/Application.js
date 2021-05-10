@@ -6,29 +6,44 @@ import {
 } from "react-router-dom";
 
 import NavBarItem from "./NavBar/NavBarItem"
-import ProductList from "./Products/ProductList"
-import RecipeList from "./Recipes/RecipeList"
-import SummaryList from "./Summary/SummaryList"
+import Products from "./Products"
+import Recipes from "./Recipes"
+import Summary from "./Summary"
+import Login from "./Login"
+import PrivateRoute from "./Login/PrivateRoute"
 
 
 export default function Application(props) {
   return (
+    <main className="layout">
     <Router>
-      <div>
+      {/* <div> */}
         <NavBarItem />
         <Switch>
-          <Route exact path="/">
-            <ProductList />
+        
+          <PrivateRoute exact path="/">
+            <Products />
+          </PrivateRoute>
+          
+          <Route exact path="/recipes">
+            <Recipes />
           </Route>
-          <Route path="/recipes">
-            <RecipeList />
+          
+          <Route exact path="/summary">
+            <Summary />
           </Route>
-          <Route path="/quantities">
-            <SummaryList />
+          
+          <Route path="/login">
+            <Login />
+          </Route>
+          
+          <Route path="*">
+            <h1>404 - Not Found</h1>
           </Route>
         </Switch>
-      </div>
+      {/* </div> */}
     </Router>
+    </main>
   );
 }
 
