@@ -1,6 +1,12 @@
+<<<<<<< HEAD
+=======
+// const { getMaxListeners } = require("node:process");
+
+>>>>>>> 6c0341075e61592c2e7f4dda8902cd17379a5b30
 const getProductsByUsers = (usersProducts) => {
   const productsByUsers = {};
   for (let product of usersProducts) {
+<<<<<<< HEAD
       if (!productsByUsers[product.user_id]) {
           productsByUsers[product.user_id] = {
               user_Id: product.user_id,
@@ -23,11 +29,27 @@ const getProductsByUsers = (usersProducts) => {
       });
 
 
+=======
+    if (!productsByUsers[product.user_id]) {
+      productsByUsers[product.user_id] = {
+        userId: product.user_id,
+        name: product.name,
+        email: product.email,
+        products: [],
+      };
+    }
+
+    productsByUsers[product.user_id].products.push({
+      name: product.name,
+      expiration_date: product.expiration_date,
+    });
+>>>>>>> 6c0341075e61592c2e7f4dda8902cd17379a5b30
   }
 
   return Object.values(productsByUsers);
 };
 
+<<<<<<< HEAD
 const AppendRecipes = (savedRecipe,formattedProducts) => {
   
   for (let productsobject of formattedProducts) {
@@ -72,3 +94,22 @@ module.exports = {
   AppendSummary
 };
 
+=======
+module.exports = {
+  getProductsByUsers,
+};
+
+// 1 : {
+//   userid:1,
+//   name:getMaxListeners
+//   email:asd@getMaxListeners,
+//   products: [
+//     potatos : {
+//       quantity:2,
+//     },
+//     tomatos,
+//     cheese
+//   ],
+//   recipes:{}
+// }
+>>>>>>> 6c0341075e61592c2e7f4dda8902cd17379a5b30
