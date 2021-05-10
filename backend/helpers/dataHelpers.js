@@ -1,4 +1,5 @@
 const getProductsByUsers = (usersProducts) => {
+  console.log("usersProducts===> ", usersProducts)
   const productsByUsers = {};
   for (let product of usersProducts) {
       if (!productsByUsers[product.user_id]) {
@@ -31,7 +32,7 @@ const getProductsByUsers = (usersProducts) => {
 const AppendRecipes = (savedRecipe,formattedProducts) => {
   
   for (let productsobject of formattedProducts) {
-     for (let recipe of savedRecipe) {
+      for (let recipe of savedRecipe) {
        if (productsobject.user_Id === recipe.user_id)
         productsobject['recipes'].push({
         recipie_name: recipe.recipie_name,
@@ -43,10 +44,10 @@ const AppendRecipes = (savedRecipe,formattedProducts) => {
 };
 
 const AppendSummary = (Summaries,combinedData) => {
- 
+
   for (let productsobject of combinedData) {
-     for (let summary of Summaries) {
-       if (productsobject.user_Id === summary.user_id) {
+      for (let summary of Summaries) {
+        if (productsobject.user_Id === summary.user_id) {
           productsobject['summary'].push({
           id: summary.id,
           name: summary.name,
