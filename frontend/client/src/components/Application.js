@@ -37,9 +37,9 @@ export default function Application(props) {
             <Login />
           </Route>
           
-          <Route path="*">
+          {/* <Route path="*">
             <h1>404 - Not Found</h1>
-          </Route>
+          </Route> */}
         </Switch>
       {/* </div> */}
     </Router>
