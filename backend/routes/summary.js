@@ -18,19 +18,6 @@ module.exports = ({ addSummary }) => {
       );
   });
 
-//   router.delete("/:id", (req, res) => {
-//     const id = Number(req.params.id) 
-//     deleteRecipe(id)
-//       .then(() => {
-//         res.status(200).send('Deleted Recipe')
-//       })
-//       .catch((err) =>
-//         res.json({
-//           error: err.message,
-//         })
-//       );
-//   });
-
 
   return router;
 };
