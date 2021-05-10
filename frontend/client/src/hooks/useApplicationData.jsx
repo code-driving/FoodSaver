@@ -2,13 +2,48 @@ import { useState } from 'react'
 
 export default function useApplicationData() {
   const [state, setState] = useState({
+    users: [],
     products: [],
     recipes: [],
     summaries: [], //keep track of the expired and saved products
-    score: 100
+    // score: 100
   })
-  const { products, recipes, score } = state
+  const { products, recipes, score, summaries } = state
+
+  function createProduct(id, product) {
+    
+    const setProduct = (value) => {
+      setState(prev => ({ ...prev, products: [...prev.products, value] }))
+    }
+    return axios
+      .put(`/api/products/${id}`)
+        .then((response) => {
+          setProduct(product)
+        })
+
+  }
+  // const setGroceries = (value) => {
+  //   setState(prev => ({ ...prev, groceries: [...prev.groceries, value] }))
+  // }
+
+  useEffect(() => {
+    Promise.all([
+      axios.get("/api/users"),
+      axios.get("/api/products"),
+      axios.get("/api/recipes"),
+      axios.get("/api/summary"),
+    ]).then(([users, products, recipes, summary]) => {
+      setState((prev) => ({
+        ...prev,
+        users: users.data,
+        products: products.data,
+        recipes: recipes.data,
+        summary: summary.data,
+      }));
+    });
+  }, []);
   
+  return {state, createProduct}
   // ? create a function to keep track of the Score
   
   //in here we will 
