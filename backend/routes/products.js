@@ -7,6 +7,7 @@ module.exports = ({ getUserProducts,  getSavedRecipes, postProduct, editProduct,
   router.get("/", (req, res) => {
     getUserProducts()
       .then((usersProducts) => {
+      console.log("usersProducts=>", usersProducts)
         const formattedProducts = getProductsByUsers(usersProducts);
         getSavedRecipes()
            .then((savedRecipe)=>{
