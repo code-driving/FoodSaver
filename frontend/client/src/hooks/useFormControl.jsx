@@ -17,7 +17,6 @@ export default function useFormControl(initialFields, action) {
     setFormData({ ...formData, [name]: value })
     
   }
-
   return { formData, handleSubmit, handleChange }
 }
 
