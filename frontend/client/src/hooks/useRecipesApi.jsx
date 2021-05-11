@@ -4,9 +4,9 @@ import ingredientsToString from "../helpers/ingredientsToString"
 
 export default function useRecipesApi(product, ingredientsArray) {
   const [product, setProduct] = useState(product);
-  const [response, setResponse] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // const [response, setResponse] = useState(null);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(null);
 
   const ingredients = ingredientsToString(ingredientsArray)
  
@@ -22,3 +22,4 @@ export default function useRecipesApi(product, ingredientsArray) {
 
   return { product }
 }
+
