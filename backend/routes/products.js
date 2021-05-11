@@ -72,7 +72,7 @@ module.exports = ({
     } = req.body;
     postProduct(name, expiration_date, user_id, quantity_grams, quantity_units)
       .then((data) => {
-        res.status(200).send("Posted");
+        res.json(data[0]);
       })
       .catch((err) =>
         res.json({
@@ -93,6 +93,7 @@ module.exports = ({
       quantity_units
     )
       .then((data) => {
+        console.log("data from route", data)
         res.json(data);
       })
       .catch((err) =>

@@ -11,6 +11,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -20,24 +21,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProductForm(props) {
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
+  
   const classes = useStyles();
   const [formData, setFormData] = useState({
     name: "",
-    expiration_date: new Date().toLocaleString,
     quantity_grams: 0,
-    quantity_units: 0,
-    price: 0,
+    quantity_units: 0
   });
+
+  const localId = localStorage.getItem("token");
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.onSubmit(formData);
+    props.onSubmit({...formData, expiration_date: selectedDate, user_id: localId});
   };
-
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
@@ -84,13 +87,6 @@ export default function ProductForm(props) {
         inputProps={{ "aria-label": "description" }}
         name="quantity_units"
         value={formData.quantity_units}
-        onChange={handleChange}
-      />
-      <Input
-        placeholder="price"
-        inputProps={{ "aria-label": "description" }}
-        name="price"
-        value={formData.price}
         onChange={handleChange}
       />
       <button type="submit">Add</button>

@@ -15,9 +15,9 @@ export default function Application(props) {
   // console.log("summary", state.summary);
   // console.log("products", state.products);
   const { products, recipes, summary, users } = state
-  console.log(recipes)
-  console.log(summary)
-  console.log(products)
+  // console.log(recipes)
+  // console.log(summary)
+  // console.log(products)
   return (
     <main className="layout">
       <Router>

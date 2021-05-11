@@ -9,19 +9,18 @@ export default function useApplicationData() {
     summary: [], //keep track of the expired and saved products
     // score: 100
   });
-  // const { products, recipes, score, summaries } = state;
 
-  // const setProduct = (value) => {
-  //   setState(prev => ({ ...prev, products: [...prev.products, value] }))
-  // }
   const localId = localStorage.getItem("token");
-  console.log(localId);
   
   const setProduct = (value) => {
+    
+    console.log('value from useApplicationData', value)
     return axios
-      .put(`/api/products/${localId}`, value)
+      .post(`/api/products/`, value)
       .then((response) => {
-        setState(prev => ({ ...prev, products: [...prev.products, value] }))//use response instead of value
+        console.log("response from products from useApplicationData", response)
+
+        setState(prev => ({ ...prev, products: [...prev.products, response.data] }))
     });
   }
   // const deleteProduct = (value) => {
