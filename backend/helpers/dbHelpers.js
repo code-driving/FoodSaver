@@ -184,7 +184,7 @@ module.exports = (db) => {
   const getPaticularUsers = (id) => {
     const query = {
       text: `SELECT * FROM users
-             WHERE user_id = ${id};`,
+             WHERE id = ${id};`,
     };
     return db
         .query(query)
