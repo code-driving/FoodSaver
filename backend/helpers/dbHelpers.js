@@ -179,7 +179,18 @@ module.exports = (db) => {
         .catch((err) => err);
   };
 
+  
 
+  const getPaticularUsers = (id) => {
+    const query = {
+      text: `SELECT * FROM users
+             WHERE user_id = ${id};`,
+    };
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
 
 
   return {
@@ -197,6 +208,7 @@ module.exports = (db) => {
     getOnlySummary,
     getPaticularUserProducts,
     getUserSavedRecipes,
-    getUserSummary
+    getUserSummary,
+    getPaticularUsers
   };
 };
