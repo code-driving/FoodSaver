@@ -3,21 +3,22 @@
 @import "styles/reset.scss";
 @import "styles/typography.scss";
 
-@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200&display=swap");
 
 * {
   box-sizing: border-box;
 }
 
-body, html {
+body,
+html {
   min-height: 100vh;
   overflow: auto;
 }
 
 body {
   background-color: $moreLighter-background;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: "Fira Sans", sans-serif;
   color: $white;
   font-size: 23px;
   line-height: 1.6;

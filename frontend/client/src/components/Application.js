@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import useApplicationData from "../hooks/useApplicationData";
-import useRecipesApi from "../hooks/useRecipesApi";
+// import useRecipesApi from "../hooks/useRecipesApi";
 
 import NavBar from "./NavBar";
 import Products from "./Products";

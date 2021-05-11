@@ -331,10 +331,6 @@ export default function ProductList(props) {
     setPage(0);
   };
 
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const emptyRows =
@@ -406,6 +402,16 @@ export default function ProductList(props) {
             </TableBody>
           </Table>
         </TableContainer>
+        <Button
+          classes={classes}
+          onClick={() => {
+            alert("clicked");
+          }}
+          variant="outlined"
+          color="primary"
+        >
+          Find Recipes
+        </Button>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
@@ -416,15 +422,6 @@ export default function ProductList(props) {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
-      <Button
-        onClick={() => {
-          alert("clicked");
-        }}
-        variant="outlined"
-        color="primary"
-      >
-        Find Recipes
-      </Button>
     </div>
   );
 }
