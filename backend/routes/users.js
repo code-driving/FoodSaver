@@ -2,12 +2,22 @@ const express = require("express");
 const router = express.Router();
 
 
-module.exports = ({ getUsers, getUserByEmail, addUser }) => {
+module.exports = ({ getUsers, getUserByEmail, addUser ,  getPaticularUsers }) => {
   /* GET users listing. */
   // login route gives user if exist
   router.get("/", (req, res) => {
     getUsers()
       .then((users) => res.json(users))
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
+  router.get("/:id", (req, res) => {
+    getPaticularUsers(req.params.id)
+      .then((user) => res.json(user))
       .catch((err) =>
         res.json({
           error: err.message,
