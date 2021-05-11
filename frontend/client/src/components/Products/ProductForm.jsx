@@ -13,9 +13,10 @@ const useStyles = makeStyles((theme) => ({
 export default function ProductForm(props) {
   const classes = useStyles();
   const [formData, setFormData] = useState({
-    product: "",
+    name: "",
     expiration_date: new Date().toLocaleString,
-    quantity: 0,
+    quantity_grams: 0,
+    quantity_units: 0,
     price: 0,
   });
   const handleSubmit = (event) => {
@@ -40,12 +41,12 @@ export default function ProductForm(props) {
       onSubmit={handleSubmit}
     >
       <Input
-        placeholder="product"
+        placeholder="product name"
         inputProps={{ "aria-label": "description" }}
-        name="product"
+        name="name"
         // value={product}
         // onChange={(event) => setProduct(event.target.value)}
-        value={formData.product}
+        value={formData.name}
         onChange={handleChange}
       />
       <Input
@@ -58,12 +59,21 @@ export default function ProductForm(props) {
         onChange={handleChange}
       />
       <Input
-        placeholder="quantity"
+        placeholder="quantity_grams"
         inputProps={{ "aria-label": "description" }}
-        name="quantity"
+        name="quantity_grams"
         // value={quantity}
         // onChange={(event) => setQuantity(event.target.value)}
-        value={formData.quantity}
+        value={formData.quantity_grams}
+        onChange={handleChange}
+      />
+      <Input
+        placeholder="quantity_units"
+        inputProps={{ "aria-label": "description" }}
+        name="quantity_units"
+        // value={quantity}
+        // onChange={(event) => setQuantity(event.target.value)}
+        value={formData.quantity_units}
         onChange={handleChange}
       />
       <Input
