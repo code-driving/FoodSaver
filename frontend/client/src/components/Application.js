@@ -11,9 +11,8 @@ import PrivateRoute from "./Login/PrivateRoute";
 
 export default function Application(props) {
   const { state, createProduct } = useApplicationData();
-  console.log("recipes", state.recipes);
-  console.log("summary", state.summary);
-  console.log("products", state.products[0]);
+
+    
   return (
     <main className="layout">
       <Router>

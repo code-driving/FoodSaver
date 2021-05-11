@@ -11,6 +11,11 @@ export default function useApplicationData() {
   });
   const { products, recipes, score, summaries } = state;
 
+
+  const localId = localStorage.getItem("token");
+  console.log(localId);
+
+
   function createProduct(id, product) {
     const setProduct = (value) => {
       setState((prev) => ({ ...prev, products: [...prev.products, value] }));
@@ -20,8 +25,14 @@ export default function useApplicationData() {
     });
   }
 
-  const localId = localStorage.getItem("token");
-  console.log(localId);
+  // function saveRecipes() {
+  //   const setRecipe= (value) => {
+  //     setState((prev) => ({ ...prev, recipes: [...prev.recipes, value] }));
+  //   };
+  //   return axios.put(`/api/recipes/${localId}`).then((response) => {
+  //     setProduct(product);
+  //   });
+  // }
 
   useEffect(() => {
     Promise.all([
@@ -40,7 +51,7 @@ export default function useApplicationData() {
     });
   }, []);
 
-  return { state, createProduct };
+  return { state, setState, createProduct };
   // ? create a function to keep track of the Score
 
   //in here we will

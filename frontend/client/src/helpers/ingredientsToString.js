@@ -1,4 +1,4 @@
-export function ingredientsToString (ingredientsArray) {
+default export function ingredientsToString (ingredientsArray) {
 let ingredientString = ''
 count = 0
 

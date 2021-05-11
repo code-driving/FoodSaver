@@ -1,9 +1,10 @@
 import React from 'react'
 
-export default function RecipeItem() {
+export default function RecipeItem(props) {
   return (
     <div>
-      RecipeItem
+      <img src={props.image} alt={props.alt}></img>
+      <h1>{props.title}</h1>   
     </div>
   )
 }
