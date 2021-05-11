@@ -96,10 +96,25 @@ const headCells = [
     disablePadding: true,
     label: "Select All",
   },
-  { id: "calories", numeric: true, disablePadding: false, label: "Calories" },
-  { id: "fat", numeric: true, disablePadding: false, label: "Fat (g)" },
-  { id: "carbs", numeric: true, disablePadding: false, label: "Carbs (g)" },
-  { id: "protein", numeric: true, disablePadding: false, label: "Protein (g)" },
+  {
+    id: "expiration_date",
+    numeric: true,
+    disablePadding: false,
+    label: "Expiration Date",
+  },
+  {
+    id: "quantity_grams",
+    numeric: true,
+    disablePadding: false,
+    label: "Quantity (g)",
+  },
+  {
+    id: "quantity_units",
+    numeric: true,
+    disablePadding: false,
+    label: "Amount (units)",
+  },
+  // { id: "protein", numeric: true, disablePadding: false, label: "Protein (g)" },
 ];
 
 function EnhancedTableHead(props) {
@@ -265,7 +280,7 @@ export default function ProductList(props) {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const { products } = props;
   console.log("products in list component", products);
@@ -375,9 +390,9 @@ export default function ProductList(props) {
                       >
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
+                      <TableCell align="right">{row.expiration_date}</TableCell>
+                      <TableCell align="right">{row.quantity_grams}</TableCell>
+                      <TableCell align="right">{row.quantity_units}</TableCell>
                       <TableCell align="right">{row.protein}</TableCell>
                     </TableRow>
                   );
