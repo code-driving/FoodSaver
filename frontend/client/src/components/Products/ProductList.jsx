@@ -42,6 +42,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
+import Button from "@material-ui/core/Button";
 
 // function createData(name, calories, fat, carbs, protein) {
 //   return { name, calories, fat, carbs, protein };
@@ -415,6 +416,15 @@ export default function ProductList(props) {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
+      <Button
+        onClick={() => {
+          alert("clicked");
+        }}
+        variant="outlined"
+        color="primary"
+      >
+        Find Recipes
+      </Button>
     </div>
   );
 }

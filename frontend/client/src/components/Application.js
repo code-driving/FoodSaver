@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import useApplicationData from "../hooks/useApplicationData";
+import useRecipesApi from "../hooks/useRecipesApi";
 
 import NavBar from "./NavBar";
 import Products from "./Products";
@@ -11,6 +12,7 @@ import PrivateRoute from "./Login/PrivateRoute";
 
 export default function Application(props) {
   const { state, createProduct } = useApplicationData();
+  // const { useRecipesApi } = useRecipesApi();
   console.log("recipes", state.recipes);
   console.log("summary", state.summary);
   console.log("products", state.products[0]);
