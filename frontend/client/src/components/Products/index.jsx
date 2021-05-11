@@ -3,12 +3,10 @@ import ProductList from "./ProductList";
 import ProductForm from "./ProductForm";
 
 export default function Products(props) {
-  const { products, setProducts } = props;
+  const { products, setProduct } = props;
   const onSubmit = (formData) => {
-    setProducts(formData);
+    setProduct(formData);
   };
-
-  //setProducts((prev) => ...prev, formData)
 
   return (
     <section>

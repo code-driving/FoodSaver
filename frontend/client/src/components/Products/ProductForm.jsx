@@ -20,13 +20,11 @@ export default function ProductForm(props) {
   });
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("fire!");
     props.onSubmit(formData);
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormData({ ...formData, [name]: value });
   };
   // const [product, setProduct] = useState("");

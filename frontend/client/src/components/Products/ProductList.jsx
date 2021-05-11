@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-
+import ProductItem from "./ProductItem"
 
 // in this component we will ma over our props.products and will render ProductItem component
 
@@ -16,9 +16,14 @@ export default function ProductList(props) {
   
   const { products } = props
   //map over products here, check if this is an Array
-
+console.log(products)
+const agenda = products.map((product) => {
   return (
-    <div>Material ui table</div>
-    //button
-  )
+    <ProductItem
+      key={product.id}
+      {...product} 
+    />
+  );
+});
+return <ul>{agenda}</ul>;
 }

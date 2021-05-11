@@ -10,10 +10,14 @@ import Login from "./Login";
 import PrivateRoute from "./Login/PrivateRoute";
 
 export default function Application(props) {
-  const { state, createProduct } = useApplicationData();
-  console.log("recipes", state.recipes);
-  console.log("summary", state.summary);
-  console.log("products", state.products[0]);
+  const { state, setProduct } = useApplicationData();
+  // console.log("recipes", state.recipes);
+  // console.log("summary", state.summary);
+  // console.log("products", state.products);
+  const { products, recipes, summary, users } = state
+  console.log(recipes)
+  console.log(summary)
+  console.log(products)
   return (
     <main className="layout">
       <Router>
@@ -21,7 +25,7 @@ export default function Application(props) {
         <NavBar />
         <Switch>
           <PrivateRoute exact path="/">
-            <Products onSubmit={createProduct} products={state.products} />
+            <Products products={products} setProduct={setProduct} />
           </PrivateRoute>
 
           <Route exact path="/recipes">
