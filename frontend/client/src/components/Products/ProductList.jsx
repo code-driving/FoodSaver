@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-
-export default function ProductList() {
-  return (
-    <div>
-      ProductList
-    </div>
-=======
 import React, { Fragment, useEffect } from "react";
 
 
@@ -29,6 +20,5 @@ export default function ProductList(props) {
   return (
     <div>Material ui table</div>
     //button
->>>>>>> 6c0341075e61592c2e7f4dda8902cd17379a5b30
   )
 }
