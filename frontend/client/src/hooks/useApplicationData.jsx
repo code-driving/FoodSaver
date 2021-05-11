@@ -11,20 +11,27 @@ export default function useApplicationData() {
   });
   // const { products, recipes, score, summaries } = state;
 
-  // function createProduct(id, product) {
-  //   const setProduct = (value) => {
-  //     setState((prev) => ({ ...prev, products: [...prev.products, value] }));
-  //   };
-  //   return axios.put(`/api/products/${id}`).then((response) => {
-  //     setProduct(product);
-  //   });
+  // const setProduct = (value) => {
+  //   setState(prev => ({ ...prev, products: [...prev.products, value] }))
   // }
-  const setProduct = (value) => {
-    setState(prev => ({ ...prev, products: [...prev.products, value] }))
-  }
-
   const localId = localStorage.getItem("token");
   console.log(localId);
+  
+  const setProduct = (id, value) => {
+    return axios
+      .put(`/api/products/${localId}${id}`, { value })
+      .then((response) => {
+        setState(prev => ({ ...prev, products: [...prev.products, value] }))
+    });
+  }
+  // const deleteProduct = (value) => {
+  //   return axios
+  //     .put(`/api/products/${localId}`, { value })
+  //     .then((response) => {
+  //       setState(prev => ({ ...prev, products: [...prev.products, value] }))
+  //   });
+  // }
+
 //We should not use localId at the end of each endpoint!
   useEffect(() => {
     Promise.all([
