@@ -93,7 +93,7 @@ module.exports = ({
       quantity_units
     )
       .then((data) => {
-        res.status(200).send("Edited");
+        res.json(data);
       })
       .catch((err) =>
         res.json({

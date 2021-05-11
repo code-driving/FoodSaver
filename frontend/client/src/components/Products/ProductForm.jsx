@@ -44,6 +44,7 @@ export default function ProductForm(props) {
   };
 
   return (
+    <Grid container justify="space-around">
     <form
       className={classes.root}
       noValidate
@@ -57,13 +58,6 @@ export default function ProductForm(props) {
         value={formData.name}
         onChange={handleChange}
       />
-      {/* <Input
-        placeholder="expiration date"
-        inputProps={{ "aria-label": "description" }}
-        name="expiration_date"
-        value={formData.expiration_date}
-        onChange={handleChange}
-      /> */}
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <KeyboardDatePicker
           margin="normal"
@@ -102,6 +96,7 @@ export default function ProductForm(props) {
       <button type="submit">Add</button>
       <button type="submit">Cancel</button>
     </form>
+    </Grid>
   );
 }
 

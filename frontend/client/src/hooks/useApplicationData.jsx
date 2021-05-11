@@ -17,11 +17,11 @@ export default function useApplicationData() {
   const localId = localStorage.getItem("token");
   console.log(localId);
   
-  const setProduct = (id, value) => {
+  const setProduct = (value) => {
     return axios
-      .put(`/api/products/${localId}${id}`, { value })
+      .put(`/api/products/${localId}`, value)
       .then((response) => {
-        setState(prev => ({ ...prev, products: [...prev.products, value] }))
+        setState(prev => ({ ...prev, products: [...prev.products, value] }))//use response instead of value
     });
   }
   // const deleteProduct = (value) => {
