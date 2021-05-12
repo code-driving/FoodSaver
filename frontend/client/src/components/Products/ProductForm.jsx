@@ -10,7 +10,8 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import useFormControl from '../../hooks/useFormControl';
+import Button from '@material-ui/core/Button';
+import "./ProductForm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,6 +46,15 @@ export default function ProductForm(props) {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
+  
+  const handleReset = () => {
+    setFormData({ 
+      formData: [{}]
+    });
+    Array.from(document.querySelectorAll("Input")).forEach(
+      input => (input.value = "")
+    );
+  };
 
   return (
     <Grid container justify="space-around">
@@ -58,7 +68,7 @@ export default function ProductForm(props) {
         placeholder="product name"
         inputProps={{ "aria-label": "description" }}
         name="name"
-        value={formData.name}
+        value={formData.name || ""}
         onChange={handleChange}
       />
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -68,7 +78,7 @@ export default function ProductForm(props) {
           label="Date picker dialog"
           format="MM/dd/yyyy"
           name="expiration_date"
-          value={selectedDate}
+          value={selectedDate || ""}
           onChange={handleDateChange}
           KeyboardButtonProps={{
             'aria-label': 'change date',
@@ -76,21 +86,25 @@ export default function ProductForm(props) {
       />
       </MuiPickersUtilsProvider>
       <Input
-        placeholder="quantity_grams"
+        placeholder="quantity grams"
         inputProps={{ "aria-label": "description" }}
         name="quantity_grams"
-        value={formData.quantity_grams}
+        value={formData.quantity_grams || ""}
         onChange={handleChange}
       />
       <Input
-        placeholder="quantity_units"
+        placeholder="quantity units"
         inputProps={{ "aria-label": "description" }}
         name="quantity_units"
-        value={formData.quantity_units}
+        value={formData.quantity_units || ""}
         onChange={handleChange}
       />
-      <button type="submit">Add</button>
-      <button type="submit">Cancel</button>
+      <Button type="submit" variant="contained" color="primary">
+        ADD
+      </Button>
+      <Button variant="contained" color="secondary" onClick={handleReset}>
+        CANCEL
+      </Button>
     </form>
     </Grid>
   );
