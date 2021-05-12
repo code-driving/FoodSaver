@@ -1,6 +1,16 @@
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Input from "@material-ui/core/Input";
+import 'date-fns';
+import React from 'react';
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import useFormControl from '../../hooks/useFormControl';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,30 +21,33 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProductForm(props) {
+
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+  
   const classes = useStyles();
   const [formData, setFormData] = useState({
-    product: "",
-    expiration_date: new Date().toLocaleString,
-    quantity: 0,
-    price: 0,
+    name: "",
+    quantity_grams: 0,
+    quantity_units: 0
   });
+
+  const localId = localStorage.getItem("token");
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("fire!");
-    props.onSubmit(formData);
+    props.onSubmit({...formData, expiration_date: selectedDate, user_id: localId});
   };
-
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormData({ ...formData, [name]: value });
   };
-  // const [product, setProduct] = useState("");
-  // const [expiration_date, setExpiration_date] = useState("");
-  // const [quantity, setQuantity] = useState(0);
-  // const [price, setPrice] = useState(0);
 
   return (
+    <Grid container justify="space-around">
     <form
       className={classes.root}
       noValidate
@@ -42,43 +55,44 @@ export default function ProductForm(props) {
       onSubmit={handleSubmit}
     >
       <Input
-        placeholder="product"
+        placeholder="product name"
         inputProps={{ "aria-label": "description" }}
-        name="product"
-        // value={product}
-        // onChange={(event) => setProduct(event.target.value)}
-        value={formData.product}
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+      />
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <KeyboardDatePicker
+          margin="normal"
+          id="date-picker-dialog"
+          label="Date picker dialog"
+          format="MM/dd/yyyy"
+          name="expiration_date"
+          value={selectedDate}
+          onChange={handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+        }}
+      />
+      </MuiPickersUtilsProvider>
+      <Input
+        placeholder="quantity_grams"
+        inputProps={{ "aria-label": "description" }}
+        name="quantity_grams"
+        value={formData.quantity_grams}
         onChange={handleChange}
       />
       <Input
-        placeholder="expiration date"
+        placeholder="quantity_units"
         inputProps={{ "aria-label": "description" }}
-        name="expiration_date"
-        // value={expiration_date}
-        // onChange={(event) => setExpiration_date(event.target.value)}
-        value={formData.expiration_date}
-        onChange={handleChange}
-      />
-      <Input
-        placeholder="quantity"
-        inputProps={{ "aria-label": "description" }}
-        name="quantity"
-        // value={quantity}
-        // onChange={(event) => setQuantity(event.target.value)}
-        value={formData.quantity}
-        onChange={handleChange}
-      />
-      <Input
-        placeholder="price"
-        inputProps={{ "aria-label": "description" }}
-        name="price"
-        // value={price}
-        // onChange={(event) => setPrice(event.target.value)}
-        value={formData.price}
+        name="quantity_units"
+        value={formData.quantity_units}
         onChange={handleChange}
       />
       <button type="submit">Add</button>
       <button type="submit">Cancel</button>
     </form>
+    </Grid>
   );
 }
+

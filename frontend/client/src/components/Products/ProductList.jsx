@@ -1,6 +1,5 @@
-// import React, { Fragment, useEffect } from "react";
-
-// // in this component we will ma over our props.products and will render ProductItem component
+import React, { Fragment, useEffect } from "react";
+import ProductItem from "./ProductItem";
 
 // //we will use Sorting & Selecting table from Material-ui
 // //we will be using Button from material-ui
@@ -20,7 +19,7 @@
 //     //button
 //   );
 // }
-import React from "react";
+
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
@@ -286,7 +285,7 @@ export default function ProductList(props) {
   const { products } = props;
   console.log("products in list component", products);
   const rows = products;
-
+  console.log("selected -->", selected);
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");

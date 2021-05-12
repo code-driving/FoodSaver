@@ -9,26 +9,35 @@ export default function useApplicationData() {
     summary: [], //keep track of the expired and saved products
     // score: 100
   });
-  const { products, recipes, score, summaries } = state;
-
-  function createProduct(id, product) {
-    const setProduct = (value) => {
-      setState((prev) => ({ ...prev, products: [...prev.products, value] }));
-    };
-    return axios.put(`/api/products/${id}`).then((response) => {
-      setProduct(product);
-    });
-  }
 
   const localId = localStorage.getItem("token");
-  console.log(localId);
+  
+  const setProduct = (value) => {
+    
+    console.log('value from useApplicationData', value)
+    return axios
+      .post(`/api/products/`, value)
+      .then((response) => {
+        console.log("response from products from useApplicationData", response)
 
+        setState(prev => ({ ...prev, products: [...prev.products, response.data] }))
+    });
+  }
+  // const deleteProduct = (value) => {
+  //   return axios
+  //     .put(`/api/products/${localId}`, { value })
+  //     .then((response) => {
+  //       setState(prev => ({ ...prev, products: [...prev.products, value] }))
+  //   });
+  // }
+
+//We should not use localId at the end of each endpoint!
   useEffect(() => {
     Promise.all([
-      axios.get(`/api/users/`),
+      axios.get(`/api/users`),
       axios.get(`/api/products/${localId}`),
-      axios.get(`/api/recipes/${localId}`),
-      axios.get(`/api/summary/${localId}`),
+      axios.get(`/api/recipes`),
+      axios.get(`/api/summary`),
     ]).then(([users, products, recipes, summary]) => {
       setState((prev) => ({
         ...prev,
@@ -36,11 +45,12 @@ export default function useApplicationData() {
         products: products.data,
         recipes: recipes.data,
         summary: summary.data,
-      }));
+      }))
     });
   }, []);
 
-  return { state, createProduct };
+
+  return { state, setProduct };
   // ? create a function to keep track of the Score
 
   //in here we will
