@@ -25,20 +25,6 @@ export default function useApplicationData() {
     });
   }
   
-//   // extract the urlParameter with useParams
-//   const { id } = useParams();
-//   console.log({ id });
-// // find the product with the corresponding id
-// // const productToBeDeleted = products.find((product) => product.id === id);
-  
-  // const deleteProduct = (id) => {
-    
-  //   return axios
-  //     .delete(`/api/products/${id}`)
-  //     .then((response) => {
-  //       setState(prev => ({ ...prev, products: [...prev.products] }))
-  //   });
-  // }
   const deleteProduct = (ids) => {
     
     const deletes = []

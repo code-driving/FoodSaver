@@ -218,7 +218,7 @@ const EnhancedTableToolbar = (props) => {
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton aria-label="delete">
-            <DeleteIcon onClick={props.deleteProduct} />
+            <DeleteIcon />
           </IconButton>
         </Tooltip>
       ) : (
@@ -330,7 +330,7 @@ export default function ProductList(props) {
     rows.map((i) => console.log(i.expiration_date));
   };
   dateFormatter(rows);
-
+  // numSelected={selected.length} 
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
