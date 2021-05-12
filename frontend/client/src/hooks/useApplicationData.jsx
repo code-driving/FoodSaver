@@ -64,16 +64,9 @@ export default function useApplicationData() {
   return { state, setProduct, deleteProduct };
   // ? create a function to keep track of the Score
 
-  //in here we will
-  //1.createProduct
-  //2.deleteProduct
-  //use Axios request to create or delete
-
   //3.setRecipe
   //4.deleteRecipe
   //use Axios request to create or delete
-
-  //5. in useEffect make axios get requests to all endpoints
 
   //6. create handleIncrement, handleDecrement, handleReset to update the score based on the product_saved, product_expired
   //IF SCORE == 0 THEN HE WILL HAVE TO DONATE TO FOODBANK AND HAVE A POSSIBILITY TO RESET A SCORE

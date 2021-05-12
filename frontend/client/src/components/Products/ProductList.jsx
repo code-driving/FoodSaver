@@ -270,7 +270,7 @@ export default function ProductList(props) {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const { products, deleteProduct } = props;
-  console.log(props)
+  
   console.log("products in list component", products);
   const rows = products;
 
