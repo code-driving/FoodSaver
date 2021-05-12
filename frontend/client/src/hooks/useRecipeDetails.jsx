@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useRecipesDetailsApi(recipe_id) {
-  const [details, setDetails] = useState();
+  const [details, setDetails] = useState([]);
   
  
   useEffect(() => {
