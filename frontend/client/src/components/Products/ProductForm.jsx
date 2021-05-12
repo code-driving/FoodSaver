@@ -48,14 +48,13 @@ export default function ProductForm(props) {
   };
   
   const handleReset = () => {
+    setFormData({ 
+      formData: [{}]
+    });
     Array.from(document.querySelectorAll("Input")).forEach(
       input => (input.value = "")
     );
-    setFormData({
-      formData: [{}]
-    });
   };
-  
 
   return (
     <Grid container justify="space-around">
@@ -69,7 +68,7 @@ export default function ProductForm(props) {
         placeholder="product name"
         inputProps={{ "aria-label": "description" }}
         name="name"
-        value={formData.name}
+        value={formData.name || ""}
         onChange={handleChange}
       />
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -79,7 +78,7 @@ export default function ProductForm(props) {
           label="Date picker dialog"
           format="MM/dd/yyyy"
           name="expiration_date"
-          value={selectedDate}
+          value={selectedDate || ""}
           onChange={handleDateChange}
           KeyboardButtonProps={{
             'aria-label': 'change date',
@@ -90,14 +89,14 @@ export default function ProductForm(props) {
         placeholder="quantity_grams"
         inputProps={{ "aria-label": "description" }}
         name="quantity_grams"
-        value={formData.quantity_grams}
+        value={formData.quantity_grams || ""}
         onChange={handleChange}
       />
       <Input
         placeholder="quantity_units"
         inputProps={{ "aria-label": "description" }}
         name="quantity_units"
-        value={formData.quantity_units}
+        value={formData.quantity_units || ""}
         onChange={handleChange}
       />
       <Button type="submit" variant="contained" color="primary">
