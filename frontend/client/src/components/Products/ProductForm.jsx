@@ -10,7 +10,8 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import useFormControl from '../../hooks/useFormControl';
+import Button from '@material-ui/core/Button';
+import "./ProductForm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,6 +46,16 @@ export default function ProductForm(props) {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
+  
+  const handleReset = () => {
+    Array.from(document.querySelectorAll("Input")).forEach(
+      input => (input.value = "")
+    );
+    setFormData({
+      formData: [{}]
+    });
+  };
+  
 
   return (
     <Grid container justify="space-around">
@@ -89,8 +100,12 @@ export default function ProductForm(props) {
         value={formData.quantity_units}
         onChange={handleChange}
       />
-      <button type="submit">Add</button>
-      <button type="submit">Cancel</button>
+      <Button type="submit" variant="contained" color="primary">
+        ADD
+      </Button>
+      <Button variant="contained" color="secondary" onClick={handleReset}>
+        CANCEL
+      </Button>
     </form>
     </Grid>
   );
