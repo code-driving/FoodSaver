@@ -14,6 +14,7 @@ module.exports = ({
   editProduct,
   getSummary,
   getPaticularUserProducts,
+  deleteProduct
 }) => {
   router.get("/", (req, res) => {
     getUserProducts()
@@ -94,6 +95,20 @@ module.exports = ({
     )
       .then((data) => {
         res.status(200).send("Edited");
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
+  router.delete("/:id", (req, res) => {
+    const id = Number(req.params.id)
+   console.log(id)
+    deleteProduct(id)
+      .then(() => {
+        res.status(200).send("Deleted Product")
       })
       .catch((err) =>
         res.json({

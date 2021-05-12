@@ -192,6 +192,18 @@ module.exports = (db) => {
         .catch((err) => err);
   };
 
+  const deleteProduct = (id) => {
+    const query = {
+      text: `DELETE FROM products WHERE id = $1`,
+            values: [id],
+    };
+    return db
+        .query(query)
+        .then((result) => {result.rows
+                            console.log(result.rows)})
+        .catch((err) => err);
+  };
+
 
   return {
     getUsers,
@@ -209,6 +221,7 @@ module.exports = (db) => {
     getPaticularUserProducts,
     getUserSavedRecipes,
     getUserSummary,
-    getPaticularUsers
+    getPaticularUsers,
+    deleteProduct
   };
 };

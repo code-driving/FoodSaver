@@ -7,6 +7,7 @@ import Products from "./Products";
 import Recipes from "./Recipes";
 import Summary from "./Summary";
 import Login from "./Login";
+import RecipesDetails from "./Recipes/Recipedetail"
 import PrivateRoute from "./Login/PrivateRoute";
 
 export default function Application(props) {
@@ -25,6 +26,9 @@ export default function Application(props) {
 
           <Route exact path="/recipes">
             <Recipes />
+          </Route>
+
+          <Route exact path="/recipes/:id" component={RecipesDetails}>
           </Route>
 
           <Route exact path="/summary">

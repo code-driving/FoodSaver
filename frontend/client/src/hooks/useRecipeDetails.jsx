@@ -6,16 +6,17 @@ export default function useRecipesDetailsApi(recipe_id) {
   
  
   useEffect(() => {
-    if (product) {
-      const APIKEY = process.ENV.API_KEY;
-      const url = `https://api.spoonacular.com/recipes/${recipe_id}/analyzedInstructions?apiKey=${APIKEY}&boolean=false`
+    if (recipe_id) {
+      const APIKEY = process.env.API_KEY;
+      const url = `https://api.spoonacular.com/recipes/${recipe_id}/analyzedInstructions?apiKey=f8973fa0549347b38d9ffd74077d423f&boolean=false`
       axios
         .get(url)
-        .then(res =>  setProduct(res.data))
+        .then(res =>  setDetails(res.data))
+      
     }
-  }, [details])
+  }, [recipe_id])
 
-  return { details }
+  return  details 
 }
 
 
