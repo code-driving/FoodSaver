@@ -20,4 +20,3 @@ export default function useRecipesApi(ingredients) {
 
   return recipe 
 }
-

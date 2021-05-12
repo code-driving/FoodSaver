@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from 'react-router-dom';
 
 export default function useApplicationData() {
   const [state, setState] = useState({
@@ -9,37 +10,44 @@ export default function useApplicationData() {
     summary: [], //keep track of the expired and saved products
     // score: 100
   });
-  const { products, recipes, score, summaries } = state;
-
 
   const localId = localStorage.getItem("token");
-  console.log(localId);
+  
+  const setProduct = (value) => {
+    
+    console.log('value from useApplicationData', value)
+    return axios
+      .post(`/api/products/`, value)
+      .then((response) => {
+        console.log("response from products from useApplicationData", response)
 
-
-  function createProduct(id, product) {
-    const setProduct = (value) => {
-      setState((prev) => ({ ...prev, products: [...prev.products, value] }));
-    };
-    return axios.put(`/api/products/${id}`).then((response) => {
-      setProduct(product);
+        setState(prev => ({ ...prev, products: [...prev.products, response.data] }))
+    });
+  }
+  
+//   // extract the urlParameter with useParams
+//   const { id } = useParams();
+//   console.log({ id });
+// // find the product with the corresponding id
+// // const productToBeDeleted = products.find((product) => product.id === id);
+  
+  const deleteProduct = (id,value) => {
+    
+  
+    return axios
+      .delete(`/api/products/${localId}/${id}`, { value })
+      .then((response) => {
+        setState(prev => ({ ...prev, products: [...prev.products, value] }))
     });
   }
 
-  // function saveRecipes() {
-  //   const setRecipe= (value) => {
-  //     setState((prev) => ({ ...prev, recipes: [...prev.recipes, value] }));
-  //   };
-  //   return axios.put(`/api/recipes/${localId}`).then((response) => {
-  //     setProduct(product);
-  //   });
-  // }
-
+//We should not use localId at the end of each endpoint!
   useEffect(() => {
     Promise.all([
-      axios.get(`/api/users/`),
+      axios.get(`/api/users`),
       axios.get(`/api/products/${localId}`),
-      axios.get(`/api/recipes/${localId}`),
-      axios.get(`/api/summary/${localId}`),
+      axios.get(`/api/recipes`),
+      axios.get(`/api/summary`),
     ]).then(([users, products, recipes, summary]) => {
       setState((prev) => ({
         ...prev,
@@ -47,11 +55,12 @@ export default function useApplicationData() {
         products: products.data,
         recipes: recipes.data,
         summary: summary.data,
-      }));
+      }))
     });
   }, []);
 
-  return { state, setState, createProduct };
+
+  return { state, setProduct, deleteProduct };
   // ? create a function to keep track of the Score
 
   //in here we will
@@ -69,23 +78,8 @@ export default function useApplicationData() {
   //IF SCORE == 0 THEN HE WILL HAVE TO DONATE TO FOODBANK AND HAVE A POSSIBILITY TO RESET A SCORE
 }
 
-// export default function useApplicationData() {
-//   const [state, setState] = useState({
-//     notes: [],
-//     groceries: [],
-//     currentCity: "",
-//   });
-//   const { notes, groceries, currentCity } = state;
 
-//   const setGroceries = (value) => {
-//     setState((prev) => ({ ...prev, groceries: [...prev.groceries, value] }));
-//   };
-//   const setNotes = (value) => {
-//     setState((prev) => ({ ...prev, notes: [...prev.notes, value] }));
-//   };
-//   const setCurrentCity = (value) => {
-//     setState((prev) => ({ ...prev, currentCity: value }));
-//   };
+
 
 //   return { state, setCurrentCity, setGroceries, setNotes };
 // }
@@ -110,6 +104,7 @@ export default function useApplicationData() {
 //     specificDay.spots = numberOfSpots;
 //     return newState;
 //   };
+
 //   // Cancels an existing interview
 //   function cancelInterview(id) {
 //     const appointment = {
