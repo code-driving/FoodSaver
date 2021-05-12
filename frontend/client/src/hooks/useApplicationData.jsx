@@ -31,11 +31,10 @@ export default function useApplicationData() {
 // // find the product with the corresponding id
 // // const productToBeDeleted = products.find((product) => product.id === id);
   
-  const deleteProduct = (id,value) => {
+  const deleteProduct = (id, value) => {
     
-  
     return axios
-      .delete(`/api/products/${localId}/${id}`, { value })
+      .delete(`/api/products/${id}`, { value })
       .then((response) => {
         setState(prev => ({ ...prev, products: [...prev.products, value] }))
     });
