@@ -40,6 +40,7 @@ export default function ProductForm(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     props.onSubmit({...formData, expiration_date: selectedDate, user_id: localId});
+    handleReset();
   };
   
   const handleChange = (event) => {
@@ -48,12 +49,12 @@ export default function ProductForm(props) {
   };
   
   const handleReset = () => {
-    setFormData({ 
-      formData: [{}]
-    });
     Array.from(document.querySelectorAll("Input")).forEach(
       input => (input.value = "")
-    );
+      );
+      setFormData({ 
+        formData: [{}]
+      });
   };
 
   return (
@@ -99,13 +100,13 @@ export default function ProductForm(props) {
         }}
       />
       </MuiPickersUtilsProvider>
-      <button type="submit">
+    </form>
+      <button onClick={handleSubmit} type="submit">
         YES
       </button>
       <button onClick={handleReset}>
         NO
       </button>
-    </form>
     </Grid>
   );
 }
