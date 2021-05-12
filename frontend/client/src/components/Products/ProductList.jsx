@@ -187,7 +187,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  const { numSelected, deleteProduct, selected, setSelected } = props;
 
   return (
     <Toolbar
@@ -396,7 +396,7 @@ export default function ProductList(props) {
             </TableBody>
           </Table>
         </TableContainer>
-        <button onClick={() => deleteProduct(selected)}>delete</button>
+        <button onClick={() => {deleteProduct(selected); setSelected([])}}>delete</button>
         <Button
           classes={classes}
           onClick={() => {
