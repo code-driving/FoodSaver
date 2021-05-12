@@ -214,7 +214,7 @@ const EnhancedTableToolbar = (props) => {
           Products
         </Typography>
       )}
-
+{/* 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton aria-label="delete">
@@ -227,7 +227,7 @@ const EnhancedTableToolbar = (props) => {
             <FilterListIcon />
           </IconButton>
         </Tooltip>
-      )}
+      )} */}
     </Toolbar>
   );
 };
