@@ -31,15 +31,31 @@ export default function useApplicationData() {
 // // find the product with the corresponding id
 // // const productToBeDeleted = products.find((product) => product.id === id);
   
-  const deleteProduct = (id, value) => {
+  // const deleteProduct = (id) => {
     
-    return axios
-      .delete(`/api/products/${id}`, { value })
-      .then((response) => {
-        setState(prev => ({ ...prev, products: [...prev.products, value] }))
-    });
+  //   return axios
+  //     .delete(`/api/products/${id}`)
+  //     .then((response) => {
+  //       setState(prev => ({ ...prev, products: [...prev.products] }))
+  //   });
+  // }
+  const deleteProduct = (ids) => {
+    
+    const deletes = []
+      for (const id of ids) {
+        deletes.push(
+          axios
+            .delete(`/api/products/${id}`)
+        )
+      }
+      Promise.all(deletes)
+      .then(res => {
+        const del = state.products.filter(product => !ids.includes(product.id))
+        setState(prev => ({ ...prev, products: del}))
+      })
   }
 
+  
 //We should not use localId at the end of each endpoint!
   useEffect(() => {
     Promise.all([
@@ -76,6 +92,8 @@ export default function useApplicationData() {
   //6. create handleIncrement, handleDecrement, handleReset to update the score based on the product_saved, product_expired
   //IF SCORE == 0 THEN HE WILL HAVE TO DONATE TO FOODBANK AND HAVE A POSSIBILITY TO RESET A SCORE
 }
+
+// setState(prev => ({ ...prev, products: res.data})) /// the magic to remove everything
 
 
 

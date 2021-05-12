@@ -17,7 +17,7 @@ export default function Products(props) {
 
   return (
     <section>
-      <ProductList products={products} onDelete={deleteProduct} />
+      <ProductList products={products} deleteProduct={deleteProduct} />
       <ProductForm onSubmit={onSubmit} />
     </section>
   );
