@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withTheme } from "@material-ui/core/styles";
 import Input from "@material-ui/core/Input";
 import 'date-fns';
 import React from 'react';
@@ -10,8 +10,8 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import Button from '@material-ui/core/Button';
 import "./ProductForm";
+import { isWithinInterval } from "date-fns";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,7 +57,7 @@ export default function ProductForm(props) {
   };
 
   return (
-    <Grid container justify="space-around">
+    <Grid container justify="space-around" alignItems="center">
     <form
       className={classes.root}
       noValidate
@@ -69,6 +69,20 @@ export default function ProductForm(props) {
         inputProps={{ "aria-label": "description" }}
         name="name"
         value={formData.name || ""}
+        onChange={handleChange}
+      />
+      <Input
+        placeholder="quantity grams"
+        inputProps={{ "aria-label": "description" }}
+        name="quantity_grams"
+        value={formData.quantity_grams || ""}
+        onChange={handleChange}
+      />
+      <Input
+        placeholder="quantity units"
+        inputProps={{ "aria-label": "description" }}
+        name="quantity_units"
+        value={formData.quantity_units || ""}
         onChange={handleChange}
       />
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -85,26 +99,12 @@ export default function ProductForm(props) {
         }}
       />
       </MuiPickersUtilsProvider>
-      <Input
-        placeholder="quantity grams"
-        inputProps={{ "aria-label": "description" }}
-        name="quantity_grams"
-        value={formData.quantity_grams || ""}
-        onChange={handleChange}
-      />
-      <Input
-        placeholder="quantity units"
-        inputProps={{ "aria-label": "description" }}
-        name="quantity_units"
-        value={formData.quantity_units || ""}
-        onChange={handleChange}
-      />
-      <Button type="submit" variant="contained" color="primary">
-        ADD
-      </Button>
-      <Button variant="contained" color="secondary" onClick={handleReset}>
-        CANCEL
-      </Button>
+      <button type="submit">
+        YES
+      </button>
+      <button onClick={handleReset}>
+        NO
+      </button>
     </form>
     </Grid>
   );

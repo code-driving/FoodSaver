@@ -12,6 +12,7 @@ module.exports = ({
   getSavedRecipes,
   postProduct,
   editProduct,
+  deleteProduct,
   getSummary,
   getPaticularUserProducts,
 }) => {
@@ -95,6 +96,21 @@ module.exports = ({
       .then((data) => {
         console.log("data from route", data)
         res.json(data);
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+  
+  router.delete("/1/:id", (req, res) => {
+
+    const id = Number(req.params.id) 
+    console.log("id from delete route", id)
+    deleteProduct(id)
+      .then(() => {
+        res.status(200).send('Deleted Product')
       })
       .catch((err) =>
         res.json({

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from 'react-router-dom';
 
 export default function useApplicationData() {
   const [state, setState] = useState({
@@ -23,13 +24,22 @@ export default function useApplicationData() {
         setState(prev => ({ ...prev, products: [...prev.products, response.data] }))
     });
   }
-  // const deleteProduct = (value) => {
-  //   return axios
-  //     .put(`/api/products/${localId}`, { value })
-  //     .then((response) => {
-  //       setState(prev => ({ ...prev, products: [...prev.products, value] }))
-  //   });
-  // }
+  
+//   // extract the urlParameter with useParams
+//   const { id } = useParams();
+//   console.log({ id });
+// // find the product with the corresponding id
+// // const productToBeDeleted = products.find((product) => product.id === id);
+  
+  const deleteProduct = (id,value) => {
+    
+  
+    return axios
+      .delete(`/api/products/${localId}/${id}`, { value })
+      .then((response) => {
+        setState(prev => ({ ...prev, products: [...prev.products, value] }))
+    });
+  }
 
 //We should not use localId at the end of each endpoint!
   useEffect(() => {
@@ -50,7 +60,7 @@ export default function useApplicationData() {
   }, []);
 
 
-  return { state, setProduct };
+  return { state, setProduct, deleteProduct };
   // ? create a function to keep track of the Score
 
   //in here we will
@@ -68,23 +78,8 @@ export default function useApplicationData() {
   //IF SCORE == 0 THEN HE WILL HAVE TO DONATE TO FOODBANK AND HAVE A POSSIBILITY TO RESET A SCORE
 }
 
-// export default function useApplicationData() {
-//   const [state, setState] = useState({
-//     notes: [],
-//     groceries: [],
-//     currentCity: "",
-//   });
-//   const { notes, groceries, currentCity } = state;
 
-//   const setGroceries = (value) => {
-//     setState((prev) => ({ ...prev, groceries: [...prev.groceries, value] }));
-//   };
-//   const setNotes = (value) => {
-//     setState((prev) => ({ ...prev, notes: [...prev.notes, value] }));
-//   };
-//   const setCurrentCity = (value) => {
-//     setState((prev) => ({ ...prev, currentCity: value }));
-//   };
+
 
 //   return { state, setCurrentCity, setGroceries, setNotes };
 // }
@@ -109,6 +104,7 @@ export default function useApplicationData() {
 //     specificDay.spots = numberOfSpots;
 //     return newState;
 //   };
+
 //   // Cancels an existing interview
 //   function cancelInterview(id) {
 //     const appointment = {

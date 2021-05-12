@@ -14,7 +14,7 @@ import ProductItem from "./ProductItem"
 
 export default function ProductList(props) {
   
-  const { products } = props
+  const { products, onDelete } = props;
   //map over products here, check if this is an Array
 console.log(products)
 const agenda = products.map((product) => {
@@ -23,7 +23,8 @@ const agenda = products.map((product) => {
       key={product.id}
       {...product} 
     />
-  );
-});
-return <ul>{agenda}</ul>;
+    );
+  }); 
+  <button onClick={() => onDelete}>Delete</button>
+  return <ul>{agenda}</ul>;
 }
