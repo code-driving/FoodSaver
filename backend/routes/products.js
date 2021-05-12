@@ -104,7 +104,7 @@ module.exports = ({
       );
   });
   
-  router.delete("/1/:id", (req, res) => {
+  router.delete("/:id", (req, res) => {
 
     const id = Number(req.params.id) 
     console.log("id from delete route", id)
