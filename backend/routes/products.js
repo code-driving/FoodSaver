@@ -14,8 +14,7 @@ module.exports = ({
   editProduct,
   deleteProduct,
   getSummary,
-  getPaticularUserProducts,
-  deleteProduct
+  getPaticularUserProducts
 }) => {
   router.get("/", (req, res) => {
     getUserProducts()
