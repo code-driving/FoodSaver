@@ -108,6 +108,17 @@ module.exports = (db) => {
         .then((result) => result.rows)
         .catch((err) => err);
   };
+  
+  const deleteProduct = (id) => {
+    const query = {
+      text: `DELETE FROM products WHERE id = $1`,
+            values: [id],
+    };
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
 
   const addRecipe = (recipie_name, user_id, recipe_id) => {
     const query = {
@@ -201,6 +212,7 @@ module.exports = (db) => {
     getSavedRecipes,
     postProduct,
     editProduct,
+    deleteProduct,
     addRecipe,
     deleteRecipe,
     getSummary,

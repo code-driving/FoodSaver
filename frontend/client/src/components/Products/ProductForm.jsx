@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withTheme } from "@material-ui/core/styles";
 import Input from "@material-ui/core/Input";
-import 'date-fns';
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
+import "date-fns";
+import React from "react";
+import Grid from "@material-ui/core/Grid";
+import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
-} from '@material-ui/pickers';
-import Button from '@material-ui/core/Button';
+} from "@material-ui/pickers";
 import "./ProductForm";
+import { isWithinInterval } from "date-fns";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,91 +22,89 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProductForm(props) {
-
   const [selectedDate, setSelectedDate] = React.useState(new Date());
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
-  
+
   const classes = useStyles();
   const [formData, setFormData] = useState({
     name: "",
     quantity_grams: 0,
-    quantity_units: 0
+    quantity_units: 0,
   });
 
   const localId = localStorage.getItem("token");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.onSubmit({...formData, expiration_date: selectedDate, user_id: localId});
+    props.onSubmit({
+      ...formData,
+      expiration_date: selectedDate,
+      user_id: localId,
+    });
   };
-  
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
-  
+
   const handleReset = () => {
-    setFormData({ 
-      formData: [{}]
+    setFormData({
+      formData: [{}],
     });
     Array.from(document.querySelectorAll("Input")).forEach(
-      input => (input.value = "")
+      (input) => (input.value = "")
     );
   };
 
   return (
-    <Grid container justify="space-around">
-    <form
-      className={classes.root}
-      noValidate
-      autoComplete="off"
-      onSubmit={handleSubmit}
-    >
-      <Input
-        placeholder="product name"
-        inputProps={{ "aria-label": "description" }}
-        name="name"
-        value={formData.name || ""}
-        onChange={handleChange}
-      />
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <KeyboardDatePicker
-          margin="normal"
-          id="date-picker-dialog"
-          label="Date picker dialog"
-          format="MM/dd/yyyy"
-          name="expiration_date"
-          value={selectedDate || ""}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-        }}
-      />
-      </MuiPickersUtilsProvider>
-      <Input
-        placeholder="quantity grams"
-        inputProps={{ "aria-label": "description" }}
-        name="quantity_grams"
-        value={formData.quantity_grams || ""}
-        onChange={handleChange}
-      />
-      <Input
-        placeholder="quantity units"
-        inputProps={{ "aria-label": "description" }}
-        name="quantity_units"
-        value={formData.quantity_units || ""}
-        onChange={handleChange}
-      />
-      <Button type="submit" variant="contained" color="primary">
-        ADD
-      </Button>
-      <Button variant="contained" color="secondary" onClick={handleReset}>
-        CANCEL
-      </Button>
-    </form>
+    <Grid container justify="space-around" alignItems="center">
+      <form
+        className={classes.root}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
+        <Input
+          placeholder="product name"
+          inputProps={{ "aria-label": "description" }}
+          name="name"
+          value={formData.name || ""}
+          onChange={handleChange}
+        />
+        <Input
+          placeholder="quantity grams"
+          inputProps={{ "aria-label": "description" }}
+          name="quantity_grams"
+          value={formData.quantity_grams || ""}
+          onChange={handleChange}
+        />
+        <Input
+          placeholder="quantity units"
+          inputProps={{ "aria-label": "description" }}
+          name="quantity_units"
+          value={formData.quantity_units || ""}
+          onChange={handleChange}
+        />
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            margin="normal"
+            id="date-picker-dialog"
+            label="Date picker dialog"
+            format="MM/dd/yyyy"
+            name="expiration_date"
+            value={selectedDate || ""}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              "aria-label": "change date",
+            }}
+          />
+        </MuiPickersUtilsProvider>
+      </form>
+      <button type="submit">YES</button>
+      <button onClick={handleReset}>NO</button>
     </Grid>
   );
 }
-

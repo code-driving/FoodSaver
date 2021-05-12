@@ -11,7 +11,7 @@ import Login from "./Login";
 import PrivateRoute from "./Login/PrivateRoute";
 
 export default function Application(props) {
-  const { state, setProduct } = useApplicationData();
+  const { state, setProduct, deleteProduct } = useApplicationData();
   // console.log("recipes", state.recipes);
   // console.log("summary", state.summary);
   // console.log("products", state.products);
@@ -26,7 +26,7 @@ export default function Application(props) {
         <NavBar />
         <Switch>
           <PrivateRoute exact path="/">
-            <Products products={products} setProduct={setProduct} />
+            <Products products={products} setProduct={setProduct} deleteProduct={deleteProduct} />
           </PrivateRoute>
 
           <Route exact path="/recipes">

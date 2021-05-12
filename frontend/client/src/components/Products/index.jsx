@@ -10,14 +10,14 @@ import {
 } from "@material-ui/pickers";
 
 export default function Products(props) {
-  const { products, setProduct } = props;
+  const { products, setProduct, deleteProduct } = props;
   const onSubmit = (formData) => {
     setProduct(formData);
   };
 
   return (
     <section>
-      <ProductList products={products} />
+      <ProductList products={products} onDelete={deleteProduct} />
       <ProductForm onSubmit={onSubmit} />
     </section>
   );
