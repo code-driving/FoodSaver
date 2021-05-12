@@ -41,6 +41,13 @@ export default function useApplicationData() {
       })
   }
 
+  const setRecipe = (value) => {
+    return axios
+      .post(`/api/recipes/`, value)
+      .then((response) => {
+        setState(prev => ({ ...prev, products: [...prev.products, response.data] }))
+    });
+  }
   
 //We should not use localId at the end of each endpoint!
   useEffect(() => {
