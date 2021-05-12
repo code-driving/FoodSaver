@@ -86,14 +86,14 @@ export default function ProductForm(props) {
       />
       </MuiPickersUtilsProvider>
       <Input
-        placeholder="quantity_grams"
+        placeholder="quantity grams"
         inputProps={{ "aria-label": "description" }}
         name="quantity_grams"
         value={formData.quantity_grams || ""}
         onChange={handleChange}
       />
       <Input
-        placeholder="quantity_units"
+        placeholder="quantity units"
         inputProps={{ "aria-label": "description" }}
         name="quantity_units"
         value={formData.quantity_units || ""}
