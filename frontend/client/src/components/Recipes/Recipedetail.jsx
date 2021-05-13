@@ -46,23 +46,23 @@ export default function RecipeDetail(props) {
     <section className='container'>
      <h1> Recipe Details</h1>
      < div className='top'>
-      <img src={img} alt={"food image"}></img>
-      <div>
-      <h2>Recipe Info</h2>
-      <ul>
-        <li>Time:{time} mins</li>
-        <li>{vegetarian ? 'Vegitarian : No' :'Vegitarian : Yes'}</li>
-        <li>Serves :{servings}</li>
-      </ul>
-   
-      <h2>Ingredients needed</h2>
-      <ul>
-        {ingredients}
-      </ul>
+        <img src={img} alt={"food image"}></img>
+          <div style={{marginLeft:10 }}>
+          <h2>Recipe Info</h2>
+          <ul>
+            <li>Time: {time} mins</li>
+            <li>{vegetarian ? 'Vegitarian : No' :'Vegitarian : Yes'}</li>
+            <li>Serves : {servings}</li>
+          </ul>
+      
+          <h2>Ingredients needed</h2>
+          <ul>
+            {ingredients}
+          </ul>
+        </div>
      </div>
-     </div>
+     <h2>Instructions</h2>
     <ul>
-      <li>test</li>
       {EachStep}
     </ul> 
    </section>
