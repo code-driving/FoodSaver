@@ -11,13 +11,9 @@
   box-sizing: border-box;
 }
 
-body,
-html {
-  min-height: 100vh;
-  overflow: auto;
-}
 
-body {
+
+html,body {
   background: #e9e9e9;
   font-family: "Fira Sans", sans-serif;
   color: $black;
@@ -29,15 +25,17 @@ body {
 .layout {
   @include shadow;
   display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
   max-width: 80vw;
   width: 100%;
+  height: 200vh;
   margin: 0 auto;
+  padding: 2em;
   input,
   button {
     outline: none;
+  }
+  .right {
+    width: 76%;
   }
 
   input {

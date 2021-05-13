@@ -26,7 +26,10 @@ export default function Application(props) {
     <main className="layout">
       <Router>
         {/* <div> */}
-        <NavBar />
+        <div>
+          <NavBar />
+        </div>
+        <div className='right'>
         <Switch>
           <PrivateRoute exact path="/">
             <Products
@@ -58,6 +61,7 @@ export default function Application(props) {
             <h1>404 - Not Found</h1>
           </Route> */}
         </Switch>
+        </div>
         {/* </div> */}
       </Router>
     </main>

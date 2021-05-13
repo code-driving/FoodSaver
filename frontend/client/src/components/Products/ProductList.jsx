@@ -88,6 +88,12 @@ const headCells = [
     label: "Expiration Date",
   },
   {
+    id: "Time",
+    numeric: true,
+    disablePadding: false,
+    label: "Time left",
+  },
+  {
     id: "quantity_grams",
     numeric: true,
     disablePadding: false,
@@ -273,8 +279,9 @@ export default function ProductList(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const { products, deleteProduct, setIngredientsItems } = props;
+  const { products, deleteProduct, dateData, setIngredientsItems } = props;
 
+  console.log("products in list component", products);
   const rows = products;
 
   const handleRequestSort = (event, property) => {
@@ -399,7 +406,8 @@ export default function ProductList(props) {
                       >
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.expiration_date}</TableCell>
+                      <TableCell align="right">{row.expiration}</TableCell>
+                      <TableCell align="right">{row.dayLeft}</TableCell>
                       <TableCell align="right">{row.quantity_grams}</TableCell>
                       <TableCell align="right">{row.quantity_units}</TableCell>
                     </TableRow>

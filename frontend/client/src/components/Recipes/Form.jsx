@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import "./Recipes.scss";
 
 
 export default function Form(props) {
@@ -17,7 +18,7 @@ export default function Form(props) {
 
   return (
     <form className="Form" onSubmit={handleSubmit}>
-      <h1>Please enter ingredients</h1>
+      <h1>Enter ingredients to search</h1>
       <input
           type="text"
           name='ingredients'
@@ -25,6 +26,7 @@ export default function Form(props) {
           onChange={handleChange}
           placeholder='apples,oranges'
         ></input>
+        <button onClick={handleSubmit}>Go!</button>
     </form>
   )
 
