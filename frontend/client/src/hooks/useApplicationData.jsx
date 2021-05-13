@@ -9,21 +9,18 @@ export default function useApplicationData() {
     products: [],
     recipes: [],
     summary: [],
-    dateData:[]
-    //keep track of the expired and saved products
+    favourites: []
+     //keep track of the expired and saved products
     // score: 100
   });
 
   const localId = localStorage.getItem("token");
   
   const setProduct = (value) => {
-    
-    console.log('value from useApplicationData', value)
+
     return axios
       .post(`/api/products/`, value)
       .then((response) => {
-        console.log("response from products from useApplicationData", response)
-
         setState(prev => ({ ...prev, products: [...prev.products, response.data] }))
     });
   }
@@ -43,8 +40,24 @@ export default function useApplicationData() {
         setState(prev => ({ ...prev, products: del}))
       })
   }
+  
+  // const setExpired = (ids) => {
+  //   //keep the state of the expired products 
+  //   //if the product is expired = add class to signify 
+  //   //send a post request to summary
+  //   //update the state 
+  //   const expired = state.products.find(product => ids.includes(product.id) && product.expiration_date < Date.now())
+  //   expired.classList.add('red')
+  //   return axios
+  //     .post(`/api/summary`, expired)
+  //     .then((response) => {
+  //       // setState(prev => ({ ...prev, products: [...prev.products, response.data]}))
+  //       console.log(response)
+  //     })
+  // }
 
   const setRecipe = (value) => {
+    
     return axios
       .post(`/api/recipes/`, value)
       .then((response) => {
@@ -52,6 +65,22 @@ export default function useApplicationData() {
     });
   }
   
+  const deleteRecipe = (ids) => {
+    const deletes = []
+      for (const id of ids) {
+        deletes.push(
+          axios
+            .delete(`/api/recipes/${id}`)
+        )
+      }
+      Promise.all(deletes)
+      .then(res => {
+        const del = state.recipes.filter(recipe => !ids.includes(recipe.id))
+        setState(prev => ({ ...prev, products: del}))
+      })
+  }
+  
+
 //We should not use localId at the end of each endpoint!
   useEffect(() => {
     Promise.all([
