@@ -53,13 +53,13 @@ export default function useApplicationData() {
   //       console.log(response)
   //     })
   // }
-
+  
   const setRecipe = (value) => {
     
     return axios
-      .post(`/api/recipes/`, value)
+      .post(`/api/recipes/${localId}`, value)
       .then((response) => {
-        setState(prev => ({ ...prev, products: [...prev.products, response.data] }))
+        setState(prev => ({ ...prev, recipes: [...prev.recipes, response.data] }))
     });
   }
   

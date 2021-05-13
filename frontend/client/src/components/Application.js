@@ -13,7 +13,7 @@ import RecipesDetails from "./Recipes/Recipedetail"
 import PrivateRoute from "./Login/PrivateRoute";
 
 export default function Application(props) {
-  const { state, setProduct, deleteProduct } = useApplicationData();
+  const { state, setProduct, deleteProduct, setRecipe, deleteRecipe } = useApplicationData();
   // console.log("recipes", state.recipes);
   // console.log("summary", state.summary);
   // console.log("products", state.products);
@@ -38,9 +38,11 @@ export default function Application(props) {
             <Recipes />
           </Route>
 
-          <Route exact path="/recipes/:id" component={RecipesDetails}>
+          <Route exact path="/recipes/:id" component={RecipesDetails} setRecipe={setRecipe}>
           </Route>
-
+          
+          {/* <Route path="/recipes/:id" exact render={(props) => (<RecipesDetails setRecipe={setRecipe} {...props}/>)} /> */}
+          
           <Route exact path="/summary">
             <Summary />
           </Route>
@@ -50,7 +52,7 @@ export default function Application(props) {
           </Route>
           
           <Route path="/favourites">
-            <Favourites />
+            <Favourites recipes={recipes} deleteRecipe={deleteRecipe}/>
           </Route>
 
           {/* <Route path="*">

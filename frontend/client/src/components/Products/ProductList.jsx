@@ -396,7 +396,7 @@ export default function ProductList(props) {
             </TableBody>
           </Table>
         </TableContainer>
-        <button onClick={() => {deleteProduct(selected); setSelected([])}}>delete</button>
+        <button onClick={() => {deleteProduct(selected); setSelected([])}}>del</button>
         <Button
           classes={classes}
           onClick={() => {
@@ -405,7 +405,7 @@ export default function ProductList(props) {
           variant="outlined"
           color="primary"
         >
-          Find Recipes
+          find
         </Button>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}

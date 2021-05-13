@@ -14,7 +14,7 @@
 
 
 html,body {
-  background: #e9e9e9;
+  background: #e2eafc;
   font-family: "Fira Sans", sans-serif;
   color: $black;
   font-size: 23px;
@@ -23,11 +23,11 @@ html,body {
 }
 
 .layout {
-  @include shadow;
+  // @include shadow;
   display: flex;
   max-width: 80vw;
   width: 100%;
-  height: 200vh;
+  height: 100vh;
   margin: 0 auto;
   padding: 2em;
   input,

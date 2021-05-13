@@ -105,9 +105,9 @@ export default function ProductForm(props) {
         </MuiPickersUtilsProvider>
       </form>
       <button onClick={handleSubmit} type="submit">
-        YES
+        save
       </button>
-      <button onClick={handleReset}>NO</button>
+      <button onClick={handleReset}>del</button>
     </Grid>
   );
 }

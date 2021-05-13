@@ -9,7 +9,7 @@ import "./Recipes.scss";
 
 export default function Recipes(props) {
   const [ ingredientsItems, setIngredientsItems ] = useState("")
- 
+  const { setRecipe } = props
   const recipeData  = useRecipeApi(ingredientsItems)
   
   const onSubmit = (formData) => {
@@ -18,8 +18,8 @@ export default function Recipes(props) {
   
   return (
     <section className='container'>
-     <Form onSubmit={onSubmit}/>
-     { recipeData && <RecipesList recipeData={recipeData} />}
+      <Form onSubmit={onSubmit}/>
+      { recipeData && <RecipesList recipeData={recipeData} />}
     </section>
   )
 }
