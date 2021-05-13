@@ -285,6 +285,7 @@ export default function ProductList(props) {
     if (event.target.checked) {
       const newSelecteds = rows.map((n) => n.id);
       setSelected(newSelecteds);
+
       const newSelectedsName = rows.map((n) => n.name);
       setSelectedName(newSelectedsName);
       return;
@@ -293,9 +294,11 @@ export default function ProductList(props) {
     setSelectedName([]);
   };
 
-  const handleClick = (event, id) => {
+  const handleClick = (event, id, name) => {
     const selectedIndex = selected.indexOf(id);
+    const selectedIndexName = selectedName.indexOf(name);
     let newSelected = [];
+    let newSelectedName = [];
 
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, id);
@@ -309,36 +312,20 @@ export default function ProductList(props) {
         selected.slice(selectedIndex + 1)
       );
     }
-    setSelected(newSelected);
-  };
-
-  const handleSelectAllNameClick = (event) => {
-    if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
-      setSelectedName(newSelecteds);
-      return;
-    }
-    setSelectedName([]);
-  };
-
-  const handleNameClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
+    if (selectedIndexName === -1) {
+      newSelectedName = newSelectedName.concat(selectedName, name);
+    } else if (selectedIndexName === 0) {
+      newSelectedName = newSelectedName.concat(selectedName.slice(1));
+    } else if (selectedIndexName === selectedName.length - 1) {
+      newSelectedName = newSelectedName.concat(selectedName.slice(0, -1));
+    } else if (selectedIndexName > 0) {
+      newSelectedName = newSelectedName.concat(
+        selectedName.slice(0, selectedIndexName),
+        selectedName.slice(selectedIndexName + 1)
       );
     }
-
-    setSelectedName(newSelected);
+    setSelected(newSelected);
+    setSelectedName(newSelectedName);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -351,18 +338,10 @@ export default function ProductList(props) {
   };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
-  // console.log(selected);
+
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
-  // doesn't do anything yet
-  // const dateFormatter = (rows) => {
-  //   const today = new Date();
-  //   const currentDate = new Date(today);
-  //   console.log("current", currentDate);
-  //   rows.map((i) => console.log(i.expiration_date));
-  // };
-  // dateFormatter(rows);
   console.log("selectedName", selectedName);
   console.log("selected", selected);
   return (
@@ -395,7 +374,8 @@ export default function ProductList(props) {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.id)}
+                      onClick={(event) => handleClick(event, row.id, row.name)}
+                      // onClick={(event) => handleNameClick(event, row.name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -436,11 +416,11 @@ export default function ProductList(props) {
             setSelected([]);
           }}
         >
-          delete
+          Delete
         </button>
         <Button
           classes={classes}
-          onClick={() => console.log("recipe button")}
+          onClick={useRecipesApi(selectedName)}
           variant="outlined"
           color="primary"
         >

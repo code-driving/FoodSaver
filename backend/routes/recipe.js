@@ -1,12 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = ({ getSavedRecipes, addRecipe, deleteRecipe ,getUserSavedRecipes}) => {
+module.exports = ({
+  getSavedRecipes,
+  addRecipe,
+  deleteRecipe,
+  getUserSavedRecipes,
+}) => {
   router.get("/", (req, res) => {
     getSavedRecipes()
       .then((usersRecipies) => {
-        console.log(usersRecipies)
-        res.json(usersRecipies)
+        console.log(usersRecipies);
+        res.json(usersRecipies);
       })
       .catch((err) =>
         res.json({
@@ -18,8 +23,8 @@ module.exports = ({ getSavedRecipes, addRecipe, deleteRecipe ,getUserSavedRecipe
   router.get("/:id", (req, res) => {
     getUserSavedRecipes(req.params.id)
       .then((usersRecipies) => {
-        console.log(usersRecipies)
-        res.json(usersRecipies)
+        console.log(usersRecipies);
+        res.json(usersRecipies);
       })
       .catch((err) =>
         res.json({
@@ -29,10 +34,10 @@ module.exports = ({ getSavedRecipes, addRecipe, deleteRecipe ,getUserSavedRecipe
   });
 
   router.post("/", (req, res) => {
-    const {recipie_name, user_id, recipe_id} = req.body;
+    const { recipie_name, user_id, recipe_id } = req.body;
     addRecipe(recipie_name, user_id, recipe_id)
       .then(() => {
-        res.status(200).send('Posted Recipe')
+        res.status(200).send("Posted Recipe");
       })
       .catch((err) =>
         res.json({
@@ -42,10 +47,10 @@ module.exports = ({ getSavedRecipes, addRecipe, deleteRecipe ,getUserSavedRecipe
   });
 
   router.delete("/:id", (req, res) => {
-    const id = Number(req.params.id) 
+    const id = Number(req.params.id);
     deleteRecipe(id)
       .then(() => {
-        res.status(200).send('Deleted Recipe')
+        res.status(200).send("Deleted Recipe");
       })
       .catch((err) =>
         res.json({
@@ -54,11 +59,5 @@ module.exports = ({ getSavedRecipes, addRecipe, deleteRecipe ,getUserSavedRecipe
       );
   });
 
-
-
-  
-
   return router;
 };
-
-
