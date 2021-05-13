@@ -25,12 +25,6 @@ html,body {
 .layout {
   @include shadow;
   display: flex;
-<<<<<<< HEAD
-=======
-  height: 100%;
-  align-items: center;
-  justify-content: center;
->>>>>>> c558d2a5b60f57d515436df843020b03f8381b40
   max-width: 80vw;
   width: 100%;
   height: 200vh;
