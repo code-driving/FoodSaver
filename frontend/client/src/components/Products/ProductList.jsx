@@ -85,6 +85,12 @@ const headCells = [
     label: "Expiration Date",
   },
   {
+    id: "Time",
+    numeric: true,
+    disablePadding: false,
+    label: "Time left",
+  },
+  {
     id: "quantity_grams",
     numeric: true,
     disablePadding: false,
@@ -323,14 +329,7 @@ export default function ProductList(props) {
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
-  const dateFormatter = (rows) => {
-    const today = new Date();
-    const currentDate = new Date(today);
-    console.log("current", currentDate);
-    rows.map((i) => console.log(i.expiration_date));
-  };
-  dateFormatter(rows);
-  // numSelected={selected.length} 
+    
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -382,7 +381,8 @@ export default function ProductList(props) {
                       >
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.expiration_date}</TableCell>
+                      <TableCell align="right">{row.expiration}</TableCell>
+                      <TableCell align="right">{row.dayLeft}</TableCell>
                       <TableCell align="right">{row.quantity_grams}</TableCell>
                       <TableCell align="right">{row.quantity_units}</TableCell>
                     </TableRow>

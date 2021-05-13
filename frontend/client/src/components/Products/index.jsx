@@ -11,14 +11,14 @@ import {
 
 
 export default function Products(props) {
-  const { products, setProduct, deleteProduct , dateData} = props;
+  const { products, setProduct, deleteProduct} = props;
   const onSubmit = (formData) => {
     setProduct(formData);
   };
 
   return (
     <section>
-      <ProductList products={products} dateData={dateData} deleteProduct={deleteProduct} numSelected={props.numSelected} />
+      <ProductList products={products}  deleteProduct={deleteProduct} numSelected={props.numSelected} />
       <ProductForm onSubmit={onSubmit} />
     </section>
   );

@@ -62,7 +62,10 @@ export default function useApplicationData() {
     ]).then(([users, products, recipes, summary]) => {
 
       const dateData= datefunction(products.data)
-      
+      for (let i=0; i <  products.data.length; i++) {
+          products.data[i]['expiration'] = dateData[i]['expiration']
+          products.data[i]['dayLeft'] = dateData[i]['dayLeft']
+      }
       //expiration_date
       setState((prev) => ({
         ...prev,
@@ -70,8 +73,6 @@ export default function useApplicationData() {
         products: products.data,
         recipes: recipes.data,
         summary: summary.data,
-        dateData: dateData
-
       }))
     });
   }, []);
