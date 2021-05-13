@@ -7,7 +7,9 @@ export default function useApplicationData() {
     users: [],
     products: [],
     recipes: [],
-    summary: [], //keep track of the expired and saved products
+    summary: [],
+    favourites: []
+     //keep track of the expired and saved products
     // score: 100
   });
 
@@ -77,6 +79,7 @@ export default function useApplicationData() {
       })
   }
   
+
 //We should not use localId at the end of each endpoint!
   useEffect(() => {
     Promise.all([
