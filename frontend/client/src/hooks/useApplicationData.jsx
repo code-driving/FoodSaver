@@ -7,8 +7,7 @@ export default function useApplicationData() {
     users: [],
     products: [],
     recipes: [],
-    summary: [],
-    favourites: []
+    summary: []
      //keep track of the expired and saved products
     // score: 100
   });
@@ -75,17 +74,16 @@ export default function useApplicationData() {
       Promise.all(deletes)
       .then(res => {
         const del = state.recipes.filter(recipe => !ids.includes(recipe.id))
-        setState(prev => ({ ...prev, products: del}))
+        setState(prev => ({ ...prev, recipes: del}))
       })
   }
-  
 
 //We should not use localId at the end of each endpoint!
   useEffect(() => {
     Promise.all([
       axios.get(`/api/users`),
       axios.get(`/api/products/${localId}`),
-      axios.get(`/api/recipes`),
+      axios.get(`/api/recipes/${localId}`),
       axios.get(`/api/summary`),
     ]).then(([users, products, recipes, summary]) => {
       setState((prev) => ({
@@ -99,7 +97,7 @@ export default function useApplicationData() {
   }, []);
 
 
-  return { state, setProduct, deleteProduct };
+  return { state, setProduct, deleteProduct, setRecipe, deleteRecipe };
   // ? create a function to keep track of the Score
 
   //3.setRecipe

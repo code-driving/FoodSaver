@@ -8,6 +8,7 @@ import Products from "./Products";
 import Recipes from "./Recipes";
 import Summary from "./Summary";
 import Login from "./Login";
+import Favourites from "./Favourites";
 import RecipesDetails from "./Recipes/Recipedetail"
 import PrivateRoute from "./Login/PrivateRoute";
 
@@ -46,6 +47,10 @@ export default function Application(props) {
 
           <Route path="/login">
             <Login />
+          </Route>
+          
+          <Route path="/favourites">
+            <Favourites />
           </Route>
 
           {/* <Route path="*">
