@@ -1,10 +1,7 @@
-
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import "./details.scss";
-import useApplicationData from "../../hooks/useApplicationData";
-// import useApplicationData, { setRecipe } from "../../hooks/useApplicationData";
-
+import useApplicationData from '../../hooks/useApplicationData'
 //this is the component responsible for handling data (recipes) received from api call. Create a useRecipeData hook to fetch the data (axios request)
 //we will need onSubmit as a prop to handle recipe submit event. This could be a button in RecipeList
 
@@ -23,8 +20,8 @@ console.log("props from Recipedetail", props)
   useEffect(() => {
     if (recipe_id) {
       const APIKEY = process.env.API_KEY;
-      const url = `https://api.spoonacular.com/recipes/${recipe_id}/analyzedInstructions?apiKey=f8973fa0549347b38d9ffd74077d423f&boolean=false`
-      const url2 = `https://api.spoonacular.com/recipes/${recipe_id}/information?apiKey=f8973fa0549347b38d9ffd74077d423f&boolean=false`
+      const url = `https://api.spoonacular.com/recipes/${recipe_id}/analyzedInstructions?apiKey=fe944c0a7ca548aa96c6ac698fdbdf91f&boolean=false`
+      const url2 = `https://api.spoonacular.com/recipes/${recipe_id}/information?apiKey=fe944c0a7ca548aa96c6ac698fdbdf91&boolean=false`
       Promise.all([
         axios.get(url),
         axios.get(url2)
@@ -51,33 +48,31 @@ console.log("props from Recipedetail", props)
     recipe_id: recipe_id
   }
 
-  const EachStep= steps.map((step, index) => {return <li key={index}>{step.step}</li>})
-  
+  const EachStep = steps.map((step, index) => {
+    return <li key={index}>{step.step}</li>;
+  });
 
   return (
-    <section className='container'>
+    <section className="container">
       <h1> Recipe Details</h1>
-      < div className='top'>
+      <div className="top">
         <img src={img} alt={"food image"}></img>
-          <div style={{marginLeft:10 }}>
+        <div style={{ marginLeft: 10 }}>
           <h2>Recipe Info</h2>
           <ul>
             <li>Time: {time} mins</li>
-            <li>{vegetarian ? 'Vegetarian : No' :'Vegetarian : Yes'}</li>
+            <li>{vegetarian ? "Vegitarian : No" : "Vegitarian : Yes"}</li>
             <li>Serves : {servings}</li>
           </ul>
-      
+
           <h2>Ingredients needed</h2>
-          <ul>
-            {ingredients}
-          </ul>
+          <ul>{ingredients}</ul>
         </div>
       </div>
       <h2>Instructions</h2>
-    <ul>
-      {EachStep}
-    </ul> 
-    <button onClick={setRecipe(value)}>SAVE</button>
-  </section>
-  )
+      <ul>{EachStep}</ul>
+const { setRecipe } = useApplicationData()
+      <button onClick={(value)}>save</button>
+    </section>
+  );
 }

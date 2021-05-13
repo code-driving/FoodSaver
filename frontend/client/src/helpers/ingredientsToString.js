@@ -1,8 +1,8 @@
 export default function ingredientsToString(ingredientsArray) {
   let ingredientString = "";
-  count = 0;
+  let count = 0;
 
-  for (item of ingredientsArray) {
+  for (let item of ingredientsArray) {
     count++;
     if (count === ingredientsArray.length) {
       ingredientString += item;

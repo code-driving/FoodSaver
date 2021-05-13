@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from 'react-router-dom';
+import datefunction from "../helpers/date"
 
 export default function useApplicationData() {
   const [state, setState] = useState({
@@ -86,6 +87,13 @@ export default function useApplicationData() {
       axios.get(`/api/recipes/${localId}`),
       axios.get(`/api/summary`),
     ]).then(([users, products, recipes, summary]) => {
+
+      const dateData= datefunction(products.data)
+      for (let i=0; i <  products.data.length; i++) {
+          products.data[i]['expiration'] = dateData[i]['expiration']
+          products.data[i]['dayLeft'] = dateData[i]['dayLeft']
+      }
+      //expiration_date
       setState((prev) => ({
         ...prev,
         users: users.data,

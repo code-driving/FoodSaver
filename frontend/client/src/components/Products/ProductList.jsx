@@ -44,6 +44,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import Button from "@material-ui/core/Button";
 import id from "date-fns/locale/id/index";
+import useRecipesApi from "../../hooks/useRecipesApi";
+import { Link } from "react-router-dom";
+import ingredientsToString from "../../helpers/ingredientsToString";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -83,6 +86,12 @@ const headCells = [
     numeric: true,
     disablePadding: false,
     label: "Expiration Date",
+  },
+  {
+    id: "Time",
+    numeric: true,
+    disablePadding: false,
+    label: "Time left",
   },
   {
     id: "quantity_grams",
@@ -214,7 +223,7 @@ const EnhancedTableToolbar = (props) => {
           Products
         </Typography>
       )}
-{/* 
+      {/* 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton aria-label="delete">
@@ -265,12 +274,13 @@ export default function ProductList(props) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
+  const [selectedName, setSelectedName] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const { products, deleteProduct } = props;
-  
+  const { products, deleteProduct, dateData, setIngredientsItems } = props;
+
   console.log("products in list component", products);
   const rows = products;
 
@@ -282,19 +292,25 @@ export default function ProductList(props) {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
+      const newSelecteds = rows.map((n) => n.id);
       setSelected(newSelecteds);
+
+      const newSelectedsName = rows.map((n) => n.name);
+      setSelectedName(newSelectedsName);
       return;
     }
     setSelected([]);
+    setSelectedName([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, id, name) => {
+    const selectedIndex = selected.indexOf(id);
+    const selectedIndexName = selectedName.indexOf(name);
     let newSelected = [];
+    let newSelectedName = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, id);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -305,10 +321,23 @@ export default function ProductList(props) {
         selected.slice(selectedIndex + 1)
       );
     }
-
+    if (selectedIndexName === -1) {
+      newSelectedName = newSelectedName.concat(selectedName, name);
+    } else if (selectedIndexName === 0) {
+      newSelectedName = newSelectedName.concat(selectedName.slice(1));
+    } else if (selectedIndexName === selectedName.length - 1) {
+      newSelectedName = newSelectedName.concat(selectedName.slice(0, -1));
+    } else if (selectedIndexName > 0) {
+      newSelectedName = newSelectedName.concat(
+        selectedName.slice(0, selectedIndexName),
+        selectedName.slice(selectedIndexName + 1)
+      );
+    }
     setSelected(newSelected);
+    setSelectedName(newSelectedName);
   };
-
+  let ingredientString = ingredientsToString(selectedName);
+  console.log("ingredient string -->", ingredientString);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -323,14 +352,8 @@ export default function ProductList(props) {
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
-  const dateFormatter = (rows) => {
-    const today = new Date();
-    const currentDate = new Date(today);
-    console.log("current", currentDate);
-    rows.map((i) => console.log(i.expiration_date));
-  };
-  dateFormatter(rows);
-  // numSelected={selected.length} 
+  console.log("selectedName", selectedName);
+  console.log("selected", selected);
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -361,7 +384,8 @@ export default function ProductList(props) {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.id)}
+                      onClick={(event) => handleClick(event, row.id, row.name)}
+                      // onClick={(event) => handleNameClick(event, row.name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -382,7 +406,8 @@ export default function ProductList(props) {
                       >
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.expiration_date}</TableCell>
+                      <TableCell align="right">{row.expiration}</TableCell>
+                      <TableCell align="right">{row.dayLeft}</TableCell>
                       <TableCell align="right">{row.quantity_grams}</TableCell>
                       <TableCell align="right">{row.quantity_units}</TableCell>
                     </TableRow>
@@ -396,17 +421,25 @@ export default function ProductList(props) {
             </TableBody>
           </Table>
         </TableContainer>
-        <button onClick={() => {deleteProduct(selected); setSelected([])}}>del</button>
-        <Button
-          classes={classes}
+        <button
           onClick={() => {
-            alert("clicked");
+            deleteProduct(selected);
+            setSelected([]);
           }}
-          variant="outlined"
-          color="primary"
         >
-          find
-        </Button>
+          Delete
+        </button>
+        {/* <Link to="/recipes"> */}
+        <Link to="/recipes">
+          <Button
+            classes={classes}
+            onClick={setIngredientsItems(ingredientString)}
+            variant="outlined"
+            color="primary"
+          >
+            Find Recipes
+          </Button>
+        </Link>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"

@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import useApplicationData from "../hooks/useApplicationData";
 // import useRecipesApi from "../hooks/useRecipesApi";
@@ -12,12 +13,14 @@ import Favourites from "./Favourites";
 import RecipesDetails from "./Recipes/Recipedetail"
 import PrivateRoute from "./Login/PrivateRoute";
 
-export default function Application(props) {
-  const { state, setProduct, deleteProduct, setRecipe, deleteRecipe } = useApplicationData();
+  
+  export default function Application(props) {
+    const { state, setProduct, deleteProduct, setRecipe, deleteRecipe } = useApplicationData();
+    const [ingredientsItems, setIngredientsItems] = useState("");
   // console.log("recipes", state.recipes);
   // console.log("summary", state.summary);
   // console.log("products", state.products);
-  const { products, recipes, summary, users } = state
+  const { products, recipes, summary, users } = state;
   // console.log(recipes)
   // console.log(summary)
   // console.log(products)
@@ -31,18 +34,23 @@ export default function Application(props) {
         <div className='right'>
         <Switch>
           <PrivateRoute exact path="/">
-            <Products products={products} setProduct={setProduct} deleteProduct={deleteProduct} />
+            <Products
+              products={products}
+              setProduct={setProduct}
+              deleteProduct={deleteProduct}
+              setIngredientsItems={setIngredientsItems}
+            />
           </PrivateRoute>
 
           <Route exact path="/recipes">
-            <Recipes />
+            <Recipes
+              setIngredientsItems={setIngredientsItems}
+              ingredientsItems={ingredientsItems}
+            />
           </Route>
 
-          <Route exact path="/recipes/:id" component={RecipesDetails} setRecipe={setRecipe}>
-          </Route>
-          
-          {/* <Route path="/recipes/:id" exact render={(props) => (<RecipesDetails setRecipe={setRecipe} {...props}/>)} /> */}
-          
+          <Route exact path="/recipes/:id" component={RecipesDetails}></Route>
+
           <Route exact path="/summary">
             <Summary />
           </Route>
