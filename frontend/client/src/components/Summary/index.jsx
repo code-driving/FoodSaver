@@ -1,11 +1,11 @@
 import { useState, Fragment } from 'react'
-
+import SummaryList from './SummaryList'
 
 
 export default function Summary(props) {
   
   // const { handleIncrement, handleDecrement, handleReset } = useApplicationData
-  // const { summaries } = props
+  // const { summary } = props
   
   return (
     // <Fragment>
@@ -15,8 +15,8 @@ export default function Summary(props) {
     //       onDecrement={handleDecrement}
     //       score={score}
     //   />
-    //   <SummaryList summaries={summaries}/>
+      <SummaryList />
     // </Fragment>
-    <div>hello from summary</div>
+
   )
 }

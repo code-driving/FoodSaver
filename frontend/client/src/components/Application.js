@@ -16,7 +16,7 @@ export default function Application(props) {
   // console.log("recipes", state.recipes);
   // console.log("summary", state.summary);
   // console.log("products", state.products);
-  const { products, recipes, summary, users } = state
+  const { products, recipes, summary, users} = state
   // console.log(recipes)
   // console.log(summary)
   // console.log(products)
@@ -38,7 +38,7 @@ export default function Application(props) {
           </Route>
 
           <Route exact path="/summary">
-            <Summary />
+            <Summary summary={summary} />
           </Route>
 
           <Route path="/login">

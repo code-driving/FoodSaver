@@ -14,13 +14,10 @@ export default function useApplicationData() {
   const localId = localStorage.getItem("token");
   
   const setProduct = (value) => {
-    
-    console.log('value from useApplicationData', value)
+
     return axios
       .post(`/api/products/`, value)
       .then((response) => {
-        console.log("response from products from useApplicationData", response)
-
         setState(prev => ({ ...prev, products: [...prev.products, response.data] }))
     });
   }
@@ -40,6 +37,21 @@ export default function useApplicationData() {
         setState(prev => ({ ...prev, products: del}))
       })
   }
+  
+  // const setExpired = (ids) => {
+  //   //keep the state of the expired products 
+  //   //if the product is expired = add class to signify 
+  //   //send a post request to summary
+  //   //update the state 
+  //   const expired = state.products.find(product => ids.includes(product.id) && product.expiration_date < Date.now())
+  //   expired.classList.add('red')
+  //   return axios
+  //     .post(`/api/summary`, expired)
+  //     .then((response) => {
+  //       // setState(prev => ({ ...prev, products: [...prev.products, response.data]}))
+  //       console.log(response)
+  //     })
+  // }
 
   const setRecipe = (value) => {
     return axios
