@@ -1,5 +1,6 @@
-import { useState } from 'react'
 import useRecipeDetails from '../../hooks/useRecipeDetails'
+import { useState , useEffect } from "react";
+import axios from "axios";
 
 
 //this is the component responsible for handling data (recipes) received from api call. Create a useRecipeData hook to fetch the data (axios request)
@@ -7,21 +8,34 @@ import useRecipeDetails from '../../hooks/useRecipeDetails'
 
 export default function RecipeDetail(props) {
 
-  let recipie_id = props.match.params.id
-  const recipeDetails  = useRecipeDetails(recipie_id)
- 
-  let steps = []
-  steps = recipeDetails.steps[0]['steps']
-  let img =recipeDetails.info['image']
+  let recipe_id = props.match.params.id
+
+  const [details, setDetails] = useState({ steps : [{'steps' : []}], info: { 'image' : ''}});
   
-  console.log('aaaaaaaa',recipeDetails)
-  // if(recipeDetails.length > 0 ) {
-  //   console.log('bbbbbbbb',recipeDetails)
-  //   // steps = recipeDetails[0]['steps']
-  // }
+ 
+  useEffect(() => {
+    if (recipe_id) {
+      const APIKEY = process.env.API_KEY;
+      const url = `https://api.spoonacular.com/recipes/${recipe_id}/analyzedInstructions?apiKey=f8973fa0549347b38d9ffd74077d423f&boolean=false`
+      const url2 = `https://api.spoonacular.com/recipes/${recipe_id}/information?apiKey=f8973fa0549347b38d9ffd74077d423f&boolean=false`
+      Promise.all([
+      axios.get(url),
+      axios.get(url2)
+      ]).then((res) => {
+        console.log(res)
+        setDetails(prev => ({...prev, steps:res[0].data , info:res[1].data}));
+
+      })
+    }     
+  }, [])
+ 
+
+  let steps = details.steps[0]['steps']
+  let img =  details.info['image']
 
   const EachStep= steps.map((step, index) => {return <li key={index}>{step.step}</li>})
   
+
   return (
     <section>
      Details

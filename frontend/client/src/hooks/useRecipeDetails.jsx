@@ -16,25 +16,11 @@ export default function useRecipesDetailsApi(recipe_id) {
       ]).then((res) => {
         console.log(res)
         setDetails(prev => ({...prev, steps:res[0].data , info:res[1].data}));
+       
       })
     }     
   }, [recipe_id])
-
+  
   return  details 
 }
 
-
-//<input type="button" disabled={sendRequest} onClick={() => setDetails(true)}
-
-// Promise.all([
-//   axios.get(`/api/users`),
-//   axios.get(`/api/products/${localId}`),
-//   axios.get(`/api/recipes`),
-//   axios.get(`/api/summary`),
-// ]).then((all) => {
-//   setState(prev => ({...prev, Day:"Monday", days: all[0].data, appointments: all[1].data ,interviewers : all[2].data }));
-//   })
-// }, [])
-
-
-// https://api.spoonacular.com/recipes/716429/information?includeNutrition=false
