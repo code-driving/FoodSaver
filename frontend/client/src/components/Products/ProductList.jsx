@@ -44,6 +44,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import Button from "@material-ui/core/Button";
 import id from "date-fns/locale/id/index";
+import useRecipesApi from "../../hooks/useRecipesApi";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -214,7 +215,7 @@ const EnhancedTableToolbar = (props) => {
           Products
         </Typography>
       )}
-{/* 
+      {/* 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton aria-label="delete">
@@ -265,13 +266,13 @@ export default function ProductList(props) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
+  const [selectedName, setSelectedName] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const { products, deleteProduct } = props;
-  
-  console.log("products in list component", products);
+
   const rows = products;
 
   const handleRequestSort = (event, property) => {
@@ -282,14 +283,45 @@ export default function ProductList(props) {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
+      const newSelecteds = rows.map((n) => n.id);
       setSelected(newSelecteds);
+      const newSelectedsName = rows.map((n) => n.name);
+      setSelectedName(newSelectedsName);
       return;
     }
     setSelected([]);
+    setSelectedName([]);
   };
 
-  const handleClick = (event, name) => {
+  const handleClick = (event, id) => {
+    const selectedIndex = selected.indexOf(id);
+    let newSelected = [];
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, id);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1)
+      );
+    }
+    setSelected(newSelected);
+  };
+
+  const handleSelectAllNameClick = (event) => {
+    if (event.target.checked) {
+      const newSelecteds = rows.map((n) => n.name);
+      setSelectedName(newSelecteds);
+      return;
+    }
+    setSelectedName([]);
+  };
+
+  const handleNameClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
 
@@ -306,7 +338,7 @@ export default function ProductList(props) {
       );
     }
 
-    setSelected(newSelected);
+    setSelectedName(newSelected);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -319,18 +351,20 @@ export default function ProductList(props) {
   };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
-
+  // console.log(selected);
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
-  const dateFormatter = (rows) => {
-    const today = new Date();
-    const currentDate = new Date(today);
-    console.log("current", currentDate);
-    rows.map((i) => console.log(i.expiration_date));
-  };
-  dateFormatter(rows);
-  // numSelected={selected.length} 
+  // doesn't do anything yet
+  // const dateFormatter = (rows) => {
+  //   const today = new Date();
+  //   const currentDate = new Date(today);
+  //   console.log("current", currentDate);
+  //   rows.map((i) => console.log(i.expiration_date));
+  // };
+  // dateFormatter(rows);
+  console.log("selectedName", selectedName);
+  console.log("selected", selected);
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -396,12 +430,17 @@ export default function ProductList(props) {
             </TableBody>
           </Table>
         </TableContainer>
-        <button onClick={() => {deleteProduct(selected); setSelected([])}}>delete</button>
+        <button
+          onClick={() => {
+            deleteProduct(selected);
+            setSelected([]);
+          }}
+        >
+          delete
+        </button>
         <Button
           classes={classes}
-          onClick={() => {
-            alert("clicked");
-          }}
+          onClick={() => console.log("recipe button")}
           variant="outlined"
           color="primary"
         >
