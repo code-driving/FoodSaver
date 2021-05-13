@@ -45,6 +45,8 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import Button from "@material-ui/core/Button";
 import id from "date-fns/locale/id/index";
 import useRecipesApi from "../../hooks/useRecipesApi";
+import { Link } from "react-router-dom";
+import ingredientsToString from "../../helpers/ingredientsToString";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -271,7 +273,7 @@ export default function ProductList(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const { products, deleteProduct } = props;
+  const { products, deleteProduct, setIngredientsItems } = props;
 
   const rows = products;
 
@@ -327,7 +329,8 @@ export default function ProductList(props) {
     setSelected(newSelected);
     setSelectedName(newSelectedName);
   };
-
+  let ingredientString = ingredientsToString(selectedName);
+  console.log("ingredient string -->", ingredientString);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -418,14 +421,17 @@ export default function ProductList(props) {
         >
           Delete
         </button>
-        <Button
-          classes={classes}
-          onClick={useRecipesApi(selectedName)}
-          variant="outlined"
-          color="primary"
-        >
-          Find Recipes
-        </Button>
+        {/* <Link to="/recipes"> */}
+        <Link to="/recipes">
+          <Button
+            classes={classes}
+            onClick={setIngredientsItems(ingredientString)}
+            variant="outlined"
+            color="primary"
+          >
+            Find Recipes
+          </Button>
+        </Link>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"

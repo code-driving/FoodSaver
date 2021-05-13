@@ -6,7 +6,7 @@ export default function useRecipesApi(ingredients) {
 
   useEffect(() => {
     if (ingredients) {
-      console.log(ingredients);
+      console.log("ingredients from ap", ingredients);
 
       const APIKEY = process.env.API_KEY;
       console.log(APIKEY);
