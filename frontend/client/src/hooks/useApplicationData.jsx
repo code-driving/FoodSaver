@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from 'react-router-dom';
+import datefunction from "../helpers/date"
 
 export default function useApplicationData() {
   const [state, setState] = useState({
     users: [],
     products: [],
     recipes: [],
-    summary: [], //keep track of the expired and saved products
+    summary: [],
+    dateData:[]
+    //keep track of the expired and saved products
     // score: 100
   });
 
@@ -57,12 +60,18 @@ export default function useApplicationData() {
       axios.get(`/api/recipes`),
       axios.get(`/api/summary`),
     ]).then(([users, products, recipes, summary]) => {
+
+      const dateData= datefunction(products.data)
+      
+      //expiration_date
       setState((prev) => ({
         ...prev,
         users: users.data,
         products: products.data,
         recipes: recipes.data,
         summary: summary.data,
+        dateData: dateData
+
       }))
     });
   }, []);
