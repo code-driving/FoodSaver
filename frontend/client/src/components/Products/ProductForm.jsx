@@ -93,7 +93,7 @@ export default function ProductForm(props) {
           <KeyboardDatePicker
             margin="normal"
             id="date-picker-dialog"
-            label="Date picker dialog"
+            // label="Date picker dialog"
             format="MM/dd/yyyy"
             name="expiration_date"
             value={selectedDate || ""}

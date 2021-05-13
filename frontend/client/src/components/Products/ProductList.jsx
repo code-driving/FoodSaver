@@ -43,6 +43,7 @@ import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import Button from "@material-ui/core/Button";
+import id from "date-fns/locale/id/index";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -186,7 +187,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  const { numSelected, deleteProduct, selected, setSelected } = props;
 
   return (
     <Toolbar
@@ -213,7 +214,7 @@ const EnhancedTableToolbar = (props) => {
           Products
         </Typography>
       )}
-
+{/* 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton aria-label="delete">
@@ -226,7 +227,7 @@ const EnhancedTableToolbar = (props) => {
             <FilterListIcon />
           </IconButton>
         </Tooltip>
-      )}
+      )} */}
     </Toolbar>
   );
 };
@@ -268,7 +269,8 @@ export default function ProductList(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const { products } = props;
+  const { products, deleteProduct } = props;
+  
   console.log("products in list component", products);
   const rows = products;
 
@@ -328,7 +330,7 @@ export default function ProductList(props) {
     rows.map((i) => console.log(i.expiration_date));
   };
   dateFormatter(rows);
-
+  // numSelected={selected.length} 
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -353,13 +355,13 @@ export default function ProductList(props) {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, row.id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -383,7 +385,6 @@ export default function ProductList(props) {
                       <TableCell align="right">{row.expiration_date}</TableCell>
                       <TableCell align="right">{row.quantity_grams}</TableCell>
                       <TableCell align="right">{row.quantity_units}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -395,6 +396,7 @@ export default function ProductList(props) {
             </TableBody>
           </Table>
         </TableContainer>
+        <button onClick={() => {deleteProduct(selected); setSelected([])}}>delete</button>
         <Button
           classes={classes}
           onClick={() => {

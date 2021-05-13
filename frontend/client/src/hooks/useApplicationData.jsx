@@ -25,22 +25,30 @@ export default function useApplicationData() {
     });
   }
   
-//   // extract the urlParameter with useParams
-//   const { id } = useParams();
-//   console.log({ id });
-// // find the product with the corresponding id
-// // const productToBeDeleted = products.find((product) => product.id === id);
-  
-  const deleteProduct = (id,value) => {
+  const deleteProduct = (ids) => {
     
-  
-    return axios
-      .delete(`/api/products/${localId}/${id}`, { value })
-      .then((response) => {
-        setState(prev => ({ ...prev, products: [...prev.products, value] }))
-    });
+    const deletes = []
+      for (const id of ids) {
+        deletes.push(
+          axios
+            .delete(`/api/products/${id}`)
+        )
+      }
+      Promise.all(deletes)
+      .then(res => {
+        const del = state.products.filter(product => !ids.includes(product.id))
+        setState(prev => ({ ...prev, products: del}))
+      })
   }
 
+  const setRecipe = (value) => {
+    return axios
+      .post(`/api/recipes/`, value)
+      .then((response) => {
+        setState(prev => ({ ...prev, products: [...prev.products, response.data] }))
+    });
+  }
+  
 //We should not use localId at the end of each endpoint!
   useEffect(() => {
     Promise.all([
@@ -63,20 +71,15 @@ export default function useApplicationData() {
   return { state, setProduct, deleteProduct };
   // ? create a function to keep track of the Score
 
-  //in here we will
-  //1.createProduct
-  //2.deleteProduct
-  //use Axios request to create or delete
-
   //3.setRecipe
   //4.deleteRecipe
   //use Axios request to create or delete
 
-  //5. in useEffect make axios get requests to all endpoints
-
   //6. create handleIncrement, handleDecrement, handleReset to update the score based on the product_saved, product_expired
   //IF SCORE == 0 THEN HE WILL HAVE TO DONATE TO FOODBANK AND HAVE A POSSIBILITY TO RESET A SCORE
 }
+
+// setState(prev => ({ ...prev, products: res.data})) /// the magic to remove everything
 
 
 

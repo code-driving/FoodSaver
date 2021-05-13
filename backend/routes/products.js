@@ -109,8 +109,8 @@ module.exports = ({
     const id = Number(req.params.id) 
     console.log("id from delete route", id)
     deleteProduct(id)
-      .then(() => {
-        res.status(200).send('Deleted Product')
+      .then((data) => {
+        res.json(data)
       })
       .catch((err) =>
         res.json({
