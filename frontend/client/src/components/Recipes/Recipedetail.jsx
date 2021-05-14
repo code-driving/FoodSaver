@@ -23,9 +23,9 @@ export default function RecipeDetail(props) {
   console.log("details -->", details);
   const { id } = useParams();
   console.log("id from useParams", { id });
-  const API_KEY = process.env.REACT_APP_API_KEY;
 
   useEffect(() => {
+    const API_KEY = process.env.REACT_APP_API_KEY;
     if ({ id }) {
       const url = `https://api.spoonacular.com/recipes/${id}/analyzedInstructions?apiKey=${API_KEY}&boolean=false`;
       const url2 = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}&boolean=false`;
