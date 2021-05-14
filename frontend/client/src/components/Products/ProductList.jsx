@@ -279,9 +279,14 @@ export default function ProductList(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const { products, deleteProduct, dateData, setIngredientsItems } = props;
+  const {
+    products,
+    deleteProduct,
+    dateData,
+    setIngredientsItems,
+    consumeProduct,
+  } = props;
 
-  console.log("products in list component", products);
   const rows = products;
 
   const handleRequestSort = (event, property) => {
@@ -337,7 +342,6 @@ export default function ProductList(props) {
     setSelectedName(newSelectedName);
   };
   let ingredientString = ingredientsToString(selectedName);
-  console.log("ingredient string -->", ingredientString);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -352,7 +356,6 @@ export default function ProductList(props) {
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
-  console.log("selectedName", selectedName);
   console.log("selected", selected);
   return (
     <div className={classes.root}>
@@ -431,15 +434,25 @@ export default function ProductList(props) {
         </button>
         {/* <Link to="/recipes"> */}
         <Link to="/recipes">
-          <Button
+          <button
             classes={classes}
             onClick={setIngredientsItems(ingredientString)}
             variant="outlined"
             color="primary"
           >
-            Find Recipes
-          </Button>
+            Recipes
+          </button>
         </Link>
+        <button
+          classes={classes}
+          onClick={() => {
+            consumeProduct(selected);
+          }}
+          variant="outlined"
+          color="primary"
+        >
+          Consume
+        </button>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"

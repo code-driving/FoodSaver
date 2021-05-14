@@ -1,72 +1,69 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from 'react-router-dom';
-import datefunction from "../helpers/date"
+import { useParams } from "react-router-dom";
+import datefunction from "../helpers/date";
 
 export default function useApplicationData() {
   const [state, setState] = useState({
     users: [],
     products: [],
     recipes: [],
-    summary: []
-     //keep track of the expired and saved products
+    summary: [],
+    //keep track of the expired and saved products
     // score: 100
   });
 
   const localId = localStorage.getItem("token");
-  
+
   const setProduct = (value) => {
-    
-     return axios
-      .post(`/api/products/`, value)
-      .then((response) => {
-        
-        console.log('sssssss',response.data)
-        const dateData= datefunction([response.data])
-        console.log('wwwwwww',dateData[0])
-        const parseddata = dateData[0]
-        const combined = {...response.data, expiration : parseddata.expiration, dayLeft : parseddata.dayLeft}
-        console.log('qqqqqq',combined)
-        
-       
-        setState(prev => ({ ...prev, products: [...prev.products, combined] }))
+    return axios.post(`/api/products/`, value).then((response) => {
+      console.log("sssssss", response.data);
+      const dateData = datefunction([response.data]);
+      console.log("wwwwwww", dateData[0]);
+      const parseddata = dateData[0];
+      const combined = {
+        ...response.data,
+        expiration: parseddata.expiration,
+        dayLeft: parseddata.dayLeft,
+      };
+      console.log("qqqqqq", combined);
+
+      setState((prev) => ({ ...prev, products: [...prev.products, combined] }));
     });
-  }
-  
+  };
+
   const deleteProduct = (ids) => {
-    
-    const deletes = []
-      for (const id of ids) {
-        deletes.push(
-          axios
-            .delete(`/api/products/${id}`)
-        )
-      }
-      Promise.all(deletes)
-      .then(res => {
-        const del = state.products.filter(product => !ids.includes(product.id))
-        setState(prev => ({ ...prev, products: del}))
-      })
-  }
-  
-  const setRecipe = (value) => {
-    return axios
-      .post(`/api/recipes/`, value)
-      .then((response) => {
-        setState(prev => ({ ...prev, recipes: [...prev.recipes, response.data] }))
+    const deletes = [];
+    for (const id of ids) {
+      deletes.push(axios.delete(`/api/products/${id}`));
+    }
+    Promise.all(deletes).then((res) => {
+      const del = state.products.filter((product) => !ids.includes(product.id));
+      setState((prev) => ({ ...prev, products: del }));
     });
-  }
-  
+  };
+
+  const setRecipe = (value) => {
+    return axios.post(`/api/recipes/`, value).then((response) => {
+      setState((prev) => ({
+        ...prev,
+        recipes: [...prev.recipes, response.data],
+      }));
+    });
+  };
+
   const deleteRecipe = (id) => {
-    console.log("test")
-    return axios
-      .delete(`/api/recipes/${id}`)
-      .then(res => {
-        console.log("id from delete", id)
-        const del = state.recipes.filter(recipe => recipe.id !== id)
-        setState(prev => ({ ...prev, recipes: del}))
-    })
-  }
+    console.log("test");
+    return axios.delete(`/api/recipes/${id}`).then((res) => {
+      console.log("id from delete", id);
+      const del = state.recipes.filter((recipe) => recipe.id !== id);
+      setState((prev) => ({ ...prev, recipes: del }));
+    });
+  };
+
+  const consumeProduct = (id) => {
+    console.log("product consumed");
+  };
   // const deleteRecipe = (ids) => {
   //   console.log('ids from delete recipe', ids)
   //   const deletes = []
@@ -83,7 +80,7 @@ export default function useApplicationData() {
   //     })
   // }
 
-//We should not use localId at the end of each endpoint!
+  //We should not use localId at the end of each endpoint!
   useEffect(() => {
     Promise.all([
       axios.get(`/api/users`),
@@ -91,34 +88,36 @@ export default function useApplicationData() {
       axios.get(`/api/recipes/${localId}`),
       axios.get(`/api/summary`),
     ]).then(([users, products, recipes, summary]) => {
-
-      const dateData= datefunction(products.data)
-      for (let i=0; i <  products.data.length; i++) {
-          products.data[i]['expiration'] = dateData[i]['expiration']
-          products.data[i]['dayLeft'] = dateData[i]['dayLeft']
+      const dateData = datefunction(products.data);
+      for (let i = 0; i < products.data.length; i++) {
+        products.data[i]["expiration"] = dateData[i]["expiration"];
+        products.data[i]["dayLeft"] = dateData[i]["dayLeft"];
       }
-    
+
       setState((prev) => ({
         ...prev,
         users: users.data,
         products: products.data,
         recipes: recipes.data,
         summary: summary.data,
-      }))
+      }));
     });
   }, []);
 
-
-  return { state, setProduct, deleteProduct, setRecipe, deleteRecipe };
+  return {
+    state,
+    setProduct,
+    deleteProduct,
+    setRecipe,
+    deleteRecipe,
+    consumeProduct,
+  };
 
   //6. create handleIncrement, handleDecrement, handleReset to update the score based on the product_saved, product_expired
   //IF SCORE == 0 THEN HE WILL HAVE TO DONATE TO FOODBANK AND HAVE A POSSIBILITY TO RESET A SCORE
 }
 
 // setState(prev => ({ ...prev, products: res.data})) /// the magic to remove everything
-
-
-
 
 //   return { state, setCurrentCity, setGroceries, setNotes };
 // }

@@ -10,14 +10,20 @@ import Recipes from "./Recipes";
 import Summary from "./Summary";
 import Login from "./Login";
 import Favourites from "./Favourites";
-import RecipesDetails from "./Recipes/Recipedetail"
+import RecipesDetails from "./Recipes/Recipedetail";
 import PrivateRoute from "./Login/PrivateRoute";
 
-  
-  export default function Application(props) {
-    const { state, setProduct, deleteProduct, setRecipe, deleteRecipe } = useApplicationData();
-    const [ingredientsItems, setIngredientsItems] = useState("");
-    const { products, recipes, summary, users } = state;
+export default function Application(props) {
+  const {
+    state,
+    setProduct,
+    deleteProduct,
+    setRecipe,
+    deleteRecipe,
+    consumeProduct,
+  } = useApplicationData();
+  const [ingredientsItems, setIngredientsItems] = useState("");
+  const { products, recipes, summary, users } = state;
 
   return (
     <main className="layout">
@@ -26,49 +32,50 @@ import PrivateRoute from "./Login/PrivateRoute";
         <div>
           <NavBar />
         </div>
-        <div className='right'>
-        <Switch>
-          <PrivateRoute exact path="/">
-            <Products
-              products={products}
-              setProduct={setProduct}
-              deleteProduct={deleteProduct}
-              setIngredientsItems={setIngredientsItems}
-            />
-          </PrivateRoute>
+        <div className="right">
+          <Switch>
+            <PrivateRoute exact path="/">
+              <Products
+                products={products}
+                setProduct={setProduct}
+                deleteProduct={deleteProduct}
+                setIngredientsItems={setIngredientsItems}
+                consumeProduct={consumeProduct}
+              />
+            </PrivateRoute>
 
-          <Route exact path="/recipes">
-            <Recipes
-              setIngredientsItems={setIngredientsItems}
-              ingredientsItems={ingredientsItems}
-            />
-          </Route>
-          
-          <Route exact path="/recipes/:id">
-            <RecipesDetails setRecipe={setRecipe}/>
-          </Route>
+            <Route exact path="/recipes">
+              <Recipes
+                setIngredientsItems={setIngredientsItems}
+                ingredientsItems={ingredientsItems}
+              />
+            </Route>
 
-          {/* <Route exact path="/recipes/:id" component={RecipesDetails}></Route> */}
-          
-          {/* <Route exact path="/details/:id" render={(props)=>{
+            <Route exact path="/recipes/:id">
+              <RecipesDetails setRecipe={setRecipe} />
+            </Route>
+
+            {/* <Route exact path="/recipes/:id" component={RecipesDetails}></Route> */}
+
+            {/* <Route exact path="/details/:id" render={(props)=>{
             <RecipesDetails id={props.match.params.id}/>
           }} /> */}
-          <Route exact path="/summary">
-            <Summary />
-          </Route>
+            <Route exact path="/summary">
+              <Summary />
+            </Route>
 
-          <Route path="/login">
-            <Login />
-          </Route>
-          
-          <Route path="/favourites">
-            <Favourites recipes={recipes} deleteRecipe={deleteRecipe}/>
-          </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
 
-          {/* <Route path="*">
+            <Route path="/favourites">
+              <Favourites recipes={recipes} deleteRecipe={deleteRecipe} />
+            </Route>
+
+            {/* <Route path="*">
             <h1>404 - Not Found</h1>
           </Route> */}
-        </Switch>
+          </Switch>
         </div>
         {/* </div> */}
       </Router>
