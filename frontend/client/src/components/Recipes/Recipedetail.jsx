@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./details.scss";
 import useApplicationData from '../../hooks/useApplicationData'
@@ -9,7 +9,7 @@ import "./Recipes.scss"
 export default function RecipeDetail(props) {
   const [redirect, setRedirect] = useState(false);
   const { setRecipe } = props;
-  
+
   const [details, setDetails] = useState({
     steps: [{ steps: [] }],
     info: {
@@ -20,14 +20,14 @@ export default function RecipeDetail(props) {
       servings: "",
     },
   });
-  
-  
+
+  console.log("details -->", details);
   const { id } = useParams();
   console.log("id from useParams", { id });
-  const API_KEY = process.env.REACT_APP_API_KEY  
-  
+
   useEffect(() => {
-    if ({id}) {
+    const API_KEY = process.env.REACT_APP_API_KEY;
+    if ({ id }) {
       const url = `https://api.spoonacular.com/recipes/${id}/analyzedInstructions?apiKey=${API_KEY}&boolean=false`;
       const url2 = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}&boolean=false`;
       Promise.all([axios.get(url), axios.get(url2)]).then((res) => {
@@ -41,7 +41,7 @@ export default function RecipeDetail(props) {
     }
   }, []);
   let steps = details.steps[0]["steps"];
-  let name =  details.info['title']
+  let name = details.info["title"];
   let img = details.info["image"];
   let ingredients = details.info["extendedIngredients"].map((ingredients) => (
     <li> {ingredients["nameClean"]}</li>
@@ -51,16 +51,16 @@ export default function RecipeDetail(props) {
   let servings = details.info["servings"];
   const localId = localStorage.getItem("token");
   // let recipe_id = props.match.params.id;
-  console.log("id from useParams after call",id );
-  
-  
+  console.log("id from useParams after call", id);
+
   const value = {
-        recipie_name: name,
-        user_id: localId, 
-        recipe_id: id
-  }
-  console.log("value from Recipe Detail", value)
-  
+    recipie_name: name,
+    user_id: localId,
+    recipe_id: id,
+    imageSRC: img,
+  };
+  console.log("value from Recipe Detail", value);
+
   const EachStep = steps.map((step, index) => {
     return <li key={index}>{step.step}</li>;
   });
@@ -87,4 +87,3 @@ export default function RecipeDetail(props) {
     </section>
   );
 }
-

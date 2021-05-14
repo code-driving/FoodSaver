@@ -106,12 +106,12 @@ const headCells = [
     disablePadding: false,
     label: "Amount (units)",
   },
-  {
-    id: "warning",
-    numeric: true,
-    disablePadding: false,
-    label: "warning",
-  },
+  // {
+  //   id: "warning",
+  //   numeric: true,
+  //   disablePadding: false,
+  //   label: "warning",
+  // },
 ];
 
 function EnhancedTableHead(props) {
@@ -160,6 +160,7 @@ function EnhancedTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
+        <span className="warning">Warning</span>
       </TableRow>
     </TableHead>
   );
@@ -280,9 +281,14 @@ export default function ProductList(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const { products, deleteProduct, dateData, setIngredientsItems } = props;
+  const {
+    products,
+    deleteProduct,
+    dateData,
+    setIngredientsItems,
+    consumeProduct,
+  } = props;
 
-  console.log("products in list component", products);
   const rows = products;
 
   const handleRequestSort = (event, property) => {
@@ -338,7 +344,6 @@ export default function ProductList(props) {
     setSelectedName(newSelectedName);
   };
   let ingredientString = ingredientsToString(selectedName);
-  console.log("ingredient string -->", ingredientString);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -352,9 +357,14 @@ export default function ProductList(props) {
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
-  console.log("selectedName", selectedName);
-  console.log("selected", selected);
+  const warning = (dayLeft) => {
+    if (dayLeft === "Expired") {
+      return "dot-red";
+    } else if (dayLeft === "1 day" || dayLeft.includes("hours")) {
+      return "dot-yellow";
+    }
+    return "dot-green";
+  };
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -411,6 +421,7 @@ export default function ProductList(props) {
                       <TableCell align="right">{row.dayLeft}</TableCell>
                       <TableCell align="right">{row.quantity_grams}</TableCell>
                       <TableCell align="right">{row.quantity_units}</TableCell>
+                      <section className={warning(row.dayLeft)}></section>
                     </TableRow>
                   );
                 })}
@@ -438,6 +449,16 @@ export default function ProductList(props) {
             find recipes
           </button>
         </Link>
+        <button
+          classes={classes}
+          onClick={() => {
+            consumeProduct(selected);
+          }}
+          variant="outlined"
+          color="primary"
+        >
+          Consume
+        </button>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
