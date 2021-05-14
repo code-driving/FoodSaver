@@ -49,9 +49,11 @@ export default function useApplicationData() {
   }
   
   const deleteRecipe = (id) => {
+    console.log("test")
     return axios
       .delete(`/api/recipes/${id}`)
       .then(res => {
+        console.log("id from delete", id)
         const del = state.recipes.filter(recipe => recipe.id !== id)
         setState(prev => ({ ...prev, recipes: del}))
     })
