@@ -1,13 +1,14 @@
-import React from 'react'
-import FavouriteItem from './FavouriteItem'
+import React from "react";
+import FavouriteItem from "./FavouriteItem";
 
 export default function FavouriteList(props) {
   const { recipes, deleteRecipe } = props;
-  
-  const favouriteRecipes = Array.isArray(recipes) && recipes.map((favourite, index) => <FavouriteItem key={index} {...favourite} deleteRecipe={deleteRecipe}/>)
+  console.log("recipes from fav list -->", recipes);
+  const favouriteRecipes =
+    Array.isArray(recipes) &&
+    recipes.map((favourite, index) => (
+      <FavouriteItem key={index} {...favourite} deleteRecipe={deleteRecipe} />
+    ));
 
-  return (
-    <div>
-      {favouriteRecipes}
-    </div>
-)}
+  return <div>{favouriteRecipes}</div>;
+}

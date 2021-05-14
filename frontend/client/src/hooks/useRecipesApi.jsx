@@ -3,6 +3,7 @@ import axios from "axios";
 
 export default function useRecipesApi(ingredients) {
   const [recipe, setRecipe] = useState(null);
+  console.log("recipe from hook", recipe);
 
   useEffect(() => {
     if (ingredients) {
