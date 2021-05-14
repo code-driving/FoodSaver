@@ -24,6 +24,7 @@ import PrivateRoute from "./Login/PrivateRoute";
   // console.log(recipes)
   // console.log(summary)
   // console.log(products)
+  console.log("hi",process.env.REACT_APP_API_KEY)
   return (
     <main className="layout">
       <Router>
@@ -49,8 +50,11 @@ import PrivateRoute from "./Login/PrivateRoute";
             />
           </Route>
 
-          <Route exact path="/recipes/:id" component={RecipesDetails}></Route>
-
+          {/* <Route exact path="/recipes/:id" component={RecipesDetails}></Route> */}
+          
+          <Route exact path="/details/:id" render={(props)=>{
+            <RecipesDetails id={props.match.params.id}/>
+          }} />
           <Route exact path="/summary">
             <Summary />
           </Route>

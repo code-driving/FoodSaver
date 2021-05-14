@@ -4,54 +4,57 @@ import "./details.scss";
 import useApplicationData from '../../hooks/useApplicationData'
 //this is the component responsible for handling data (recipes) received from api call. Create a useRecipeData hook to fetch the data (axios request)
 //we will need onSubmit as a prop to handle recipe submit event. This could be a button in RecipeList
-
 export default function RecipeDetail(props) {
   
-const { setRecipe } = useApplicationData()
-
-console.log("props from Recipedetail", props)
-  let recipe_id = props.match.params.id
-  const localId = localStorage.getItem("token");
+  const { setRecipe } = useApplicationData();
   
-  
-  const [details, setDetails] = useState({ steps : [{'steps' : []}], info: { 'image' : '', extendedIngredients : [], time : 0, vegetarian: '', servings: '', name : ''}});
-  
-  
+  const [details, setDetails] = useState({
+    steps: [{ steps: [] }],
+    info: {
+      image: "",
+      extendedIngredients: [],
+      time: 0,
+      vegetarian: "",
+      servings: "",
+    },
+  });
   useEffect(() => {
     if (recipe_id) {
       const APIKEY = process.env.API_KEY;
-      const url = `https://api.spoonacular.com/recipes/${recipe_id}/analyzedInstructions?apiKey=fe944c0a7ca548aa96c6ac698fdbdf91f&boolean=false`
-      const url2 = `https://api.spoonacular.com/recipes/${recipe_id}/information?apiKey=fe944c0a7ca548aa96c6ac698fdbdf91&boolean=false`
-      Promise.all([
-        axios.get(url),
-        axios.get(url2)
-      ]).then((res) => {
-        console.log(res)
-        setDetails(prev => ({...prev, steps:res[0].data , info:res[1].data}));
-        
-      })
-    }     
-  }, [])
-  
-  
-  let steps = details.steps[0]['steps']
+      const url = `https://api.spoonacular.com/recipes/${recipe_id}/analyzedInstructions?apiKey=f8973fa0549347b38d9ffd74077d423f&boolean=false`;
+      const url2 = `https://api.spoonacular.com/recipes/${recipe_id}/information?apiKey=f8973fa0549347b38d9ffd74077d423f&boolean=false`;
+      Promise.all([axios.get(url), axios.get(url2)]).then((res) => {
+        console.log(res);
+        setDetails((prev) => ({
+          ...prev,
+          steps: res[0].data,
+          info: res[1].data,
+        }));
+      });
+    }
+  }, []);
+  let steps = details.steps[0]["steps"];
   let name =  details.info['title']
-  let img =  details.info['image']
-  let ingredients =  details.info['extendedIngredients'].map(ingredients=> (<li> {ingredients['nameClean']}</li>))
-  let time = details.info['readyInMinutes']
-  let vegetarian = details.info['vegetarian']
-  let servings = details.info['servings']
+  let img = details.info["image"];
+  let ingredients = details.info["extendedIngredients"].map((ingredients) => (
+    <li> {ingredients["nameClean"]}</li>
+  ));
+  let time = details.info["readyInMinutes"];
+  let vegetarian = details.info["vegetarian"];
+  let servings = details.info["servings"];
+  const localId = localStorage.getItem("token");
+  let recipe_id = props.match.params.id;
   
   const value = {
-    recipie_name: name, 
-    user_id: localId, 
-    recipe_id: recipe_id
+        recipie_name: name,
+        user_id: localId, 
+        recipe_id: recipe_id
   }
-
+  console.log("value from Recipe Detail", value)
+  
   const EachStep = steps.map((step, index) => {
     return <li key={index}>{step.step}</li>;
   });
-
   return (
     <section className="container">
       <h1> Recipe Details</h1>
@@ -64,15 +67,14 @@ console.log("props from Recipedetail", props)
             <li>{vegetarian ? "Vegitarian : No" : "Vegitarian : Yes"}</li>
             <li>Serves : {servings}</li>
           </ul>
-
           <h2>Ingredients needed</h2>
           <ul>{ingredients}</ul>
         </div>
       </div>
       <h2>Instructions</h2>
       <ul>{EachStep}</ul>
-const { setRecipe } = useApplicationData()
-      <button onClick={(value)}>save</button>
+      <button onClick={() => setRecipe(value)}>save</button>
     </section>
   );
 }
+

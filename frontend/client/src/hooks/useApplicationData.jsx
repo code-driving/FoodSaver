@@ -56,7 +56,7 @@ export default function useApplicationData() {
   // }
   
   const setRecipe = (value) => {
-    
+    console.log("test")
     return axios
       .post(`/api/recipes/${localId}`, value)
       .then((response) => {
