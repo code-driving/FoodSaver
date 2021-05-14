@@ -58,7 +58,7 @@ export default function useApplicationData() {
   const setRecipe = (value) => {
     console.log("test")
     return axios
-      .post(`/api/recipes/${localId}`, value)
+      .post(`/api/recipes/`, value)
       .then((response) => {
         setState(prev => ({ ...prev, recipes: [...prev.recipes, response.data] }))
     });
