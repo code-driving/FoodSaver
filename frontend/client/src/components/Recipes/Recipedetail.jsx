@@ -56,7 +56,7 @@ export default function RecipeDetail(props) {
     recipie_name: name,
     user_id: localId,
     recipe_id: id,
-    image: img,
+    imageSRC: img,
   };
   console.log("value from Recipe Detail", value);
 

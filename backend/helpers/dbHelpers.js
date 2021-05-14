@@ -120,11 +120,11 @@ module.exports = (db) => {
         .catch((err) => err);
   };
 
-  const addRecipe = (recipie_name, user_id, recipe_id) => {
+  const addRecipe = (recipie_name, user_id, recipe_id,imageSRC) => {
     const query = {
-      text: `INSERT INTO saved_recipes (recipie_name, user_id, recipe_id)
-              VALUES ($1,$2, $3)`,
-             values: [recipie_name, user_id, recipe_id],
+      text: `INSERT INTO saved_recipes (recipie_name, user_id, recipe_id ,imageSRC)
+              VALUES ($1,$2, $3, $4)`,
+             values: [recipie_name, user_id, recipe_id , imageSRC],
     };
     return db
         .query(query)
