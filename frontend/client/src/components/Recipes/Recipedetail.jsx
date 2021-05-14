@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./details.scss";
-
+import useApplicationData from '../../hooks/useApplicationData'
 //this is the component responsible for handling data (recipes) received from api call. Create a useRecipeData hook to fetch the data (axios request)
 //we will need onSubmit as a prop to handle recipe submit event. This could be a button in RecipeList
-
 export default function RecipeDetail(props) {
-  let recipe_id = props.match.params.id;
-
+  
+  const { setRecipe } = useApplicationData();
+  
   const [details, setDetails] = useState({
     steps: [{ steps: [] }],
     info: {
@@ -18,7 +18,6 @@ export default function RecipeDetail(props) {
       servings: "",
     },
   });
-
   useEffect(() => {
     if (recipe_id) {
       const APIKEY = process.env.API_KEY;
@@ -34,8 +33,8 @@ export default function RecipeDetail(props) {
       });
     }
   }, []);
-
   let steps = details.steps[0]["steps"];
+  let name =  details.info['title']
   let img = details.info["image"];
   let ingredients = details.info["extendedIngredients"].map((ingredients) => (
     <li> {ingredients["nameClean"]}</li>
@@ -43,16 +42,24 @@ export default function RecipeDetail(props) {
   let time = details.info["readyInMinutes"];
   let vegetarian = details.info["vegetarian"];
   let servings = details.info["servings"];
-
+  const localId = localStorage.getItem("token");
+  let recipe_id = props.match.params.id;
+  
+  const value = {
+        recipie_name: name,
+        user_id: localId, 
+        recipe_id: recipe_id
+  }
+  console.log("value from Recipe Detail", value)
+  
   const EachStep = steps.map((step, index) => {
     return <li key={index}>{step.step}</li>;
   });
-
   return (
-    <section className="container">
+    <section className="recipe-details-container">
       <h1> Recipe Details</h1>
-      <div className="top">
-        <img src={img} alt={"food image"}></img>
+      <div>
+        <img src={img} alt={"food image"} class="recipe-image"></img>
         <div style={{ marginLeft: 10 }}>
           <h2>Recipe Info</h2>
           <ul>
@@ -60,13 +67,17 @@ export default function RecipeDetail(props) {
             <li>{vegetarian ? "Vegitarian : No" : "Vegitarian : Yes"}</li>
             <li>Serves : {servings}</li>
           </ul>
-
           <h2>Ingredients needed</h2>
           <ul>{ingredients}</ul>
         </div>
       </div>
       <h2>Instructions</h2>
       <ul>{EachStep}</ul>
+      <button onClick={() => setRecipe(value)}>save</button>
+      <ul className="recipe-steps" id="recipe-steps">
+        {EachStep}
+      </ul>
     </section>
   );
 }
+

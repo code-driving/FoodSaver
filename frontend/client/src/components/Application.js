@@ -9,12 +9,14 @@ import Products from "./Products";
 import Recipes from "./Recipes";
 import Summary from "./Summary";
 import Login from "./Login";
-import RecipesDetails from "./Recipes/Recipedetail";
+import Favourites from "./Favourites";
+import RecipesDetails from "./Recipes/Recipedetail"
 import PrivateRoute from "./Login/PrivateRoute";
 
-export default function Application(props) {
-  const { state, setProduct, deleteProduct } = useApplicationData();
-  const [ingredientsItems, setIngredientsItems] = useState("");
+  
+  export default function Application(props) {
+    const { state, setProduct, deleteProduct, setRecipe, deleteRecipe } = useApplicationData();
+    const [ingredientsItems, setIngredientsItems] = useState("");
   // console.log("recipes", state.recipes);
   // console.log("summary", state.summary);
   // console.log("products", state.products);
@@ -22,6 +24,7 @@ export default function Application(props) {
   // console.log(recipes)
   // console.log(summary)
   // console.log(products)
+
   return (
     <main className="layout">
       <Router>
@@ -48,13 +51,20 @@ export default function Application(props) {
           </Route>
 
           <Route exact path="/recipes/:id" component={RecipesDetails}></Route>
-
+          
+          {/* <Route exact path="/details/:id" render={(props)=>{
+            <RecipesDetails id={props.match.params.id}/>
+          }} /> */}
           <Route exact path="/summary">
             <Summary />
           </Route>
 
           <Route path="/login">
             <Login />
+          </Route>
+          
+          <Route path="/favourites">
+            <Favourites recipes={recipes} deleteRecipe={deleteRecipe}/>
           </Route>
 
           {/* <Route path="*">

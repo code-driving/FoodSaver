@@ -10,6 +10,7 @@ export default function NavBar() {
           <li><Link to="/recipes">recipes</Link></li>
           <li><Link to="/summary">summary</Link></li>
           <li><Link to='/login'>login</Link></li>
+          <li><Link to='/favourites'>favourites</Link></li>
         </ul>
       </nav>
   )

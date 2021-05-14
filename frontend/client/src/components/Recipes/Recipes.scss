@@ -1,56 +1,58 @@
-h1,h2 {
-    color: black;
-    margin-left: .3em;
+h1,
+h2 {
+  color: black;
+  margin-left: 0.3em;
 }
-.container{
-    display: block;
-    justify-content : center,
-  
+.container {
+  display: block;
+  justify-content: center;
 }
 
 .list {
-    display: flex;
-    flex-wrap: wrap;
-    text-align: center;
-    justify-content: space-evenly;
-    margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: space-evenly;
+  margin-top: 1.5rem;
 }
 .item {
-   justify-content: center;
-   border: 4px solid black;
-    width: calc((100% / 3) - 1rem);;
-    min-width: 100px;
-    margin-top: 1.5rem;
-    padding: .5em;
-    box-shadow: -6px -6px 9px #fff, 6px 6px 9px rgba(#000, 0.4);
+  justify-content: center;
+  border: 4px solid black;
+  width: calc((100% / 3) - 1rem);
+  min-width: 100px;
+  margin-top: 1.5rem;
+  padding: 0.5em;
+  box-shadow: -6px -6px 9px #fff, 6px 6px 9px rgba(#000, 0.4);
 }
 
 .item:hover {
-    border: 4px solid rgba(0, 0, 0, 0.479);
-    box-shadow: -6px -6px 9px #fff inset, 6px 6px 9px rgba(#000, 0.4) inset;
-  }
-  
+  border: 4px solid rgba(0, 0, 0, 0.479);
+  box-shadow: -6px -6px 9px #fff inset, 6px 6px 9px rgba(#000, 0.4) inset;
+}
 
 img {
-
-    max-width: 300%;
-    height: auto;
-    display: block;
+  max-width: 300%;
+  height: auto;
+  display: block;
 }
 
 hr {
-
-    height: .1em;
-    background-color: black;
+  height: 0.1em;
+  background-color: black;
 }
 
 ul {
-  margin-top: -.5em;
+  margin-top: -0.5em;
 }
 
 input {
-    width: 51vw;
-    margin-left: .68em;
-    margin-right: .5em;
+  width: 51vw;
+  margin-left: 0.68em;
+  margin-right: 0.5em;
 }
 
+.recipe-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
