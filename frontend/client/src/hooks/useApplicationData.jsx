@@ -16,15 +16,15 @@ export default function useApplicationData() {
   const localId = localStorage.getItem("token");
 
   const setProduct = (value) => {
-    
-     return axios
-      .post(`/api/products/`, value)
-      .then((response) => {
-        
-        const dateData= datefunction([response.data])
-        const parseddata = dateData[0]
-        const combined = {...response.data, expiration : parseddata.expiration, dayLeft : parseddata.dayLeft}
-        setState(prev => ({ ...prev, products: [...prev.products, combined] }))
+    return axios.post(`/api/products/`, value).then((response) => {
+      const dateData = datefunction([response.data]);
+      const parseddata = dateData[0];
+      const combined = {
+        ...response.data,
+        expiration: parseddata.expiration,
+        dayLeft: parseddata.dayLeft,
+      };
+      setState((prev) => ({ ...prev, products: [...prev.products, combined] }));
     });
   };
 
@@ -49,27 +49,26 @@ export default function useApplicationData() {
   };
 
   const deleteRecipe = (id) => {
-   
-    return axios
-      .delete(`/api/recipes/${id}`)
-      .then(res => {
-        console.log("id from delete", id)
-        
-        let newstate =[]
+    return axios.delete(`/api/recipes/${id}`).then((res) => {
+      console.log("id from delete", id);
 
-        for (let i = 0; i < state.recipes.length; i++) {
-          if(state.recipes[i].recipe_id != id) {
-            newstate.push(state.recipes[i])
-          }
+      let newstate = [];
+
+      for (let i = 0; i < state.recipes.length; i++) {
+        if (state.recipes[i].recipe_id != id) {
+          newstate.push(state.recipes[i]);
         }
+      }
 
-        setState(prev => ({ ...prev, recipes: newstate}))
-    })
-  }
+      setState((prev) => ({ ...prev, recipes: newstate }));
+    });
+  };
 
+  const consumeProduct = (id) => {
+    console.log("product consumed", id);
+  };
 
-  
-//We should not use localId at the end of each endpoint!
+  //We should not use localId at the end of each endpoint!
   useEffect(() => {
     Promise.all([
       axios.get(`/api/users`),
