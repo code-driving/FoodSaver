@@ -465,7 +465,9 @@ export default function ProductList(props) {
         />
       </Paper>
       <Popup openPopUp={OpenPopUp}
-          setopenPopUp={setOpenPopUp}>
+          setopenPopUp={setOpenPopUp}
+          selectedName={selectedName} 
+       >
       </Popup>
       
     </div>

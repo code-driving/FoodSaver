@@ -1,2 +1,26 @@
 @import "styles/variables.scss";
 
+.modalTop {
+    display: flex ;
+    padding-top : .5em ;
+    padding-bottom: -.1em;
+   
+}
+
+.modalMiddle {
+    padding : 1em ;
+    display:flex;
+    justify-content: flex-end;
+  
+}
+
+.modalBottom {
+  padding: .5em  ;
+  display:flex;
+  justify-content: flex-end;
+}
+
+
+.modalBottom1{
+  padding-left: .2em;
+}
