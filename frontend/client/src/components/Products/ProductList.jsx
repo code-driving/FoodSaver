@@ -355,8 +355,15 @@ export default function ProductList(props) {
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
-  console.log("selected", selected);
+  const warning = (dayLeft) => {
+    console.log("from function", dayLeft);
+    if (dayLeft === "Expired") {
+      return "dot-red";
+    } else if (dayLeft === "1 day" || dayLeft.includes("hours")) {
+      return "dot-yellow";
+    }
+    return "dot-green";
+  };
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -413,6 +420,10 @@ export default function ProductList(props) {
                       <TableCell align="right">{row.dayLeft}</TableCell>
                       <TableCell align="right">{row.quantity_grams}</TableCell>
                       <TableCell align="right">{row.quantity_units}</TableCell>
+                      {console.log(row.dayLeft)}
+                      <TableCell className={warning(row.dayLeft)}></TableCell>
+
+                      {/* <div className={props.item.purchased ? 'purchased' : ''}></div> */}
                     </TableRow>
                   );
                 })}
