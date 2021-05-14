@@ -281,7 +281,6 @@ export default function ProductList(props) {
 
   const { products, deleteProduct, dateData, setIngredientsItems } = props;
 
-  console.log("products in list component", products);
   const rows = products;
 
   const handleRequestSort = (event, property) => {
