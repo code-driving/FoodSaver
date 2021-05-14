@@ -47,6 +47,7 @@ import id from "date-fns/locale/id/index";
 import useRecipesApi from "../../hooks/useRecipesApi";
 import { Link } from "react-router-dom";
 import ingredientsToString from "../../helpers/ingredientsToString";
+import "./ProductList.scss"
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -277,7 +278,7 @@ export default function ProductList(props) {
   const [selectedName, setSelectedName] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const { products, deleteProduct, dateData, setIngredientsItems } = props;
 
@@ -427,18 +428,15 @@ export default function ProductList(props) {
             setSelected([]);
           }}
         >
-          del
+          delete
         </button>
         {/* <Link to="/recipes"> */}
         <Link to="/recipes">
-          <Button
-            classes={classes}
+          <button
             onClick={setIngredientsItems(ingredientString)}
-            variant="outlined"
-            color="primary"
           >
-            Find Recipes
-          </Button>
+            find recipes
+          </button>
         </Link>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}

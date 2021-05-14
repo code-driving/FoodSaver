@@ -26,8 +26,7 @@ export default function Form(props) {
           onChange={handleChange}
           placeholder='apples,oranges'
         ></input>
-        <button onClick={handleSubmit}>Go!</button>
+        <button onClick={handleSubmit} style={{marginTop: '1rem'}}>search</button>
     </form>
   )
-
 }

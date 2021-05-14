@@ -10,7 +10,7 @@ const { recipes, deleteRecipe } = props
     <>
       <h1>Recipe Details</h1>
       <Link to={`/recipes/${props.recipe_id}`}><ul>{props.recipie_name}</ul></Link>
-      <button onClick={() => deleteRecipe(props.recipe_id)}>del</button>
+      <button onClick={() => deleteRecipe(props.recipe_id)}>delete</button>
     </>
   )
 }

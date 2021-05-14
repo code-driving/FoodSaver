@@ -8,6 +8,7 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
+import './Products.scss'
 
 export default function Products(props) {
   const { products, setProduct, deleteProduct, setIngredientsItems } = props;

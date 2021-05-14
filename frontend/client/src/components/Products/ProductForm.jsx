@@ -10,8 +10,9 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
-import "./ProductForm";
+import "./ProductForm.scss";
 import { isWithinInterval } from "date-fns";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -104,10 +105,10 @@ export default function ProductForm(props) {
           />
         </MuiPickersUtilsProvider>
       </form>
-      <button onClick={handleSubmit} type="submit">
+      <button className="formButton" onClick={handleSubmit} type="submit">
         save
       </button>
-      <button onClick={handleReset}>del</button>
+      <button className="formButton" onClick={handleReset}>del</button>
     </Grid>
   );
 }

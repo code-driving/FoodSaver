@@ -23,7 +23,7 @@ import PrivateRoute from "./Login/PrivateRoute";
     <main className="layout">
       <Router>
         {/* <div> */}
-        <div>
+        <div className="left">
           <NavBar />
         </div>
         <div className='right'>

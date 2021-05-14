@@ -13,3 +13,22 @@ a:focus {
   transition: all 0.4s ease-in;
   color: $products-colors;
 }
+button {
+  padding: 0.5rem 0.8rem;
+  border-radius: 20px;
+  background-color: #7F1C20;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+button:hover,
+button:focus {
+  cursor: pointer;
+  background-color: #706B64;
+  color: $white;
+}
+h1 {
+  color: orange;
+}
+

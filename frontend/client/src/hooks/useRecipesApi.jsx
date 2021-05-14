@@ -8,7 +8,7 @@ export default function useRecipesApi(ingredients) {
     if (ingredients) {
       console.log("ingredients from ap", ingredients);
 
-      const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=3977f14ad014450997808f6ff4aa83ec&ingredients=${ingredients}&number=9`;
+      const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=5be0c499db2a441086810136bbdeca6b&ingredients=${ingredients}&number=9`;
       axios.get(url).then((res) => {
         setRecipe(res.data);
         console.log(res);

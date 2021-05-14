@@ -4,6 +4,7 @@ import axios from "axios";
 import "./details.scss";
 import useApplicationData from '../../hooks/useApplicationData'
 import { useParams, Redirect } from 'react-router-dom';
+import "./Recipes.scss"
 
 export default function RecipeDetail(props) {
   const [redirect, setRedirect] = useState(false);
@@ -68,11 +69,12 @@ export default function RecipeDetail(props) {
       <h1> Recipe Details</h1>
       <div>
         <img src={img} alt={"food image"} class="recipe-image"></img>
-        <div style={{ marginLeft: 10 }}>
+        {/* <div style={{ marginLeft: 10 }}> */}
+        <div className="recipe_detail">
           <h2>Recipe Info</h2>
           <ul>
             <li>Time: {time} mins</li>
-            <li>{vegetarian ? "Vegitarian : No" : "Vegitarian : Yes"}</li>
+            <li>{vegetarian ? "Vegetarian : No" : "Vegetarian : Yes"}</li>
             <li>Serves : {servings}</li>
           </ul>
           <h2>Ingredients needed</h2>
@@ -80,12 +82,8 @@ export default function RecipeDetail(props) {
         </div>
       </div>
       <h2>Instructions</h2>
-      <ul>{EachStep}</ul>
+      <ul className="recipe_detail">{EachStep}</ul>
       <Link to={`/favourites`}><button onClick={() => setRecipe(value)}>save</button></Link>
-      <ul className="recipe-steps" id="recipe-steps">
-        {EachStep}
-      </ul>
-      <button onClick={() => setRecipe(value)}>save</button>
     </section>
   );
 }
