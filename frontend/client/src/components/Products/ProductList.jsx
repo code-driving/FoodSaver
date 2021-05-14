@@ -47,6 +47,7 @@ import id from "date-fns/locale/id/index";
 import useRecipesApi from "../../hooks/useRecipesApi";
 import { Link } from "react-router-dom";
 import ingredientsToString from "../../helpers/ingredientsToString";
+import Popup from "./popup"
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -278,6 +279,8 @@ export default function ProductList(props) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [OpenPopUp,setOpenPopUp] =  React.useState(false)
+
 
   const {
     products,
@@ -445,9 +448,7 @@ export default function ProductList(props) {
         </Link>
         <button
           classes={classes}
-          onClick={() => {
-            consumeProduct(selected);
-          }}
+          onClick={() => {setOpenPopUp(true)}}
           variant="outlined"
           color="primary"
         >
@@ -463,6 +464,10 @@ export default function ProductList(props) {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
+      <Popup openPopUp={OpenPopUp}
+          setopenPopUp={setOpenPopUp}>
+      </Popup>
+      
     </div>
   );
 }
