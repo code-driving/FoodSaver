@@ -384,7 +384,6 @@ export default function ProductList(props) {
                     <TableRow
                       hover
                       onClick={(event) => handleClick(event, row.id, row.name)}
-                      // onClick={(event) => handleNameClick(event, row.name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -420,23 +419,31 @@ export default function ProductList(props) {
             </TableBody>
           </Table>
         </TableContainer>
-        <button
+        <Button
           onClick={() => {
             deleteProduct(selected);
             setSelected([]);
           }}
         >
           Delete
-        </button>
+        </Button>
         {/* <Link to="/recipes"> */}
         <Link to="/recipes">
           <Button
             classes={classes}
-            onClick={setIngredientsItems(ingredientString)}
+            onClick={setSelectedName(ingredientString)}
             variant="outlined"
             color="primary"
           >
             Find Recipes
+          </Button>
+          <Button
+            classes={classes}
+            onClick={setSelected(selected)}
+            variant="outlined"
+            color="primary"
+          >
+            Consume
           </Button>
         </Link>
         <TablePagination
