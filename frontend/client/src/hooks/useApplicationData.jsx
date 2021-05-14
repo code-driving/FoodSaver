@@ -62,7 +62,7 @@ export default function useApplicationData() {
   };
 
   const consumeProduct = (id) => {
-    console.log("product consumed");
+    console.log("product consumed", id);
   };
   // const deleteRecipe = (ids) => {
   //   console.log('ids from delete recipe', ids)
