@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom'
 import axios from "axios";
 import "./details.scss";
 import useApplicationData from '../../hooks/useApplicationData'
@@ -18,11 +19,12 @@ export default function RecipeDetail(props) {
       servings: "",
     },
   });
+  
   useEffect(() => {
     if (recipe_id) {
       const APIKEY = process.env.API_KEY;
-      const url = `https://api.spoonacular.com/recipes/${recipe_id}/analyzedInstructions?apiKey=f8973fa0549347b38d9ffd74077d423f&boolean=false`;
-      const url2 = `https://api.spoonacular.com/recipes/${recipe_id}/information?apiKey=f8973fa0549347b38d9ffd74077d423f&boolean=false`;
+      const url = `https://api.spoonacular.com/recipes/${recipe_id}/analyzedInstructions?apiKey=3977f14ad014450997808f6ff4aa83ec&boolean=false`;
+      const url2 = `https://api.spoonacular.com/recipes/${recipe_id}/information?apiKey=3977f14ad014450997808f6ff4aa83ec&boolean=false`;
       Promise.all([axios.get(url), axios.get(url2)]).then((res) => {
         console.log(res);
         setDetails((prev) => ({
@@ -73,7 +75,7 @@ export default function RecipeDetail(props) {
       </div>
       <h2>Instructions</h2>
       <ul>{EachStep}</ul>
-      <button onClick={() => setRecipe(value)}>save</button>
+      <Link to={`/favourites`}><button onClick={() => setRecipe(value)}>save</button></Link>
       <ul className="recipe-steps" id="recipe-steps">
         {EachStep}
       </ul>
