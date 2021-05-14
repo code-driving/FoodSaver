@@ -13,15 +13,12 @@ export default function date(datesobject) {
       let now = new Date()
       
       for (let i = 0 ; i < datearray.length; i++ ) {
-
         let dateString=''
         let date1 = new Date(datearray[i]);
         let day = date1.getDate();
         let month=date1.getMonth() +1
         let year=date1.getFullYear()
-        console.log(year, month, day)
         let timeLeft =formatDistance(new Date(year, month-1, day),now)
-        console.log('ssssssssss',new Date())
         dateString = year+'-'+month+'-'+day
         if (isAfter(new Date(year, month-1, day), new Date())){
           let object = { name : names[i], expiration : dateString , dayLeft : timeLeft }

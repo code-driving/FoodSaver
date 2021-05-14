@@ -18,23 +18,19 @@ export default function useApplicationData() {
   
   const setProduct = (value) => {
     
-   
-
-    return axios
+     return axios
       .post(`/api/products/`, value)
       .then((response) => {
+        
         console.log('sssssss',response.data)
-      
         const dateData= datefunction([response.data])
-        console.log('wwwwwww',dateData)
-        // const joined=  [...response.data, dateData]
-        // for (let i=0; i <  value.length; i++) {
-        //   value[i]['expiration'] = dateData[i]['expiration']
-        //   value[i]['dayLeft'] = dateData[i]['dayLeft']
-        // }
-        // console.log()
-
-        setState(prev => ({ ...prev, products: [...prev.products, response.data] }))
+        console.log('wwwwwww',dateData[0])
+        const parseddata = dateData[0]
+        const combined = {...response.data, expiration : parseddata.expiration, dayLeft : parseddata.dayLeft}
+        console.log('qqqqqq',combined)
+        
+       
+        setState(prev => ({ ...prev, products: [...prev.products, combined] }))
     });
   }
   
