@@ -68,44 +68,40 @@ body {
   height: 25px;
   width: 25px;
   background-color: rgb(187, 15, 15);
-  border-radius: 50%;
+  border-radius: 25%;
   display: inline-block;
-  margin-top: 25px;
-  margin-left: 65px;
+  margin-top: 0.7em;
+  margin-left: 1.35em;
 }
 
 .dot-yellow {
   height: 25px;
   width: 25px;
   background-color: rgb(228, 210, 52);
-  border-radius: 50%;
+  border-radius: 25%;
   display: inline-block;
-  margin-top: 25px;
-  margin-left: 65px;
-}
-
-.dot-brown {
-  height: 25px;
-  width: 25px;
-  background-color: rgb(105, 62, 5);
-  border-radius: 50%;
-  display: inline-block;
-  margin-top: 25px;
-  margin-left: 65px;
+  margin-top: 0.7em;
+  margin-left: 1.35em;
 }
 
 .dot-green {
   height: 25px;
   width: 25px;
   background-color: rgb(13, 167, 26);
-  border-radius: 50%;
+  border-radius: 25%;
   display: inline-block;
-  margin-top: 25px;
-  margin-left: 65px;
+  margin-top: 0.75em;
+  margin-left: 1.35em;
 }
 
-.MuiTableCell-root MuiTableCell-body dot-green {
-  width: 5px;
+.warning {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.8em;
+  margin-right: 0.2em;
+  font-size: 20.15px;
+  font-family: "Roboto";
+  font-weight: 430;
 }
 
 @media only screen and (max-width: 960px) {

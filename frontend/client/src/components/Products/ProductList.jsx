@@ -105,12 +105,12 @@ const headCells = [
     disablePadding: false,
     label: "Amount (units)",
   },
-  {
-    id: "warning",
-    numeric: true,
-    disablePadding: false,
-    label: "warning",
-  },
+  // {
+  //   id: "warning",
+  //   numeric: true,
+  //   disablePadding: false,
+  //   label: "warning",
+  // },
 ];
 
 function EnhancedTableHead(props) {
@@ -159,6 +159,7 @@ function EnhancedTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
+        <span className="warning">Warning</span>
       </TableRow>
     </TableHead>
   );
@@ -356,7 +357,6 @@ export default function ProductList(props) {
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
   const warning = (dayLeft) => {
-    console.log("from function", dayLeft);
     if (dayLeft === "Expired") {
       return "dot-red";
     } else if (dayLeft === "1 day" || dayLeft.includes("hours")) {
@@ -420,10 +420,7 @@ export default function ProductList(props) {
                       <TableCell align="right">{row.dayLeft}</TableCell>
                       <TableCell align="right">{row.quantity_grams}</TableCell>
                       <TableCell align="right">{row.quantity_units}</TableCell>
-                      {console.log(row.dayLeft)}
-                      <TableCell className={warning(row.dayLeft)}></TableCell>
-
-                      {/* <div className={props.item.purchased ? 'purchased' : ''}></div> */}
+                      <section className={warning(row.dayLeft)}></section>
                     </TableRow>
                   );
                 })}
