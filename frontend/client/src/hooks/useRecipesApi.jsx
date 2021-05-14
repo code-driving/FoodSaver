@@ -18,4 +18,3 @@ export default function useRecipesApi(ingredients) {
 
   return recipe;
 }
-// fe944c0a7ca548aa96c6ac698fdbdf91
