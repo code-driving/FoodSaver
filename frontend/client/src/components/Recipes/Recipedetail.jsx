@@ -58,7 +58,6 @@ export default function RecipeDetail(props) {
         user_id: localId, 
         recipe_id: id
   }
-  console.log("value from Recipe Detail", value)
   
   const EachStep = steps.map((step, index) => {
     return <li key={index}>{step.step}</li>;
@@ -82,10 +81,6 @@ export default function RecipeDetail(props) {
       <h2>Instructions</h2>
       <ul>{EachStep}</ul>
       <Link to={`/favourites`}><button onClick={() => setRecipe(value)}>save</button></Link>
-      <ul className="recipe-steps" id="recipe-steps">
-        {EachStep}
-      </ul>
-      <button onClick={() => setRecipe(value)}>save</button>
     </section>
   );
 }
