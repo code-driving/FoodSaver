@@ -12,6 +12,7 @@ import Login from "./Login";
 import Favourites from "./Favourites";
 import RecipesDetails from "./Recipes/Recipedetail"
 import PrivateRoute from "./Login/PrivateRoute";
+// require("dotenv").config();
 
   
   export default function Application(props) {
@@ -24,7 +25,11 @@ import PrivateRoute from "./Login/PrivateRoute";
   // console.log(recipes)
   // console.log(summary)
   // console.log(products)
+<<<<<<< HEAD
   console.log("hi",process.env.REACT_APP_API_KEY)
+=======
+  console.log(process.env.REACT_APP_API_KEY);
+>>>>>>> main
   return (
     <main className="layout">
       <Router>
@@ -32,24 +37,25 @@ import PrivateRoute from "./Login/PrivateRoute";
         <div>
           <NavBar />
         </div>
-        <div className='right'>
-        <Switch>
-          <PrivateRoute exact path="/">
-            <Products
-              products={products}
-              setProduct={setProduct}
-              deleteProduct={deleteProduct}
-              setIngredientsItems={setIngredientsItems}
-            />
-          </PrivateRoute>
+        <div className="right">
+          <Switch>
+            <PrivateRoute exact path="/">
+              <Products
+                products={products}
+                setProduct={setProduct}
+                deleteProduct={deleteProduct}
+                setIngredientsItems={setIngredientsItems}
+              />
+            </PrivateRoute>
 
-          <Route exact path="/recipes">
-            <Recipes
-              setIngredientsItems={setIngredientsItems}
-              ingredientsItems={ingredientsItems}
-            />
-          </Route>
+            <Route exact path="/recipes">
+              <Recipes
+                setIngredientsItems={setIngredientsItems}
+                ingredientsItems={ingredientsItems}
+              />
+            </Route>
 
+<<<<<<< HEAD
           {/* <Route exact path="/recipes/:id" component={RecipesDetails}></Route> */}
           
           <Route exact path="/details/:id" render={(props)=>{
@@ -66,11 +72,22 @@ import PrivateRoute from "./Login/PrivateRoute";
           <Route path="/favourites">
             <Favourites recipes={recipes} deleteRecipe={deleteRecipe}/>
           </Route>
+=======
+            <Route exact path="/recipes/:id" component={RecipesDetails}></Route>
 
-          {/* <Route path="*">
+            <Route exact path="/summary">
+              <Summary />
+            </Route>
+
+            <Route path="/login">
+              <Login />
+            </Route>
+>>>>>>> main
+
+            {/* <Route path="*">
             <h1>404 - Not Found</h1>
           </Route> */}
-        </Switch>
+          </Switch>
         </div>
         {/* </div> */}
       </Router>

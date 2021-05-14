@@ -56,10 +56,10 @@ export default function RecipeDetail(props) {
     return <li key={index}>{step.step}</li>;
   });
   return (
-    <section className="container">
+    <section className="recipe-details-container">
       <h1> Recipe Details</h1>
-      <div className="top">
-        <img src={img} alt={"food image"}></img>
+      <div>
+        <img src={img} alt={"food image"} class="recipe-image"></img>
         <div style={{ marginLeft: 10 }}>
           <h2>Recipe Info</h2>
           <ul>
@@ -74,6 +74,9 @@ export default function RecipeDetail(props) {
       <h2>Instructions</h2>
       <ul>{EachStep}</ul>
       <button onClick={() => setRecipe(value)}>save</button>
+      <ul className="recipe-steps" id="recipe-steps">
+        {EachStep}
+      </ul>
     </section>
   );
 }
