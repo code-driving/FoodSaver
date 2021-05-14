@@ -26,6 +26,7 @@ CREATE TABLE saved_recipes (
   id SERIAL PRIMARY KEY NOT NULL,
   recipie_name varchar(255) NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  imageSRC TEXT,
   recipe_id INTEGER NOT NULL
 );
 
