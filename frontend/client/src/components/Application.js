@@ -18,9 +18,6 @@ import PrivateRoute from "./Login/PrivateRoute";
     const { state, setProduct, deleteProduct, setRecipe, deleteRecipe } = useApplicationData();
     const [ingredientsItems, setIngredientsItems] = useState("");
     const { products, recipes, summary, users } = state;
-  // console.log(recipes)
-  // console.log(summary)
-  // console.log(products)
 
   return (
     <main className="layout">

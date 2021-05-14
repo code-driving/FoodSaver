@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom'
 import axios from "axios";
 import "./details.scss";
 import useApplicationData from '../../hooks/useApplicationData'
@@ -79,6 +80,8 @@ export default function RecipeDetail(props) {
         </div>
       </div>
       <h2>Instructions</h2>
+      <ul>{EachStep}</ul>
+      <Link to={`/favourites`}><button onClick={() => setRecipe(value)}>save</button></Link>
       <ul className="recipe-steps" id="recipe-steps">
         {EachStep}
       </ul>

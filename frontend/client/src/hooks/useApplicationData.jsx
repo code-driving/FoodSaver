@@ -16,11 +16,20 @@ export default function useApplicationData() {
   const localId = localStorage.getItem("token");
   
   const setProduct = (value) => {
-
-    return axios
+    
+     return axios
       .post(`/api/products/`, value)
       .then((response) => {
-        setState(prev => ({ ...prev, products: [...prev.products, response.data] }))
+        
+        console.log('sssssss',response.data)
+        const dateData= datefunction([response.data])
+        console.log('wwwwwww',dateData[0])
+        const parseddata = dateData[0]
+        const combined = {...response.data, expiration : parseddata.expiration, dayLeft : parseddata.dayLeft}
+        console.log('qqqqqq',combined)
+        
+       
+        setState(prev => ({ ...prev, products: [...prev.products, combined] }))
     });
   }
   
@@ -88,7 +97,7 @@ export default function useApplicationData() {
           products.data[i]['expiration'] = dateData[i]['expiration']
           products.data[i]['dayLeft'] = dateData[i]['dayLeft']
       }
-      //expiration_date
+    
       setState((prev) => ({
         ...prev,
         users: users.data,
