@@ -58,20 +58,6 @@ export default function useApplicationData() {
         setState(prev => ({ ...prev, recipes: del}))
     })
   }
-  // const deleteRecipe = (ids) => {
-  //   const deletes = []
-  //     for (const id of ids) {
-  //       deletes.push(
-  //         axios
-  //           .delete(`/api/recipes/${id}`)
-  //       )
-  //     }
-  //     Promise.all(deletes)
-  //     .then(res => {
-  //       const del = state.recipes.filter(recipe => !ids.includes(recipe.id))
-  //       setState(prev => ({ ...prev, recipes: del}))
-  //     })
-  // }
 
 //We should not use localId at the end of each endpoint!
   useEffect(() => {
