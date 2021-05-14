@@ -40,23 +40,7 @@ export default function useApplicationData() {
       })
   }
   
-  // const setExpired = (ids) => {
-  //   //keep the state of the expired products 
-  //   //if the product is expired = add class to signify 
-  //   //send a post request to summary
-  //   //update the state 
-  //   const expired = state.products.find(product => ids.includes(product.id) && product.expiration_date < Date.now())
-  //   expired.classList.add('red')
-  //   return axios
-  //     .post(`/api/summary`, expired)
-  //     .then((response) => {
-  //       // setState(prev => ({ ...prev, products: [...prev.products, response.data]}))
-  //       console.log(response)
-  //     })
-  // }
-  
   const setRecipe = (value) => {
-    console.log("test")
     return axios
       .post(`/api/recipes/`, value)
       .then((response) => {
@@ -64,20 +48,28 @@ export default function useApplicationData() {
     });
   }
   
-  const deleteRecipe = (ids) => {
-    const deletes = []
-      for (const id of ids) {
-        deletes.push(
-          axios
-            .delete(`/api/recipes/${id}`)
-        )
-      }
-      Promise.all(deletes)
+  const deleteRecipe = (id) => {
+    return axios
+      .delete(`/api/recipes/${id}`)
       .then(res => {
-        const del = state.recipes.filter(recipe => !ids.includes(recipe.id))
+        const del = state.recipes.filter(recipe => recipe.id !== id)
         setState(prev => ({ ...prev, recipes: del}))
-      })
+    })
   }
+  // const deleteRecipe = (ids) => {
+  //   const deletes = []
+  //     for (const id of ids) {
+  //       deletes.push(
+  //         axios
+  //           .delete(`/api/recipes/${id}`)
+  //       )
+  //     }
+  //     Promise.all(deletes)
+  //     .then(res => {
+  //       const del = state.recipes.filter(recipe => !ids.includes(recipe.id))
+  //       setState(prev => ({ ...prev, recipes: del}))
+  //     })
+  // }
 
 //We should not use localId at the end of each endpoint!
   useEffect(() => {
@@ -106,11 +98,6 @@ export default function useApplicationData() {
 
 
   return { state, setProduct, deleteProduct, setRecipe, deleteRecipe };
-  // ? create a function to keep track of the Score
-
-  //3.setRecipe
-  //4.deleteRecipe
-  //use Axios request to create or delete
 
   //6. create handleIncrement, handleDecrement, handleReset to update the score based on the product_saved, product_expired
   //IF SCORE == 0 THEN HE WILL HAVE TO DONATE TO FOODBANK AND HAVE A POSSIBILITY TO RESET A SCORE

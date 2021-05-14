@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 export default function FavouriteItem(props) {
-const { deleteRecipe } = props
+const { recipes, deleteRecipe } = props
 
   return (
     <section>
