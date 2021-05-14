@@ -43,8 +43,12 @@ import PrivateRoute from "./Login/PrivateRoute";
               ingredientsItems={ingredientsItems}
             />
           </Route>
+          
+          <Route exact path="/recipes/:id">
+            <RecipesDetails setRecipe={setRecipe}/>
+          </Route>
 
-          <Route exact path="/recipes/:id" component={RecipesDetails}></Route>
+          {/* <Route exact path="/recipes/:id" component={RecipesDetails}></Route> */}
           
           {/* <Route exact path="/details/:id" render={(props)=>{
             <RecipesDetails id={props.match.params.id}/>

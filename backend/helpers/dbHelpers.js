@@ -134,7 +134,7 @@ module.exports = (db) => {
 
   const deleteRecipe = (id) => {
     const query = {
-      text: `DELETE FROM saved_recipes WHERE id = $1`,
+      text: `DELETE FROM saved_recipes WHERE recipe_id = $1`,
              values: [id],
     };
     return db

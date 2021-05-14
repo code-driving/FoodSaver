@@ -427,7 +427,7 @@ export default function ProductList(props) {
             setSelected([]);
           }}
         >
-          Delete
+          del
         </button>
         {/* <Link to="/recipes"> */}
         <Link to="/recipes">

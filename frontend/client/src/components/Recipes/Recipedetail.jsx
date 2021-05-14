@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import axios from "axios";
 import "./details.scss";
 import useApplicationData from '../../hooks/useApplicationData'
-//this is the component responsible for handling data (recipes) received from api call. Create a useRecipeData hook to fetch the data (axios request)
-//we will need onSubmit as a prop to handle recipe submit event. This could be a button in RecipeList
+import { useParams, Redirect } from 'react-router-dom';
+
 export default function RecipeDetail(props) {
-  
-  const { setRecipe } = useApplicationData();
+  const [redirect, setRedirect] = useState(false);
+  const { setRecipe } = props;
   
   const [details, setDetails] = useState({
     steps: [{ steps: [] }],
@@ -20,11 +20,15 @@ export default function RecipeDetail(props) {
     },
   });
   
+  
+  const { id } = useParams();
+  console.log("id from useParams", { id });
+  const API_KEY = process.env.REACT_APP_API_KEY  
+  
   useEffect(() => {
-    if (recipe_id) {
-      const APIKEY = process.env.API_KEY;
-      const url = `https://api.spoonacular.com/recipes/${recipe_id}/analyzedInstructions?apiKey=3977f14ad014450997808f6ff4aa83ec&boolean=false`;
-      const url2 = `https://api.spoonacular.com/recipes/${recipe_id}/information?apiKey=3977f14ad014450997808f6ff4aa83ec&boolean=false`;
+    if ({id}) {
+      const url = `https://api.spoonacular.com/recipes/${id}/analyzedInstructions?apiKey=${API_KEY}&boolean=false`;
+      const url2 = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}&boolean=false`;
       Promise.all([axios.get(url), axios.get(url2)]).then((res) => {
         console.log(res);
         setDetails((prev) => ({
@@ -45,12 +49,14 @@ export default function RecipeDetail(props) {
   let vegetarian = details.info["vegetarian"];
   let servings = details.info["servings"];
   const localId = localStorage.getItem("token");
-  let recipe_id = props.match.params.id;
+  // let recipe_id = props.match.params.id;
+  console.log("id from useParams after call",id );
+  
   
   const value = {
         recipie_name: name,
         user_id: localId, 
-        recipe_id: recipe_id
+        recipe_id: id
   }
   console.log("value from Recipe Detail", value)
   
@@ -79,6 +85,7 @@ export default function RecipeDetail(props) {
       <ul className="recipe-steps" id="recipe-steps">
         {EachStep}
       </ul>
+      <button onClick={() => setRecipe(value)}>save</button>
     </section>
   );
 }
