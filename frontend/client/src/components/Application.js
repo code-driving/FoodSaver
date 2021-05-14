@@ -11,6 +11,7 @@ import Summary from "./Summary";
 import Login from "./Login";
 import RecipesDetails from "./Recipes/Recipedetail";
 import PrivateRoute from "./Login/PrivateRoute";
+// require("dotenv").config();
 
 export default function Application(props) {
   const { state, setProduct, deleteProduct } = useApplicationData();
@@ -22,6 +23,7 @@ export default function Application(props) {
   // console.log(recipes)
   // console.log(summary)
   // console.log(products)
+  console.log(process.env.REACT_APP_API_KEY);
   return (
     <main className="layout">
       <Router>
@@ -29,38 +31,38 @@ export default function Application(props) {
         <div>
           <NavBar />
         </div>
-        <div className='right'>
-        <Switch>
-          <PrivateRoute exact path="/">
-            <Products
-              products={products}
-              setProduct={setProduct}
-              deleteProduct={deleteProduct}
-              setIngredientsItems={setIngredientsItems}
-            />
-          </PrivateRoute>
+        <div className="right">
+          <Switch>
+            <PrivateRoute exact path="/">
+              <Products
+                products={products}
+                setProduct={setProduct}
+                deleteProduct={deleteProduct}
+                setIngredientsItems={setIngredientsItems}
+              />
+            </PrivateRoute>
 
-          <Route exact path="/recipes">
-            <Recipes
-              setIngredientsItems={setIngredientsItems}
-              ingredientsItems={ingredientsItems}
-            />
-          </Route>
+            <Route exact path="/recipes">
+              <Recipes
+                setIngredientsItems={setIngredientsItems}
+                ingredientsItems={ingredientsItems}
+              />
+            </Route>
 
-          <Route exact path="/recipes/:id" component={RecipesDetails}></Route>
+            <Route exact path="/recipes/:id" component={RecipesDetails}></Route>
 
-          <Route exact path="/summary">
-            <Summary />
-          </Route>
+            <Route exact path="/summary">
+              <Summary />
+            </Route>
 
-          <Route path="/login">
-            <Login />
-          </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
 
-          {/* <Route path="*">
+            {/* <Route path="*">
             <h1>404 - Not Found</h1>
           </Route> */}
-        </Switch>
+          </Switch>
         </div>
         {/* </div> */}
       </Router>
