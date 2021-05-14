@@ -123,7 +123,7 @@ module.exports = (db) => {
   const addRecipe = (recipie_name, user_id, recipe_id,imageSRC) => {
     const query = {
       text: `INSERT INTO saved_recipes (recipie_name, user_id, recipe_id ,imageSRC)
-              VALUES ($1,$2, $3, $4)`,
+              VALUES ($1,$2, $3, $4) RETURNING *`,
              values: [recipie_name, user_id, recipe_id , imageSRC],
     };
     return db
@@ -181,7 +181,7 @@ module.exports = (db) => {
   const addSummary= (user_id, product_id, grams_wasted, units_wasted, grams_saved, units_saved) => {
     const query = {
       text: `INSERT INTO product_summary (user_id, product_id, grams_wasted, units_wasted, grams_saved, units_saved)
-              VALUES ($1,$2, $3, $4, $5, $6)`,
+              VALUES ($1,$2, $3, $4, $5, $6) RETURNING *`,
              values: [user_id, product_id, grams_wasted, units_wasted, grams_saved, units_saved],
     };
     return db

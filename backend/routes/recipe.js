@@ -36,8 +36,8 @@ module.exports = ({
   router.post("/", (req, res) => {
     const { recipie_name, user_id, recipe_id , imageSRC} = req.body;
     addRecipe(recipie_name, user_id, recipe_id,imageSRC)
-      .then(() => {
-        res.status(200).send("Posted Recipe");
+      .then((data1) => {
+        res.json(data1);
       })
       .catch((err) =>
         res.json({
