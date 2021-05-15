@@ -149,6 +149,19 @@ export default function ProductForm(props) {
           value={formData.quantity_units || ""}
           onChange={handleChange}
       />
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            margin="normal"
+            id="date-picker-dialog"
+            format="MM/dd/yyyy"
+            name="expiration_date"
+            value={selectedDate || ""}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              "aria-label": "change date",
+            }}
+            />
+        </MuiPickersUtilsProvider>
       </form>
       <div className="buttons_form">
         <button onClick={handleReset}>cancel</button>
