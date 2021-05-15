@@ -40,10 +40,7 @@ export default function useApplicationData() {
   };
 
   const setRecipe = (value) => {
-    console.log("sssssssssssss", value);
     return axios.post(`/api/recipes/`, value).then((response) => {
-      const append = response.data;
-      console.log("qqqqqqqqqqqqqq", append);
       setState((prev) => ({
         ...prev,
         recipes: [...prev.recipes, response.data[0]],
@@ -53,8 +50,6 @@ export default function useApplicationData() {
 
   const deleteRecipe = (id) => {
     return axios.delete(`/api/recipes/${id}`).then((res) => {
-      console.log("id from delete", id);
-
       let newstate = [];
 
       for (let i = 0; i < state.recipes.length; i++) {

@@ -39,7 +39,19 @@ export default function RecipeDetail(props) {
       });
     }
   }, []);
+
+  // still working on this
+  ////////////////////////////////////
+  // const stepCheck = (steps) => {
+  //   const noInstuctions = ["No instructions found :("];
+  //   if (!steps) {
+  //     return noInstuctions;
+  //   }
+  //   return steps;
+  // };
+
   let steps = details.steps[0]["steps"];
+
   let name = details.info["title"];
   let img = details.info["image"];
   let ingredients = details.info["extendedIngredients"].map((ingredients) => (
