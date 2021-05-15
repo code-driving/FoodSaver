@@ -6,10 +6,14 @@
 @import "styles/typography.scss";
 @import "styles/mixins.scss";
 
+.logo {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
 .top_navigation {
   display: flex;
   flex-direction: column;
-  flex: 2 1 70%;
   
     li {
       flex: 1 1 auto;
@@ -26,19 +30,23 @@
 }
 @media only screen and (max-width: 960px) {
   .top_navigation {
-    display: flex;
+    flex-direction: row;
     li {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
+      margin: 0.2rem;
     }
+  }
+  .logo {
+    width: 100px;
+    height: 100px;
   }
 }
 
 @media only screen and (max-width: 320px) {
   .top_navigation {
-    display: flex;
     li {
       flex-direction: row;
     }

@@ -451,7 +451,7 @@ export default function ProductList(props) {
           </button>
         </Link>
         <button
-          classes={classes}
+          // classes={classes}
           onClick={() => {
             consumeProduct(selected);
           }}
