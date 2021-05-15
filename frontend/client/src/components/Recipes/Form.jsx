@@ -1,20 +1,18 @@
-import { useState } from 'react'
+import { useState } from "react";
 import "./Recipes.scss";
 
-
 export default function Form(props) {
-  const [formData,setFormData] = useState({ingredients:''})
-  
+  const [formData, setFormData] = useState({ ingredients: "" });
+
   const handleSubmit = (event) => {
-    event.preventDefault()
-    props.onSubmit(formData)
-  }
+    event.preventDefault();
+    props.onSubmit(formData);
+  };
 
   const handleChange = (event) => {
-    const { name, value } = event.target
-    setFormData({ ...formData, [name]: value })
-    
-  }
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   return (
     <form className="Form" onSubmit={handleSubmit}>
@@ -26,7 +24,7 @@ export default function Form(props) {
           onChange={handleChange}
           placeholder='apples,oranges'
         ></input>
-        <button style={{marginLeft: '1.5rem'}} onClick={handleSubmit}>search</button>
+        <button style={{marginLeft: '1.5rem'}} disabled={!formData.ingredients} onClick={handleSubmit}>search</button>
     </form>
   )
 }

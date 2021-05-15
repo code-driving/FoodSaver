@@ -3,7 +3,6 @@ import axios from "axios";
 
 export default function useRecipesApi(ingredients) {
   const [recipe, setRecipe] = useState(null);
-  console.log("recipe from hook", recipe);
 
   useEffect(() => {
     if (ingredients) {
@@ -12,7 +11,6 @@ export default function useRecipesApi(ingredients) {
       const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${API_KEY}&ingredients=${ingredients}&number=8`;
       axios.get(url).then((res) => {
         setRecipe(res.data);
-        console.log(res);
       });
     }
   }, [ingredients]);
