@@ -10,5 +10,7 @@ export default function FavouriteList(props) {
       <FavouriteItem key={index} {...favourite} deleteRecipe={deleteRecipe} />
     ));
 
-  return <div>{favouriteRecipes}</div>;
+  return <div>
+  <h1>My Favourite Recipes</h1>
+  {favouriteRecipes}</div>;
 }

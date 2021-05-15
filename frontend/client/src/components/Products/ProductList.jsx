@@ -433,6 +433,7 @@ export default function ProductList(props) {
             </TableBody>
           </Table>
         </TableContainer>
+        <div className="product_list_buttons">
         <button
           onClick={() => {
             deleteProduct(selected);
@@ -457,8 +458,9 @@ export default function ProductList(props) {
           variant="outlined"
           color="primary"
         >
-          Consume
+          consume
         </button>
+        </div>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"

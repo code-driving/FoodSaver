@@ -1,3 +1,8 @@
+@import "~normalize.css/normalize.css";
+@import "styles/variables.scss";
+@import "styles/reset.scss";
+@import "styles/mixins.scss";
+
 ul li {
   list-style-type: none;
 }
@@ -14,20 +19,26 @@ a:focus {
   color: $products-colors;
 }
 button {
+  @include shadow;
   padding: 0.5rem 0.8rem;
   border-radius: 20px;
-  background-color: #7F1C20;
+  background-color: #802026;
   border: none;
   outline: none;
   font-weight: bold;
   transition: all 0.3s ease-in-out;
 }
 button:hover,
-button:focus {
+button:active {
   cursor: pointer;
   background-color: #706B64;
   color: $white;
 }
+button:active {
+  @include inset;
+}
+
+
 h1 {
   color: orange;
 }

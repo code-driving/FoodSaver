@@ -62,7 +62,8 @@ export default function ProductForm(props) {
   };
 
   return (
-    <Grid container justify="space-around" alignItems="center">
+    <Grid container justify="space-around">
+    <h2>Add new products</h2>
       <form
         className={classes.root}
         noValidate
@@ -89,7 +90,7 @@ export default function ProductForm(props) {
           name="quantity_units"
           value={formData.quantity_units || ""}
           onChange={handleChange}
-        />
+          />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
             margin="normal"
@@ -102,13 +103,13 @@ export default function ProductForm(props) {
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
-          />
+            />
         </MuiPickersUtilsProvider>
       </form>
-      <button className="formButton" onClick={handleSubmit} type="submit">
+      <button style={{marginTop: '1rem'}} onClick={handleSubmit} type="submit">
         save
       </button>
-      <button className="formButton" onClick={handleReset}>del</button>
-    </Grid>
+      <button style={{marginTop: '1rem'}} onClick={handleReset}>cancel</button>
+      </Grid>
   );
 }

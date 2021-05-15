@@ -66,7 +66,7 @@ export default function RecipeDetail(props) {
   });
   return (
     <section className="recipe-details-container">
-      <h1> Recipe Details</h1>
+      <h1 style={{alignSelf: 'center'}}>Recipe Details</h1>
       <div>
         <img src={img} alt={"food image"} class="recipe-image"></img>
         {/* <div style={{ marginLeft: 10 }}> */}
@@ -83,7 +83,7 @@ export default function RecipeDetail(props) {
       </div>
       <h2>Instructions</h2>
       <ul className="recipe_detail">{EachStep}</ul>
-      <Link to={`/favourites`}><button onClick={() => setRecipe(value)}>save</button></Link>
+      <Link to={`/favourites`}><button style={{marginTop: '1.3rem'}} onClick={() => setRecipe(value)}>save</button></Link>
     </section>
   );
 }
