@@ -97,10 +97,10 @@ module.exports = (db) => {
   };
 
   const editProduct = (name, expiration_date, product_id, quantity_grams, quantity_units) => {
-    const query = {
+     const query = {
       text: `UPDATE products
              SET name = $1, expiration_date = $2, quantity_grams = $4, quantity_units = $5
-             WHERE id = $3`,
+             WHERE id =$3 RETURNING *;`,
              values: [name, expiration_date, product_id, quantity_grams, quantity_units],
     };
     return db

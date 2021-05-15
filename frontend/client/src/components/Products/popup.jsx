@@ -6,12 +6,20 @@ import "./ProductForm.scss"
 
 export default function Popup(props) {
  
-  const {title, openPopUp, setopenPopUp, selectedName} = props
+  const {title, openPopUp, setopenPopUp, selectedName, EditProduct, EditSummary ,selected} = props
+  let product_id = selected[0]
 
-  const onSubmit = (formData) => {
-    // setProduct(formData);
+  
+  const onSubmitEdit = (formData) => {
+    EditProduct(formData);
   };
 
+  const onSubmitconsume = (formData) => {
+    let product_id = selected[0]
+    EditSummary(product_id,formData);
+  };
+  
+  
   return (
     <Dialog open={openPopUp} maxWidth="md">
       <DialogTitle >
@@ -24,15 +32,9 @@ export default function Popup(props) {
       </DialogTitle>
       <div className='modalMiddle'>
       <DialogContent dividers>
-        <ProductForm onSubmit={onSubmit} />
+        <ProductForm  product_id ={product_id} onSubmitEdit={onSubmitEdit}  onSubmitconsume={onSubmitconsume}/>
       </DialogContent>
       </div>
-      <div className="modalBottom">
-        <Button variant="contained" color="secondary">Edit Ingredient</Button>
-        <div className="modalBottom1">
-        <Button  variant="contained" color="secondary" >Use Ingredient</Button>
-        </div>
-    </div>
     </Dialog>
   );
 }

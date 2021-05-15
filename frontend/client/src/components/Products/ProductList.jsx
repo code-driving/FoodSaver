@@ -288,6 +288,8 @@ export default function ProductList(props) {
     dateData,
     setIngredientsItems,
     consumeProduct,
+    EditProduct,
+    EditSummary,
   } = props;
 
   const rows = products;
@@ -467,6 +469,9 @@ export default function ProductList(props) {
       <Popup openPopUp={OpenPopUp}
           setopenPopUp={setOpenPopUp}
           selectedName={selectedName} 
+          EditProduct={EditProduct}
+          EditSummary={EditSummary}
+          selected={selected}
        >
       </Popup>
       

@@ -30,7 +30,6 @@ module.exports = ({
 
   router.get("/:id", (req, res) => {
     const id = Number(req.params.id);
-    console.log(id);
     getPaticularUserProducts(id)
       .then((userProducts) => {
         res.json(userProducts);
@@ -45,7 +44,6 @@ module.exports = ({
   router.get("/all", (req, res) => {
     getUserProducts()
       .then((usersProducts) => {
-        console.log(usersProducts);
         const formattedProducts = getProductsByUsers(usersProducts);
         getSavedRecipes().then((savedRecipe) => {
           const combinedData = AppendRecipes(savedRecipe, formattedProducts);
@@ -82,10 +80,9 @@ module.exports = ({
       );
   });
 
-  router.put("/:id", (req, res) => {
-    const product_id = Number(req.params.id);
-    console.log(product_id);
-    const { name, expiration_date, quantity_grams, quantity_units } = req.body;
+  router.put("/", (req, res) => {
+   
+    const { name, expiration_date, product_id, quantity_grams, quantity_units } = req.body;
     editProduct(
       name,
       expiration_date,
@@ -94,7 +91,6 @@ module.exports = ({
       quantity_units
     )
       .then((data) => {
-        console.log("data from route", data)
         res.json(data);
       })
       .catch((err) =>
@@ -107,7 +103,6 @@ module.exports = ({
   router.delete("/:id", (req, res) => {
 
     const id = Number(req.params.id) 
-    console.log("id from delete route", id)
     deleteProduct(id)
       .then((data) => {
         res.json(data)

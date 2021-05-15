@@ -18,6 +18,7 @@ export default function useApplicationData() {
   const setProduct = (value) => {
     return axios.post(`/api/products/`, value).then((response) => {
       const dateData = datefunction([response.data]);
+      console.log('from add pppppppppppppppppppp',response.data)
       const parseddata = dateData[0];
       const combined = {
         ...response.data,
@@ -27,6 +28,46 @@ export default function useApplicationData() {
       setState((prev) => ({ ...prev, products: [...prev.products, combined] }));
     });
   };
+
+  const EditProduct = (value) => {
+    return axios.put(`/api/products`, value).then((res) => {
+      const product_id =res['data'][0]['id']
+      const dateData = datefunction([res['data'][0]]);
+      const parseddata = dateData[0];
+
+      const combined = {
+        ...res['data'][0],
+        expiration: parseddata.expiration,
+        dayLeft: parseddata.dayLeft,
+      };
+
+      let deletedState =[];
+      
+      for (let i = 0; i < state.products.length ; i++) {
+        if(state.products[i]['id'] != product_id ){
+          deletedState.push(state.products[i])
+        }
+      }
+    const combinedState = [...deletedState, combined ]
+      setState((prev) => ({ ...prev, products: combinedState }));
+        
+    });
+  };
+
+  const EditSummary = (value) => {
+    //------For Consume
+    // return axios.post(`/api/products/`, value).then((response) => {
+    //   const dateData = datefunction([response.data]);
+    //   const parseddata = dateData[0];
+    //   const combined = {
+    //     ...response.data,
+    //     expiration: parseddata.expiration,
+    //     dayLeft: parseddata.dayLeft,
+    //   };
+    //   setState((prev) => ({ ...prev, products: [...prev.products, combined] }));
+    // });
+  };
+
 
   const deleteProduct = (ids) => {
     const deletes = [];
@@ -100,6 +141,8 @@ export default function useApplicationData() {
     setRecipe,
     deleteRecipe,
     consumeProduct,
+    EditProduct,
+    EditSummary
   };
 
   //6. create handleIncrement, handleDecrement, handleReset to update the score based on the product_saved, product_expired

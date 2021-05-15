@@ -32,6 +32,7 @@ CREATE TABLE saved_recipes (
 
 CREATE TABLE product_summary (
   id SERIAL PRIMARY KEY NOT NULL,
+  name varchar(255) NOT NULL,
   grams_wasted float, 
   units_wasted INTEGER,
   grams_saved float, 

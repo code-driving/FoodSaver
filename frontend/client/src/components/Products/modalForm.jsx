@@ -5,13 +5,14 @@ import "date-fns";
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
+import { Button } from '@material-ui/core';
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import "./ProductForm";
-import { isWithinInterval } from "date-fns";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,10 +39,20 @@ export default function ProductForm(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.onSubmit({
+    props.onSubmitEdit({
       ...formData,
       expiration_date: selectedDate,
-      user_id: localId,
+      product_id: props.product_id,
+    });
+    handleReset();
+  };
+
+  const handleSubmitConsume = (event) => {
+    event.preventDefault();
+    props.onSubmitconsume({
+      ...formData,
+      expiration_date: selectedDate,
+      product_id: props.product_id,
     });
     handleReset();
   };
@@ -103,6 +114,12 @@ export default function ProductForm(props) {
             }}
           />
         </MuiPickersUtilsProvider>
+        <div className="modalBottom">
+            <Button variant="contained" color="secondary" onClick={handleSubmit} >Edit Ingredient</Button>
+            <div className="modalBottom1">
+            <Button  variant="contained" color="secondary" onClick={handleSubmitConsume} >Use Ingredient</Button>
+            </div>
+       </div>
       </form>
     </Grid>
    

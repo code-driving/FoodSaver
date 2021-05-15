@@ -16,6 +16,7 @@ export default function Products(props) {
     deleteProduct,
     setIngredientsItems,
     consumeProduct,
+    EditProduct,
   } = props;
   const onSubmit = (formData) => {
     setProduct(formData);
@@ -29,6 +30,7 @@ export default function Products(props) {
         numSelected={props.numSelected}
         setIngredientsItems={setIngredientsItems}
         consumeProduct={consumeProduct}
+        EditProduct={EditProduct}
       />
       <ProductForm onSubmit={onSubmit} />
     </section>
