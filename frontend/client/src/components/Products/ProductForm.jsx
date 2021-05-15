@@ -12,10 +12,51 @@ import {
 } from "@material-ui/pickers";
 import "./ProductForm.scss";
 import { isWithinInterval } from "date-fns";
+import {createMuiTheme} from "@material-ui/core";
+import {ThemeProvider} from "@material-ui/styles";
 import chineesefood from '../images/icons/chinesefood.png';
 import coffee from '../images/icons/coffee.png';
 import pasta from '../images/icons/pasta.png';
 import plate from '../images/icons/plate.png';
+
+const materialTheme = createMuiTheme({
+    overrides: {
+        MuiPickersToolbar: {
+            toolbar: {
+                backgroundColor: '#802026',
+            },
+        },
+        MuiPickersCalendarHeader: {
+            switchHeader: {
+                backgroundColor: "white",
+                color: "#802026",
+            },
+            dayLabel: {
+              textTransform: 'uppercase',
+              color: '#802026'
+            },
+        },
+        MuiPickersDay: {
+          day: {
+            color: '#802026',
+          },
+          daySelected: {
+            backgroundColor: '#802026',
+            '&:hover': {
+              backgroundColor: '#802026',
+            },
+          },
+          current: {
+            color: '#802026',
+          },
+        },
+        MuiButton: {
+          label: {
+            color: "#802026",
+          },
+        },
+    },
+});
 
 
 const useStyles = makeStyles((theme) => ({
@@ -150,6 +191,7 @@ export default function ProductForm(props) {
           onChange={handleChange}
       />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <ThemeProvider theme={materialTheme}>
           <KeyboardDatePicker
             margin="normal"
             id="date-picker-dialog"
@@ -161,6 +203,7 @@ export default function ProductForm(props) {
               "aria-label": "change date",
             }}
             />
+        </ThemeProvider>
         </MuiPickersUtilsProvider>
       </form>
       <div className="buttons_form">
