@@ -40,14 +40,14 @@ export default function useApplicationData() {
   };
 
   const setRecipe = (value) => {
-    console.log('sssssssssssss',value)
-    return axios
-      .post(`/api/recipes/`, value)
-      .then((response) => {
-        const append = response.data
-        console.log('qqqqqqqqqqqqqq',append)
-        setState(prev => ({ ...prev, recipes: [...prev.recipes, response.data] }))
-  
+    console.log("sssssssssssss", value);
+    return axios.post(`/api/recipes/`, value).then((response) => {
+      const append = response.data;
+      console.log("qqqqqqqqqqqqqq", append);
+      setState((prev) => ({
+        ...prev,
+        recipes: [...prev.recipes, response.data[0]],
+      }));
     });
   };
 
