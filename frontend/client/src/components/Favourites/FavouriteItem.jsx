@@ -12,7 +12,7 @@ export default function FavouriteItem(props) {
       
       <img className="favourite_detail" src={props.imagesrc} alt={"food image"}></img>
       </Link>
-      <button style={{marginTop: '1.5rem'}} onClick={() => deleteRecipe(props.recipe_id)}>delete</button>
+      <button className="button" style={{marginTop: '1.5rem'}} onClick={() => deleteRecipe(props.recipe_id)}>delete</button>
     </>
   );
 }

@@ -95,7 +95,7 @@ export default function RecipeDetail(props) {
       </div>
       <h2 style={{margin: '1rem 0 1rem 0'}}>Instructions</h2>
       <ul className="recipe_detail">{EachStep}</ul>
-      <Link to={`/favourites`}><button style={{marginTop: '1.3rem'}} onClick={() => setRecipe(value)}>save</button></Link>
+      <Link to={`/favourites`}><button className="button" style={{marginTop: '1.3rem'}} onClick={() => setRecipe(value)}>save</button></Link>
     </section>
   );
 }

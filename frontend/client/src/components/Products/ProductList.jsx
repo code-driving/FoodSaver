@@ -444,7 +444,8 @@ export default function ProductList(props) {
         </TableContainer>
         <div className="product_list_buttons">
         <button
-          onClick={() => {
+            className="button"
+            onClick={() => {
             deleteProduct(selected);
             setSelected([]);
           }}
@@ -454,6 +455,7 @@ export default function ProductList(props) {
         {/* <Link to="/recipes"> */}
         <Link to="/recipes">
           <button
+            className="button"
             onClick={setIngredientsItems(ingredientString)}
           >
             find recipes
@@ -461,6 +463,7 @@ export default function ProductList(props) {
         </Link>
         <button
           // classes={classes}
+          className="button"
           onClick={() => {
             consumeProduct(selected);
           }}
