@@ -4,7 +4,6 @@
 @import "styles/typography.scss";
 @import "styles/mixins.scss";
 
-
 .product_list_buttons {
   margin: 1rem;
   display: flex;
@@ -12,12 +11,11 @@
 }
 
 #root > main > div.right > section > div.makeStyles-root-1 > div {
-  background-color:hsl(27, 47%, 53%);
-  color: white; 
+  background-color: hsl(27, 47%, 53%);
+  color: white;
 }
 
 @media only screen and (max-width: 960px) {
-
   .product_list_buttons {
     margin: 0.3rem;
     padding: 0.1rem;
