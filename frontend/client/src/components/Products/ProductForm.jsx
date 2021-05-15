@@ -73,8 +73,9 @@ export default function ProductForm(props) {
       <img src={coffee} className="animated_images__coffee" alt="coffee" />
       <img src={plate} className="animated_images__plate" alt="plate" />
     </div>
-    <Grid container justify="space-around">
     <h2>Add new products</h2>
+    {/* <Grid container justify="space-around">
+    // <h2>Add new products</h2>
       <form
         className={classes.root}
         noValidate
@@ -121,7 +122,37 @@ export default function ProductForm(props) {
         save
       </button>
       <button style={{marginTop: '1rem'}} onClick={handleReset}>cancel</button>
-      </Grid>
+      </Grid> */}
+    <form onSubmit={handleSubmit}>
+      <label className="sr-only" for="name">name</label>
+      <input 
+          name="name"
+          placeholder="product name"
+          value={formData.name || ""}
+          onChange={handleChange}
+      />
+        
+      <label class="sr-only" for="grams">grams</label>
+      <input 
+          name="quantity_grams"
+          placeholder="grams"
+          value={formData.quantity_grams || ""}
+          onChange={handleChange}
+      />
+      <label class="sr-only" for="units">units</label>
+      <input 
+          name="quantity_units"
+          placeholder="units"
+          value={formData.quantity_units || ""}
+          onChange={handleChange}
+      />
+      </form>
+      <div className="buttons_form">
+        <button style={{marginTop: '1rem'}} onClick={handleSubmit} type="submit">
+          save
+        </button>
+        <button style={{marginTop: '1rem'}} onClick={handleReset}>cancel</button>
+      </div>
       </>
   );
 }
