@@ -4,7 +4,6 @@
 @import "styles/typography.scss";
 @import "styles/mixins.scss";
 
-
 @import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200&display=swap");
 
@@ -12,15 +11,42 @@
   box-sizing: border-box;
 }
 
-.clearfix:after {visibility: hidden; display: block; font-size: 0; content: ''; clear: both; height: 0; }
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: "";
+  clear: both;
+  height: 0;
+}
 
-html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+html {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
-*, *:before, *:after {box-sizing: inherit}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 
-.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
 
-html,body {
+html,
+body {
   background: rgb(167, 144, 121);
   font-family: "Fira Sans", sans-serif;
   color: $black;
@@ -41,7 +67,7 @@ body {
   // color: rgba(167, 144, 121, 0.8);
   display: flex;
   // max-width: 80vw;
-  max-width: 1400px;
+  max-width: 1450px;
   width: 100%;
   height: 100vh;
   margin: 0 auto;
@@ -52,7 +78,9 @@ body {
   .left {
     width: 24%;
   }
-  h1, h2, h6 {
+  h1,
+  h2,
+  h6 {
     color: orange;
     text-align: center;
     font-weight: bold;
@@ -89,7 +117,7 @@ body {
 .dot-green {
   height: 25px;
   width: 25px;
-  background-color: rgb(13, 167, 26);
+  background-color: #0da71a;
   border-radius: 25%;
   display: inline-block;
   margin-top: 0.75em;
