@@ -47,7 +47,6 @@ module.exports = ({
         const formattedProducts = getProductsByUsers(usersProducts);
         getSavedRecipes().then((savedRecipe) => {
           const combinedData = AppendRecipes(savedRecipe, formattedProducts);
-          // res.json(combinedData)
           getSummary().then((Summary) => {
             const finalCombinedData = AppendSummary(Summary, combinedData);
             res.json(finalCombinedData);

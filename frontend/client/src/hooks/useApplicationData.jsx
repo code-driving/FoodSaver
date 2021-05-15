@@ -9,8 +9,7 @@ export default function useApplicationData() {
     products: [],
     recipes: [],
     summary: [],
-    //keep track of the expired and saved products
-    // score: 100
+   
   });
 
   const localId = localStorage.getItem("token");
@@ -18,7 +17,6 @@ export default function useApplicationData() {
   const setProduct = (value) => {
     return axios.post(`/api/products/`, value).then((response) => {
       const dateData = datefunction([response.data]);
-      console.log('from add pppppppppppppppppppp',response.data)
       const parseddata = dateData[0];
       const combined = {
         ...response.data,
@@ -30,7 +28,9 @@ export default function useApplicationData() {
   };
 
   const EditProduct = (value) => {
+      console.log('77777777777777777777',value)
     return axios.put(`/api/products`, value).then((res) => {
+      console.log('ressssssssssssssss',res)
       const product_id =res['data'][0]['id']
       const dateData = datefunction([res['data'][0]]);
       const parseddata = dateData[0];
@@ -50,22 +50,33 @@ export default function useApplicationData() {
       }
     const combinedState = [...deletedState, combined ]
       setState((prev) => ({ ...prev, products: combinedState }));
-        
     });
   };
 
   const EditSummary = (value) => {
-    //------For Consume
-    // return axios.post(`/api/products/`, value).then((response) => {
-    //   const dateData = datefunction([response.data]);
-    //   const parseddata = dateData[0];
-    //   const combined = {
-    //     ...response.data,
-    //     expiration: parseddata.expiration,
-    //     dayLeft: parseddata.dayLeft,
-    //   };
-    //   setState((prev) => ({ ...prev, products: [...prev.products, combined] }));
-    // });
+      console.log('pppppppppp',value)
+      const productID=value.product_id
+      let StateToChange = {}
+
+      for (let i=0; i<state.products.length;i++){
+        if(state.products[i]['id']=== productID){
+          StateToChange = state.products[i]
+        }
+      }
+      let QuantityG = StateToChange.quantity_grams
+      let QuantityU= value.quantity_units-StateToChange.quantity_units
+      let newstate = {}
+      if(QuantityG != 0 ){
+          newstate = {...StateToChange, quantity_grams: (QuantityG - value.quantity_grams) ,product_id:productID};
+      } else {
+          newstate = {...StateToChange, quantity_grams: QuantityU ,product_id:productID};
+          
+      }
+
+     return axios.put(`/api/summary/`, value).then((res) => {
+      console.log('sssssssssssss',newstate)
+      EditProduct(newstate)
+    });
   };
 
 

@@ -9,14 +9,13 @@ export default function Popup(props) {
   const {title, openPopUp, setopenPopUp, selectedName, EditProduct, EditSummary ,selected} = props
   let product_id = selected[0]
 
-  
+
   const onSubmitEdit = (formData) => {
     EditProduct(formData);
   };
 
   const onSubmitconsume = (formData) => {
-    let product_id = selected[0]
-    EditSummary(product_id,formData);
+    EditSummary(formData);
   };
   
   

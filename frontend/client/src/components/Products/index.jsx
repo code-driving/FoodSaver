@@ -15,7 +15,7 @@ export default function Products(props) {
     setProduct,
     deleteProduct,
     setIngredientsItems,
-    consumeProduct,
+    EditSummary,
     EditProduct,
   } = props;
   const onSubmit = (formData) => {
@@ -29,7 +29,7 @@ export default function Products(props) {
         deleteProduct={deleteProduct}
         numSelected={props.numSelected}
         setIngredientsItems={setIngredientsItems}
-        consumeProduct={consumeProduct}
+        EditSummary={EditSummary}
         EditProduct={EditProduct}
       />
       <ProductForm onSubmit={onSubmit} />

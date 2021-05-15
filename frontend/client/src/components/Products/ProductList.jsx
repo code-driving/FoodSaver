@@ -287,7 +287,6 @@ export default function ProductList(props) {
     deleteProduct,
     dateData,
     setIngredientsItems,
-    consumeProduct,
     EditProduct,
     EditSummary,
   } = props;

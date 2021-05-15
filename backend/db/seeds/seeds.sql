@@ -22,7 +22,7 @@ VALUES ('CRISPY BUTTERMIL FRIED CHICKEN',1, 640803,'https://spoonacular.com/reci
 ('Soup',3, 5, '');
 
 
-INSERT INTO product_summary ( user_id, product_id, grams_wasted, units_wasted, grams_saved, units_saved)
-VALUES (1,1, 5, 7, 3, 5),
-(1,2, 3,  6, 4, 6),
-(2,3, 4, 4, 9, 7);
+INSERT INTO product_summary ( name, user_id, product_id, grams_wasted, units_wasted, grams_saved, units_saved)
+VALUES ('potato',1, 1, 0, 7, 0, 5),
+('cheese',1,2, 3,  0, 4, 0),
+('grapes',1,3, 4, 0, 9, 0);

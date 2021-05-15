@@ -38,21 +38,25 @@ export default function ProductForm(props) {
   const localId = localStorage.getItem("token");
 
   const handleSubmit = (event) => {
+    const localId = localStorage.getItem("token");
     event.preventDefault();
     props.onSubmitEdit({
       ...formData,
       expiration_date: selectedDate,
       product_id: props.product_id,
+      user_id: localId
     });
     handleReset();
-  };
+  }; 
 
   const handleSubmitConsume = (event) => {
+    const localId = localStorage.getItem("token");
     event.preventDefault();
     props.onSubmitconsume({
       ...formData,
       expiration_date: selectedDate,
       product_id: props.product_id,
+      user_id: localId
     });
     handleReset();
   };
