@@ -104,7 +104,7 @@ export default function ProductForm(props) {
           />
         </MuiPickersUtilsProvider>
       </form>
-      <button onClick={handleSubmit} type="submit">
+      <button disabled={!formData.name} onClick={handleSubmit} type="submit">
         save
       </button>
       <button onClick={handleReset}>del</button>
