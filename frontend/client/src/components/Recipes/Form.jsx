@@ -18,7 +18,7 @@ export default function Form(props) {
 
   return (
     <form className="Form" onSubmit={handleSubmit}>
-      <h1>Enter ingredients to search</h1>
+      <h1 style={{marginBottom: '1.5rem'}}>Enter ingredients to search</h1>
       <input
           type="text"
           name='ingredients'
@@ -26,7 +26,7 @@ export default function Form(props) {
           onChange={handleChange}
           placeholder='apples,oranges'
         ></input>
-        <button onClick={handleSubmit} style={{marginTop: '1rem'}}>search</button>
+        <button style={{marginLeft: '1.5rem'}} onClick={handleSubmit}>search</button>
     </form>
   )
 }

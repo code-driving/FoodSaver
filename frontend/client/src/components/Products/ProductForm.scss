@@ -40,6 +40,7 @@ input,
         -o-filter: drop-shadow(0 0 2px #e07f4f) brightness(80%);
           -ms-filter: drop-shadow(0 0 2px #e07f4f) brightness(80%);
         filter: drop-shadow(0 0 2px #e07f4f) brightness(80%);
+        cursor: pointer;
     }
     
     &__food:hover,
@@ -102,5 +103,13 @@ input,
     display: flex;
     justify-content: flex-end;
     margin: 1rem;
+    
+      button {
+        margin: 1rem;
+    }
+  }
+  
+  .inputs_form {
+    width: 100%;
   }
   

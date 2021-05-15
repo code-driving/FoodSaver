@@ -73,7 +73,7 @@ export default function ProductForm(props) {
       <img src={coffee} className="animated_images__coffee" alt="coffee" />
       <img src={plate} className="animated_images__plate" alt="plate" />
     </div>
-    <h2>Add new products</h2>
+    <h2 style={{marginBottom: '1.5rem'}}>Add new products</h2>
     {/* <Grid container justify="space-around">
     // <h2>Add new products</h2>
       <form
@@ -126,6 +126,7 @@ export default function ProductForm(props) {
     <form onSubmit={handleSubmit}>
       <label className="sr-only" for="name">name</label>
       <input 
+          className="inputs_form"
           name="name"
           placeholder="product name"
           value={formData.name || ""}
@@ -134,6 +135,7 @@ export default function ProductForm(props) {
         
       <label class="sr-only" for="grams">grams</label>
       <input 
+          className="inputs_form"
           name="quantity_grams"
           placeholder="grams"
           value={formData.quantity_grams || ""}
@@ -141,6 +143,7 @@ export default function ProductForm(props) {
       />
       <label class="sr-only" for="units">units</label>
       <input 
+          className="inputs_form"
           name="quantity_units"
           placeholder="units"
           value={formData.quantity_units || ""}
@@ -148,10 +151,10 @@ export default function ProductForm(props) {
       />
       </form>
       <div className="buttons_form">
-        <button style={{marginTop: '1rem'}} onClick={handleSubmit} type="submit">
+        <button onClick={handleReset}>cancel</button>
+        <button onClick={handleSubmit} type="submit">
           save
         </button>
-        <button style={{marginTop: '1rem'}} onClick={handleReset}>cancel</button>
       </div>
       </>
   );
