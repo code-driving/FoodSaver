@@ -118,11 +118,7 @@ export default function ProductForm(props) {
             />
         </MuiPickersUtilsProvider>
       </form>
-<<<<<<< HEAD
-      <button style={{marginTop: '1rem'}} onClick={handleSubmit} type="submit">
-=======
       <button disabled={!formData.name} onClick={handleSubmit} type="submit">
->>>>>>> main
         save
       </button>
       <button style={{marginTop: '1rem'}} onClick={handleReset}>cancel</button>
@@ -169,7 +165,7 @@ export default function ProductForm(props) {
       </form>
       <div className="buttons_form">
         <button onClick={handleReset}>cancel</button>
-        <button onClick={handleSubmit} type="submit">
+        <button disabled={!formData.name} onClick={handleSubmit} type="submit">
           save
         </button>
       </div>
