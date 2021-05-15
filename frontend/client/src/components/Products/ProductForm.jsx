@@ -150,7 +150,7 @@ export default function ProductForm(props) {
           onChange={handleChange}
       />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <KeyboardDatePicker
+          {/* <KeyboardDatePicker
             margin="normal"
             id="date-picker-dialog"
             format="MM/dd/yyyy"
@@ -160,7 +160,19 @@ export default function ProductForm(props) {
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
-            />
+            /> */}
+            <KeyboardDatePicker
+          disableToolbar
+          variant="inline"
+          format="MM/dd/yyyy"
+          margin="normal"
+          id="date-picker-inline"
+          value={selectedDate || ""}
+          onChange={handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
         </MuiPickersUtilsProvider>
       </form>
       <div className="buttons_form">

@@ -48,6 +48,24 @@ import useRecipesApi from "../../hooks/useRecipesApi";
 import { Link } from "react-router-dom";
 import ingredientsToString from "../../helpers/ingredientsToString";
 import "./ProductList.scss"
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { purple } from '@material-ui/core/colors';
+import { palette } from '@material-ui/system';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      // Purple and green play nicely together.
+      main: purple[500],
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: '#0DA71A',
+    },
+  },
+});
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -225,20 +243,6 @@ const EnhancedTableToolbar = (props) => {
           Products
         </Typography>
       )}
-      {/* 
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton aria-label="filter list">
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )} */}
     </Toolbar>
   );
 };
@@ -250,13 +254,17 @@ EnhancedTableToolbar.propTypes = {
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
+    backgroundColor: "#bf824f"
   },
   paper: {
     width: "100%",
     marginBottom: theme.spacing(2),
+    backgroundColor: "#bf824f"
   },
   table: {
     minWidth: 750,
+    backgroundColor: "#bf824f"
+    
   },
   visuallyHidden: {
     border: 0,
@@ -366,11 +374,12 @@ export default function ProductList(props) {
     return "dot-green";
   };
   return (
+    <ThemeProvider theme={theme}>
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
-          <Table
+          <Table 
             className={classes.table}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
@@ -393,7 +402,7 @@ export default function ProductList(props) {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow
+                    <TableRow 
                       hover
                       onClick={(event) => handleClick(event, row.id, row.name)}
                       // onClick={(event) => handleNameClick(event, row.name)}
@@ -472,5 +481,6 @@ export default function ProductList(props) {
         />
       </Paper>
     </div>
-  );
+    </ThemeProvider>
+  )
 }
