@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS products CASCADE;
 DROP TABLE IF EXISTS saved_recipes CASCADE;
-DROP TABLE IF EXISTS quantities CASCADE;
+DROP TABLE IF EXISTS product_summary CASCADE;
 
 
 CREATE TABLE users (
@@ -10,7 +10,7 @@ CREATE TABLE users (
   email varchar(255) NOT NULL,
   password varchar(255) NOT NULL,
   phone_number bigint NOT NULL,
-  score INTEGER NOT NULL
+  score INTEGER DEFAULT 100
 );
 
 CREATE TABLE products (
@@ -19,6 +19,7 @@ CREATE TABLE products (
   expiration_date DATE NOT NULL,
   quantity_grams float,
   quantity_units INTEGER,
+  AddedToSummary boolean DEFAULT FALSE,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -32,6 +33,7 @@ CREATE TABLE saved_recipes (
 
 CREATE TABLE product_summary (
   id SERIAL PRIMARY KEY NOT NULL,
+  name varchar(255) NOT NULL,
   grams_wasted float, 
   units_wasted INTEGER,
   grams_saved float, 

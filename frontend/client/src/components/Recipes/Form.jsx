@@ -24,7 +24,7 @@ export default function Form(props) {
           onChange={handleChange}
           placeholder='apples,oranges'
         ></input>
-        <button style={{marginLeft: '1.5rem'}} disabled={!formData.ingredients} onClick={handleSubmit}>search</button>
+        <button className="button" style={{marginLeft: '1.5rem'}} disabled={!formData.ingredients} onClick={handleSubmit}>search</button>
     </form>
   )
 }

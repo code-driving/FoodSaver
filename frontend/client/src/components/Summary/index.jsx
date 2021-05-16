@@ -1,5 +1,5 @@
 import { useState, Fragment } from 'react'
-
+import ScrollToTop from "../ScrollToTop/index"
 
 
 export default function Summary(props) {
@@ -17,6 +17,8 @@ export default function Summary(props) {
     //   />
     //   <SummaryList summaries={summaries}/>
     // </Fragment>
-    <div>hello from summary</div>
+    <div>hello from summary
+    <ScrollToTop />
+    </div>
   )
 }

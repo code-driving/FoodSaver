@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = ({ addSummary, getOnlySummary, getUserSummary }) => {
+module.exports = ({ EditSummary, getOnlySummary, getUserSummary ,addSummary}) => {
   router.get("/", (req, res) => {
     getOnlySummary()
       .then((summary) => {
@@ -26,23 +26,45 @@ module.exports = ({ addSummary, getOnlySummary, getUserSummary }) => {
       );
   });
 
+  router.put("/", (req, res) => {
+    const {
+      name,
+      user_id,
+      product_id,
+      quantity_grams,
+      quantity_units
+    } = req.body;
+    let  grams_saved= quantity_grams || 0;
+    let  units_saved= quantity_units || 0;
+    EditSummary(
+      name,
+      user_id,
+      product_id,
+      grams_saved,
+      units_saved 
+    )
+      .then((result) => {
+        res.status(200).send("Posted Summary");
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
   router.post("/", (req, res) => {
     const {
+      name,
       user_id,
       product_id,
-      grams_wasted,
-      units_wasted,
-      grams_saved,
-      units_saved,
     } = req.body;
-    console.log(req.body);
+
+    let grams_wasted, units_wasted, grams_saved, units_saved = 0
     addSummary(
+      name,
       user_id,
       product_id,
-      grams_wasted,
-      units_wasted,
-      grams_saved,
-      units_saved
     )
       .then((result) => {
         res.status(200).send("Posted Summary");

@@ -1,6 +1,32 @@
 @import "styles/variables.scss";
 @import "styles/mixins.scss";
 
+.modalTop {
+    display: flex ;
+    padding-top : .5em ;
+    padding-bottom: -.1em;
+   
+}
+
+.modalMiddle {
+    padding : 1em ;
+    width:43.2em;
+    display:flex;
+    justify-content: flex-end;
+  
+}
+
+.modalBottom {
+    padding-left: 10em;
+  padding: .5em  ;
+  display:flex;
+  justify-content: flex-end;
+}
+
+
+.modalBottom1{
+  padding-left: .2em;
+}
 input,
   .formButton {
     outline: none;

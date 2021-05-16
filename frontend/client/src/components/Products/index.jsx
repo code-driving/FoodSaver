@@ -9,6 +9,7 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import './Products.scss'
+import ScrollToTop from "../ScrollToTop/index"
 
 export default function Products(props) {
   const {
@@ -16,7 +17,8 @@ export default function Products(props) {
     setProduct,
     deleteProduct,
     setIngredientsItems,
-    consumeProduct,
+    EditSummary,
+    EditProduct,
   } = props;
   const onSubmit = (formData) => {
     setProduct(formData);
@@ -29,9 +31,11 @@ export default function Products(props) {
         deleteProduct={deleteProduct}
         numSelected={props.numSelected}
         setIngredientsItems={setIngredientsItems}
-        consumeProduct={consumeProduct}
+        EditSummary={EditSummary}
+        EditProduct={EditProduct}
       />
       <ProductForm onSubmit={onSubmit} />
+      <ScrollToTop />
     </section>
   );
 }

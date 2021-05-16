@@ -12,10 +12,51 @@ import {
 } from "@material-ui/pickers";
 import "./ProductForm.scss";
 import { isWithinInterval } from "date-fns";
+import { createMuiTheme } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/styles";
 import chineesefood from "../images/icons/chinesefood.png";
 import coffee from "../images/icons/coffee.png";
 import pasta from "../images/icons/pasta.png";
 import plate from "../images/icons/plate.png";
+
+const materialTheme = createMuiTheme({
+  overrides: {
+    MuiPickersToolbar: {
+      toolbar: {
+        backgroundColor: "#802026",
+      },
+    },
+    MuiPickersCalendarHeader: {
+      switchHeader: {
+        backgroundColor: "white",
+        color: "#802026",
+      },
+      dayLabel: {
+        textTransform: "uppercase",
+        color: "#802026",
+      },
+    },
+    MuiPickersDay: {
+      day: {
+        color: "#802026",
+      },
+      daySelected: {
+        backgroundColor: "#802026",
+        "&:hover": {
+          backgroundColor: "#802026",
+        },
+      },
+      current: {
+        color: "#802026",
+      },
+    },
+    MuiButton: {
+      label: {
+        color: "#802026",
+      },
+    },
+  },
+});
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,55 +118,7 @@ export default function ProductForm(props) {
         <img src={plate} className="animated_images__plate" alt="plate" />
       </div>
       <h2 style={{ marginBottom: "1.5rem" }}>Add new products</h2>
-      {/* <Grid container justify="space-around">
-    // <h2>Add new products</h2>
-      <form
-        className={classes.root}
-        noValidate
-        autoComplete="off"
-        onSubmit={handleSubmit}
-      >
-        <Input
-          placeholder="product name"
-          inputProps={{ "aria-label": "description" }}
-          name="name"
-          value={formData.name || ""}
-          onChange={handleChange}
-        />
-        <Input
-          placeholder="quantity grams"
-          inputProps={{ "aria-label": "description" }}
-          name="quantity_grams"
-          value={formData.quantity_grams || ""}
-          onChange={handleChange}
-        />
-        <Input
-          placeholder="quantity units"
-          inputProps={{ "aria-label": "description" }}
-          name="quantity_units"
-          value={formData.quantity_units || ""}
-          onChange={handleChange}
-          />
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <KeyboardDatePicker
-            margin="normal"
-            id="date-picker-dialog"
-            // label="Date picker dialog"
-            format="MM/dd/yyyy"
-            name="expiration_date"
-            value={selectedDate || ""}
-            onChange={handleDateChange}
-            KeyboardButtonProps={{
-              "aria-label": "change date",
-            }}
-            />
-        </MuiPickersUtilsProvider>
-      </form>
-      <button disabled={!formData.name} onClick={handleSubmit} type="submit">
-        save
-      </button>
-      <button style={{marginTop: '1rem'}} onClick={handleReset}>cancel</button>
-      </Grid> */}
+
       <form onSubmit={handleSubmit}>
         <label className="sr-only" for="name">
           name
@@ -159,22 +152,31 @@ export default function ProductForm(props) {
           onChange={handleChange}
         />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <KeyboardDatePicker
-            margin="normal"
-            id="date-picker-dialog"
-            format="MM/dd/yyyy"
-            name="expiration_date"
-            value={selectedDate || ""}
-            onChange={handleDateChange}
-            KeyboardButtonProps={{
-              "aria-label": "change date",
-            }}
-          />
+          <ThemeProvider theme={materialTheme}>
+            <KeyboardDatePicker
+              margin="normal"
+              id="date-picker-dialog"
+              format="MM/dd/yyyy"
+              name="expiration_date"
+              value={selectedDate || ""}
+              onChange={handleDateChange}
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+            />
+          </ThemeProvider>
         </MuiPickersUtilsProvider>
       </form>
       <div className="buttons_form">
-        <button onClick={handleReset}>cancel</button>
-        <button disabled={!formData.name} onClick={handleSubmit} type="submit">
+        <button className="button" onClick={handleReset}>
+          cancel
+        </button>
+        <button
+          className="button"
+          disabled={!formData.name}
+          onClick={handleSubmit}
+          type="submit"
+        >
           save
         </button>
       </div>

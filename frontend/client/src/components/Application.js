@@ -21,6 +21,8 @@ export default function Application(props) {
     setRecipe,
     deleteRecipe,
     consumeProduct,
+    EditProduct,
+    EditSummary,
   } = useApplicationData();
   const [ingredientsItems, setIngredientsItems] = useState("");
   const { products, recipes, summary, users } = state;
@@ -41,6 +43,8 @@ export default function Application(props) {
                 deleteProduct={deleteProduct}
                 setIngredientsItems={setIngredientsItems}
                 consumeProduct={consumeProduct}
+                EditProduct={EditProduct}
+                EditSummary={EditSummary}
               />
             </PrivateRoute>
 

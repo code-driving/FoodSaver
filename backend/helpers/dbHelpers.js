@@ -101,24 +101,12 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const editProduct = (
-    name,
-    expiration_date,
-    product_id,
-    quantity_grams,
-    quantity_units
-  ) => {
-    const query = {
+  const editProduct = (name, expiration_date, product_id, quantity_grams, quantity_units) => {
+     const query = {
       text: `UPDATE products
              SET name = $1, expiration_date = $2, quantity_grams = $4, quantity_units = $5
-             WHERE id = $3`,
-      values: [
-        name,
-        expiration_date,
-        product_id,
-        quantity_grams,
-        quantity_units,
-      ],
+             WHERE id =$3 RETURNING *;`,
+             values: [name, expiration_date, product_id, quantity_grams, quantity_units],
     };
     return db
       .query(query)
@@ -194,25 +182,25 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const addSummary = (
-    user_id,
-    product_id,
-    grams_wasted,
-    units_wasted,
-    grams_saved,
-    units_saved
-  ) => {
+  const EditSummary= (name, user_id, product_id,  grams_saved, units_saved) => {
+  
     const query = {
-      text: `INSERT INTO product_summary (user_id, product_id, grams_wasted, units_wasted, grams_saved, units_saved)
-              VALUES ($1,$2, $3, $4, $5, $6) RETURNING *`,
-      values: [
-        user_id,
-        product_id,
-        grams_wasted,
-        units_wasted,
-        grams_saved,
-        units_saved,
-      ],
+      text: `UPDATE product_summary 
+             SET name=$1, user_id=$2, product_id= $3, grams_saved=grams_saved + $4, units_saved = units_saved + $5
+             WHERE product_id=$3 RETURNING *`,
+             values: [name, user_id, product_id, grams_saved, units_saved],
+    };
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
+
+  const addSummary= (name, user_id, product_id,  grams_saved, units_saved) => {
+    const query = {
+      text: `INSERT INTO product_summary ( name, user_id, product_id, grams_wasted, units_wasted, grams_saved, units_saved)
+             VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,
+             values: [name, user_id, product_id, 0, 0, 0, 0],
     };
     return db
       .query(query)
@@ -231,6 +219,20 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const updatescore= (id , score) => {
+    const query = {
+      text: `UPDATE users
+             SET score= $2
+             WHERE id=$1 RETURNING *`,
+             values: [id,score],
+    };
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
+
+
   return {
     getUsers,
     getUserByEmail,
@@ -243,12 +245,14 @@ module.exports = (db) => {
     addRecipe,
     deleteRecipe,
     getSummary,
-    addSummary,
+    EditSummary,
     getOnlySummary,
     getPaticularUserProducts,
     getUserSavedRecipes,
     getUserSummary,
     getPaticularUsers,
     deleteProduct,
+    addSummary,
+    updatescore
   };
 };
