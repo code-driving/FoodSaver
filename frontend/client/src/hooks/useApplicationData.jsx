@@ -3,6 +3,8 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import datefunction from "../helpers/date";
 import CalculateScoreInc from "../helpers/calculateScoreInc";
+import CalculateScoreDec from "../helpers/CalculateScoreDec";
+import editSingleProduct from "../helpers/editsingleproduct"
 
 
 export default function useApplicationData() {
@@ -44,25 +46,8 @@ export default function useApplicationData() {
 
   const EditProduct = (value) => {
     return axios.put(`/api/products`, value).then((res) => {
-      const product_id =res['data'][0]['id']
-      const dateData = datefunction([res['data'][0]]);
-      const parseddata = dateData[0];
-
-      const combined = {
-        ...res['data'][0],
-        expiration: parseddata.expiration,
-        dayLeft: parseddata.dayLeft,
-      };
-
-      let deletedState =[];
-      
-      for (let i = 0; i < state.products.length ; i++) {
-        if(state.products[i]['id'] != product_id ){
-          deletedState.push(state.products[i])
-        }
-      }
-    const combinedState = [...deletedState, combined ]
-      setState((prev) => ({ ...prev, products: combinedState }));
+      console.log('1111111111111111',res)
+      editSingleProduct(res,state,setState)
     });
   };
 
@@ -157,7 +142,33 @@ export default function useApplicationData() {
     });
   }, []);
 
+  
+  useEffect(() => {
 
+    if (state.users.length > 0) {
+      let IdAndScore = CalculateScoreDec(state['products'],state['users'][0]['score'])
+      console.log(IdAndScore)
+      let userdata={ score:IdAndScore.newScore, user_id:localId}
+      updateUser(userdata)
+      let productIDs=IdAndScore.setTrue
+      //Run Request in parallel
+      let returndata = [];
+      let promises = [];
+      for (let i = 0; i < productIDs.length ; i++){
+        promises.push(axios.put(`/api/products/Boolean`, {product_id:productIDs[i]} ).then((res) => {
+          returndata.push(res);
+         })
+       )  
+      }
+
+      // Promise.all(promises).then(() => {
+          
+      // })
+     
+    
+    }
+  }, []);
+  
   return {
     state,
     setProduct,
@@ -168,6 +179,9 @@ export default function useApplicationData() {
     EditProduct,
     EditSummary
   };
+
+
+
 
   //6. create handleIncrement, handleDecrement, handleReset to update the score based on the product_saved, product_expired
   //IF SCORE == 0 THEN HE WILL HAVE TO DONATE TO FOODBANK AND HAVE A POSSIBILITY TO RESET A SCORE
