@@ -55,6 +55,7 @@ import { purple } from "@material-ui/core/colors";
 import { palette } from "@material-ui/system";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import date from "../../helpers/date";
 
 const theme = createMuiTheme({
   palette: {
@@ -286,6 +287,7 @@ export default function ProductList(props) {
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [selectedName, setSelectedName] = React.useState([]);
+  const [selectedDate, setSelectedDate] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -362,17 +364,20 @@ export default function ProductList(props) {
 
       const newSelectedsName = rows.map((n) => n.name);
       setSelectedName(newSelectedsName);
+
       return;
     }
     setSelected([]);
     setSelectedName([]);
   };
 
-  const handleClick = (event, id, name) => {
+  const handleClick = (event, id, name, date) => {
     const selectedIndex = selected.indexOf(id);
     const selectedIndexName = selectedName.indexOf(name);
+    const selectedIndexDate = selectedDate.indexOf(date);
     let newSelected = [];
     let newSelectedName = [];
+    let newSelectedDate = [];
 
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, id);
@@ -398,9 +403,24 @@ export default function ProductList(props) {
         selectedName.slice(selectedIndexName + 1)
       );
     }
+
+    if (selectedIndexDate === -1) {
+      newSelectedDate = newSelectedDate.concat(selectedDate, date);
+    } else if (selectedIndexDate === 0) {
+      newSelectedDate = newSelectedDate.concat(selectedDate.slice(1));
+    } else if (selectedIndexDate === selectedDate.length - 1) {
+      newSelectedDate = newSelectedDate.concat(selectedDate.slice(0, -1));
+    } else if (selectedIndexDate > 0) {
+      newSelectedDate = newSelectedDate.concat(
+        selectedDate.slice(0, selectedIndexDate),
+        selectedDate.slice(selectedIndexDate + 1)
+      );
+    }
     setSelected(newSelected);
     setSelectedName(newSelectedName);
+    setSelectedDate(newSelectedDate);
   };
+  console.log(selectedDate);
   let ingredientString = ingredientsToString(selectedName);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -456,7 +476,7 @@ export default function ProductList(props) {
                       <TableRow
                         hover
                         onClick={(event) =>
-                          handleClick(event, row.id, row.name)
+                          handleClick(event, row.id, row.name, row.expiration)
                         }
                         // onClick={(event) => handleNameClick(event, row.name)}
                         role="checkbox"
@@ -548,6 +568,7 @@ export default function ProductList(props) {
           EditProduct={EditProduct}
           EditSummary={EditSummary}
           selected={selected}
+          rows={products}
         ></Popup>
       </div>
     </ThemeProvider>
