@@ -299,6 +299,8 @@ export default function ProductList(props) {
     setIngredientsItems,
     EditProduct,
     EditSummary,
+    score,
+    decreaseScore
   } = props;
 
   const rows = products;
@@ -474,6 +476,7 @@ export default function ProductList(props) {
         >
           edit/consume
         </button>
+        <div>{score}</div>
         </div>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}

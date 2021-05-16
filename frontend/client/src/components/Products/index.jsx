@@ -19,6 +19,8 @@ export default function Products(props) {
     setIngredientsItems,
     EditSummary,
     EditProduct,
+    score,
+    decreaseScore
   } = props;
   const onSubmit = (formData) => {
     setProduct(formData);
@@ -33,6 +35,8 @@ export default function Products(props) {
         setIngredientsItems={setIngredientsItems}
         EditSummary={EditSummary}
         EditProduct={EditProduct}
+        score={score}
+        decreaseScore={decreaseScore}
       />
       <ProductForm onSubmit={onSubmit} />
       <ScrollToTop />
