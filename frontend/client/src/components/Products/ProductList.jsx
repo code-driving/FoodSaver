@@ -485,5 +485,6 @@ export default function ProductList(props) {
       </Paper>
     </div>
     </ThemeProvider>
+    
   )
 }
