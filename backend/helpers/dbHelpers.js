@@ -217,6 +217,19 @@ module.exports = (db) => {
         .catch((err) => err);
   };
 
+  const updatescore= (id , score) => {
+    const query = {
+      text: `UPDATE users
+             SET score= $2
+             WHERE id=$1 RETURNING *`,
+             values: [id,score],
+    };
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
+
 
   return {
     getUsers,
@@ -237,6 +250,7 @@ module.exports = (db) => {
     getUserSummary,
     getPaticularUsers,
     deleteProduct,
-    addSummary
+    addSummary,
+    updatescore
   };
 };

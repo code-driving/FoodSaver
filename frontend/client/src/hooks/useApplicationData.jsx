@@ -15,7 +15,6 @@ export default function useApplicationData() {
   const localId = localStorage.getItem("token");
 
   const setProduct = (value) => {
-    console.log('2222222222222', value)
     return axios.post(`/api/products/`, value).then((response) => {
       const dateData = datefunction([response.data]);
       const parseddata = dateData[0];
@@ -32,6 +31,13 @@ export default function useApplicationData() {
           console.log(response)
       })
     });
+  };
+
+  const updateUser = (value) => {
+    return axios.put(`/api/users/`,value).then((res) => {
+     console.log(res)
+    });
+      // setState((prev) => ({ ...prev, products: [...prev.products, combined] }));
   };
 
   const EditProduct = (value) => {
@@ -156,7 +162,7 @@ export default function useApplicationData() {
     deleteRecipe,
     consumeProduct,
     EditProduct,
-    EditSummary
+    EditSummary,
   };
 
   //6. create handleIncrement, handleDecrement, handleReset to update the score based on the product_saved, product_expired

@@ -10,7 +10,7 @@ CREATE TABLE users (
   email varchar(255) NOT NULL,
   password varchar(255) NOT NULL,
   phone_number bigint NOT NULL,
-  score INTEGER NOT NULL
+  score INTEGER DEFAULT 100
 );
 
 CREATE TABLE products (
@@ -19,6 +19,7 @@ CREATE TABLE products (
   expiration_date DATE NOT NULL,
   quantity_grams float,
   quantity_units INTEGER,
+  AddedToSummary boolean DEFAULT FALSE,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
