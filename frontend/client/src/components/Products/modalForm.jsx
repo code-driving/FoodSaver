@@ -160,17 +160,11 @@ export default function ProductForm(props) {
             />
           </ThemeProvider>
         </MuiPickersUtilsProvider>
-        {/* <div className="modalBottom">
-            <Button variant="contained" color="secondary" onClick={handleSubmit} >Edit Ingredient</Button>  
-        <div className="modalBottom1">
-            <Button variant="contained" color="secondary" onClick={handleSubmitConsume} >Use Ingredient</Button>
-        </div> */}
-        {/* </div> */}
         <div className="modalBottom">
-        <button className="button modal" onClick={handleSubmit}>edit</button>
-        <div className="modalBottom1">
-        <button className="button modal" onClick={handleSubmitConsume}>consume</button>
-        </div>
+          <button className="button modal" onClick={handleSubmit}>edit</button>
+          <div className="modalBottom1">
+            <button className="button modal" onClick={handleSubmitConsume}>consume</button>
+          </div>
         </div>
       </form>
     // </Grid>
