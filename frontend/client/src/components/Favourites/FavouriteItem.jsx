@@ -1,6 +1,7 @@
 import { useState, Fragment, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Popup from "../Products/popup";
 import Favourite from "./Favourite.scss";
 
 export default function FavouriteItem(props) {
@@ -31,7 +32,8 @@ export default function FavouriteItem(props) {
           <button
             className="button"
             style={{ marginTop: "1.5rem" }}
-            onClick={() => deleteRecipe(props.recipe_id)}
+            // onClick={() => deleteRecipe(props.recipe_id)}
+            onClick={() => {}}
           >
             delete
           </button>
