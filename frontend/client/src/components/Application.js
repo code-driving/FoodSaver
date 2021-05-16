@@ -22,11 +22,10 @@ export default function Application(props) {
     deleteRecipe,
     consumeProduct,
     EditProduct,
-    EditSummary,
-    decreaseScore
+    EditSummary
   } = useApplicationData();
   const [ingredientsItems, setIngredientsItems] = useState("");
-  const { products, recipes, summary, users, score } = state;
+  const { products, recipes, summary, users } = state;
 
   return (
     <main className="layout">
@@ -46,8 +45,6 @@ export default function Application(props) {
                 consumeProduct={consumeProduct}
                 EditProduct={EditProduct}
                 EditSummary={EditSummary}
-                decreaseScore={decreaseScore}
-                score={score}
               />
             </PrivateRoute>
 

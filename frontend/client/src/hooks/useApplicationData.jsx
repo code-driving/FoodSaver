@@ -158,21 +158,6 @@ export default function useApplicationData() {
   }, []);
 
 
-  
-  // const decreaseScore = (score) => {
-  //   useEffect(() => {
-  //     //here make axios request
-  //     axios.post(`api/users/score`, score)
-  //   })
-  //   setState((prev) => ({
-  //     ...prev,
-  //     score
-  //   }));
-  // } 
-  const decreaseScore = () => {
-    console.log('hi')
-  }
-
   return {
     state,
     setProduct,
@@ -181,8 +166,7 @@ export default function useApplicationData() {
     deleteRecipe,
     consumeProduct,
     EditProduct,
-    EditSummary,
-    decreaseScore
+    EditSummary
   };
 
   //6. create handleIncrement, handleDecrement, handleReset to update the score based on the product_saved, product_expired
