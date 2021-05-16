@@ -12,11 +12,10 @@ import {
 } from "@material-ui/pickers";
 import "./ProductForm.scss";
 import { isWithinInterval } from "date-fns";
-import chineesefood from '../images/icons/chinesefood.png';
-import coffee from '../images/icons/coffee.png';
-import pasta from '../images/icons/pasta.png';
-import plate from '../images/icons/plate.png';
-
+import chineesefood from "../images/icons/chinesefood.png";
+import coffee from "../images/icons/coffee.png";
+import pasta from "../images/icons/pasta.png";
+import plate from "../images/icons/plate.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,14 +66,18 @@ export default function ProductForm(props) {
 
   return (
     <>
-    <div className="animated_images">
-      <img src={chineesefood} className="animated_images__food"alt="chineese food" />
-      <img src={pasta} className="animated_images__pasta" alt="pasta" />
-      <img src={coffee} className="animated_images__coffee" alt="coffee" />
-      <img src={plate} className="animated_images__plate" alt="plate" />
-    </div>
-    <h2 style={{marginBottom: '1.5rem'}}>Add new products</h2>
-    {/* <Grid container justify="space-around">
+      <div className="animated_images">
+        <img
+          src={chineesefood}
+          className="animated_images__food"
+          alt="chineese food"
+        />
+        <img src={pasta} className="animated_images__pasta" alt="pasta" />
+        <img src={coffee} className="animated_images__coffee" alt="coffee" />
+        <img src={plate} className="animated_images__plate" alt="plate" />
+      </div>
+      <h2 style={{ marginBottom: "1.5rem" }}>Add new products</h2>
+      {/* <Grid container justify="space-around">
     // <h2>Add new products</h2>
       <form
         className={classes.root}
@@ -123,32 +126,38 @@ export default function ProductForm(props) {
       </button>
       <button style={{marginTop: '1rem'}} onClick={handleReset}>cancel</button>
       </Grid> */}
-    <form onSubmit={handleSubmit}>
-      <label className="sr-only" for="name">name</label>
-      <input 
+      <form onSubmit={handleSubmit}>
+        <label className="sr-only" for="name">
+          name
+        </label>
+        <input
           className="inputs_form"
           name="name"
           placeholder="product name"
           value={formData.name || ""}
           onChange={handleChange}
-      />
-        
-      <label class="sr-only" for="grams">grams</label>
-      <input 
+        />
+
+        <label class="sr-only" for="grams">
+          grams
+        </label>
+        <input
           className="inputs_form"
           name="quantity_grams"
           placeholder="grams"
           value={formData.quantity_grams || ""}
           onChange={handleChange}
-      />
-      <label class="sr-only" for="units">units</label>
-      <input 
+        />
+        <label class="sr-only" for="units">
+          units
+        </label>
+        <input
           className="inputs_form"
           name="quantity_units"
           placeholder="units"
           value={formData.quantity_units || ""}
           onChange={handleChange}
-      />
+        />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
             margin="normal"
@@ -160,7 +169,7 @@ export default function ProductForm(props) {
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
-            />
+          />
         </MuiPickersUtilsProvider>
       </form>
       <div className="buttons_form">
@@ -169,6 +178,6 @@ export default function ProductForm(props) {
           save
         </button>
       </div>
-      </>
+    </>
   );
 }

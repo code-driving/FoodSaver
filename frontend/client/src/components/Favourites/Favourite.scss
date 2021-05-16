@@ -4,4 +4,29 @@
 @import "styles/typography.scss";
 @import "styles/mixins.scss";
 
+.fav-list {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.fav-container {
+  // display: flex;
+  flex-direction: row;
+  justify-content: space-center;
+  align-items: center;
+  width: 200px;
+}
 
+.fav-item {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  align-items: center;
+  justify-content: space-between;
+}
+.favourite-detail {
+  max-width: 200px;
+  border-radius: 3px;
+}
