@@ -12,7 +12,7 @@ export default function Login() {
   };
   return (
     <>
-      <h1>Please Login</h1>
+      <h1 style={{marginBottom: '1.5rem'}}>Please Login</h1>
 
       <form onSubmit={handleSubmit}>
         <input type="text" name="email" id="email" placeholder="email" />

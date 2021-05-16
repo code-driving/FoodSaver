@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./details.scss";
-import useApplicationData from "../../hooks/useApplicationData";
-import { useParams, Redirect } from "react-router-dom";
+import useApplicationData from '../../hooks/useApplicationData'
+import { useParams, Redirect } from 'react-router-dom';
+import "./Recipes.scss"
+import ScrollToTop from "../ScrollToTop/index"
 
 export default function RecipeDetail(props) {
   const [redirect, setRedirect] = useState(false);
@@ -39,7 +41,19 @@ export default function RecipeDetail(props) {
       });
     }
   }, []);
+
+  // still working on this
+  ////////////////////////////////////
+  // const stepCheck = (steps) => {
+  //   const noInstuctions = ["No instructions found :("];
+  //   if (!steps) {
+  //     return noInstuctions;
+  //   }
+  //   return steps;
+  // };
+
   let steps = details.steps[0]["steps"];
+
   let name = details.info["title"];
   let img = details.info["image"];
   let ingredients = details.info["extendedIngredients"].map((ingredients) => (
@@ -65,25 +79,25 @@ export default function RecipeDetail(props) {
   });
   return (
     <section className="recipe-details-container">
-      <h1> Recipe Details</h1>
+      <h1 style={{alignSelf: 'center'}}>Recipe Details</h1>
       <div>
-        <img src={img} alt={"food image"} class="recipe-image"></img>
-        <div style={{ marginLeft: 10 }}>
+        <img src={img} alt={"food image"} className="recipe-image"></img>
+        {/* <div style={{ marginLeft: 10 }}> */}
+        <div className="recipe_detail">
           <h2>Recipe Info</h2>
           <ul>
             <li>Time: {time} mins</li>
-            <li>{vegetarian ? "Vegitarian : No" : "Vegitarian : Yes"}</li>
+            <li>{vegetarian ? "Vegetarian : No" : "Vegetarian : Yes"}</li>
             <li>Serves : {servings}</li>
           </ul>
           <h2>Ingredients needed</h2>
           <ul>{ingredients}</ul>
         </div>
       </div>
-      <h2>Instructions</h2>
-      <ul>{EachStep}</ul>
-      <Link to={`/favourites`}>
-        <button onClick={() => setRecipe(value)}>save</button>
-      </Link>
+      <h2 style={{margin: '1rem 0 1rem 0'}}>Instructions</h2>
+      <ul className="recipe_detail">{EachStep}</ul>
+      <Link to={`/favourites`}><button className="button" style={{marginTop: '1.3rem'}} onClick={() => setRecipe(value)}>save</button></Link>
+      <ScrollToTop />
     </section>
   );
 }

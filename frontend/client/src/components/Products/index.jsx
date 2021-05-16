@@ -8,6 +8,8 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
+import './Products.scss'
+import ScrollToTop from "../ScrollToTop/index"
 
 export default function Products(props) {
   const {
@@ -33,6 +35,7 @@ export default function Products(props) {
         EditProduct={EditProduct}
       />
       <ProductForm onSubmit={onSubmit} />
+      <ScrollToTop />
     </section>
   );
 }

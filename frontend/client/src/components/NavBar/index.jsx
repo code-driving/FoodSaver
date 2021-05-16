@@ -1,11 +1,16 @@
-import React from 'react'
+import { React, Fragment}  from 'react'
 import { Link } from 'react-router-dom';
 import './NavBar.scss';
+import logo from '../images/logo.png';
 
 export default function NavBar() {
   return (
+    <>
       <nav>
-        <ul>
+        <div>
+          <img className="logo" src={logo} alt="Logo" />
+        </div>
+        <ul className="top_navigation">
           <li><Link to="/">products</Link></li>
           <li><Link to="/recipes">recipes</Link></li>
           <li><Link to="/summary">summary</Link></li>
@@ -13,5 +18,6 @@ export default function NavBar() {
           <li><Link to='/favourites'>favourites</Link></li>
         </ul>
       </nav>
+    </>
   )
 }

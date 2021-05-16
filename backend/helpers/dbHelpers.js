@@ -23,7 +23,7 @@ module.exports = (db) => {
   };
 
   const addUser = (name, email, password, phone_number) => {
-    console.log(name, email, password, phone_number)
+    console.log(name, email, password, phone_number);
     const query = {
       text: `INSERT INTO users (name, email, password, phone_number) VALUES ($1, $2, $3, $4) RETURNING *`,
       values: [name, email, password, phone_number],
@@ -44,9 +44,9 @@ module.exports = (db) => {
     };
 
     return db
-        .query(query)
-        .then((result) => result.rows)
-        .catch((err) => err);
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
 
   const getPaticularUserProducts = (id) => {
@@ -56,11 +56,10 @@ module.exports = (db) => {
     };
 
     return db
-        .query(query)
-        .then((result) => result.rows)
-        .catch((err) => err);
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
-
 
   const getUserSavedRecipes = (id) => {
     const query = {
@@ -68,9 +67,9 @@ module.exports = (db) => {
              WHERE user_id = ${id};`,
     };
     return db
-        .query(query)
-        .then((result) => result.rows)
-        .catch((err) => err);
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
 
   const getSavedRecipes = () => {
@@ -78,22 +77,28 @@ module.exports = (db) => {
       text: `SELECT * FROM saved_recipes;`,
     };
     return db
-        .query(query)
-        .then((result) => result.rows)
-        .catch((err) => err);
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
 
-  const postProduct = (name, expiration_date, user_id, quantity_grams, quantity_units, 
-                      grams_wasted) => {
+  const postProduct = (
+    name,
+    expiration_date,
+    user_id,
+    quantity_grams,
+    quantity_units,
+    grams_wasted
+  ) => {
     const query = {
       text: `INSERT INTO products (name, expiration_date, user_id, quantity_grams, quantity_units)
              VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
-             values: [name, expiration_date, user_id, quantity_grams, quantity_units],
+      values: [name, expiration_date, user_id, quantity_grams, quantity_units],
     };
     return db
-        .query(query)
-        .then((result) => result.rows)
-        .catch((err) => err);
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
 
   const editProduct = (name, expiration_date, product_id, quantity_grams, quantity_units) => {
@@ -104,54 +109,53 @@ module.exports = (db) => {
              values: [name, expiration_date, product_id, quantity_grams, quantity_units],
     };
     return db
-        .query(query)
-        .then((result) => result.rows)
-        .catch((err) => err);
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
-  
+
   const deleteProduct = (id) => {
     const query = {
       text: `DELETE FROM products WHERE id = $1`,
-            values: [id],
+      values: [id],
     };
     return db
-        .query(query)
-        .then((result) => result.rows)
-        .catch((err) => err);
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
 
-  const addRecipe = (recipie_name, user_id, recipe_id,imageSRC) => {
+  const addRecipe = (recipie_name, user_id, recipe_id, imageSRC) => {
     const query = {
       text: `INSERT INTO saved_recipes (recipie_name, user_id, recipe_id ,imageSRC)
               VALUES ($1,$2, $3, $4) RETURNING *`,
-             values: [recipie_name, user_id, recipe_id , imageSRC],
+      values: [recipie_name, user_id, recipe_id, imageSRC],
     };
     return db
-        .query(query)
-        .then((result) => result.rows)
-        .catch((err) => err);
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
 
   const deleteRecipe = (id) => {
     const query = {
       text: `DELETE FROM saved_recipes WHERE recipe_id = $1`,
-             values: [id],
+      values: [id],
     };
     return db
-        .query(query)
-        .then((result) => result.rows)
-        .catch((err) => err);
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
-
 
   const getOnlySummary = () => {
     const query = {
       text: `SELECT * FROM product_summary;`,
     };
     return db
-        .query(query)
-        .then((result) => result.rows)
-        .catch((err) => err);
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
 
   const getSummary = () => {
@@ -162,9 +166,9 @@ module.exports = (db) => {
              INNER JOIN products ON products.id = product_summary.product_id;`,
     };
     return db
-        .query(query)
-        .then((result) => result.rows)
-        .catch((err) => err);
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
 
   const getUserSummary = (id) => {
@@ -173,9 +177,9 @@ module.exports = (db) => {
              WHERE user_id = ${id};`,
     };
     return db
-        .query(query)
-        .then((result) => result.rows)
-        .catch((err) => err);
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
 
   const EditSummary= (name, user_id, product_id,  grams_saved, units_saved) => {
@@ -199,12 +203,10 @@ module.exports = (db) => {
              values: [name, user_id, product_id, 0, 0, 0, 0],
     };
     return db
-        .query(query)
-        .then((result) => result.rows)
-        .catch((err) => err);
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
-
-  
 
   const getPaticularUsers = (id) => {
     const query = {
@@ -212,9 +214,9 @@ module.exports = (db) => {
              WHERE id = ${id};`,
     };
     return db
-        .query(query)
-        .then((result) => result.rows)
-        .catch((err) => err);
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
 
   const updatescore= (id , score) => {

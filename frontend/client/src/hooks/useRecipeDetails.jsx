@@ -9,7 +9,6 @@ export default function useRecipesDetailsApi(recipe_id) {
       const url = `https://api.spoonacular.com/recipes/${recipe_id}/analyzedInstructions?apiKey=${API_KEY}&boolean=false`;
       const url2 = `https://api.spoonacular.com/recipes/${recipe_id}/information?apiKey=${API_KEY}&boolean=false`;
       Promise.all([axios.get(url), axios.get(url2)]).then((res) => {
-        console.log("recipe response", res);
         setDetails((prev) => ({
           ...prev,
           steps: res[0].data,
