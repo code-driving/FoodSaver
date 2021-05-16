@@ -472,7 +472,7 @@ export default function ProductList(props) {
           color="primary"
           className="button"
         >
-          consume
+          edit/consume
         </button>
         </div>
         <TablePagination
@@ -491,9 +491,8 @@ export default function ProductList(props) {
           EditProduct={EditProduct}
           EditSummary={EditSummary}
           selected={selected}
-       >
+      >
       </Popup>
-      
     </div>
     </ThemeProvider>
     

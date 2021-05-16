@@ -12,52 +12,51 @@ import {
 } from "@material-ui/pickers";
 import "./ProductForm.scss";
 import { isWithinInterval } from "date-fns";
-import {createMuiTheme} from "@material-ui/core";
-import {ThemeProvider} from "@material-ui/styles";
-import chineesefood from '../images/icons/chinesefood.png';
-import coffee from '../images/icons/coffee.png';
-import pasta from '../images/icons/pasta.png';
-import plate from '../images/icons/plate.png';
+import { createMuiTheme } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/styles";
+import chineesefood from "../images/icons/chinesefood.png";
+import coffee from "../images/icons/coffee.png";
+import pasta from "../images/icons/pasta.png";
+import plate from "../images/icons/plate.png";
 
 const materialTheme = createMuiTheme({
-    overrides: {
-        MuiPickersToolbar: {
-            toolbar: {
-                backgroundColor: '#802026',
-            },
-        },
-        MuiPickersCalendarHeader: {
-            switchHeader: {
-                backgroundColor: "white",
-                color: "#802026",
-            },
-            dayLabel: {
-              textTransform: 'uppercase',
-              color: '#802026'
-            },
-        },
-        MuiPickersDay: {
-          day: {
-            color: '#802026',
-          },
-          daySelected: {
-            backgroundColor: '#802026',
-            '&:hover': {
-              backgroundColor: '#802026',
-            },
-          },
-          current: {
-            color: '#802026',
-          },
-        },
-        MuiButton: {
-          label: {
-            color: "#802026",
-          },
-        },
+  overrides: {
+    MuiPickersToolbar: {
+      toolbar: {
+        backgroundColor: "#802026",
+      },
     },
+    MuiPickersCalendarHeader: {
+      switchHeader: {
+        backgroundColor: "white",
+        color: "#802026",
+      },
+      dayLabel: {
+        textTransform: "uppercase",
+        color: "#802026",
+      },
+    },
+    MuiPickersDay: {
+      day: {
+        color: "#802026",
+      },
+      daySelected: {
+        backgroundColor: "#802026",
+        "&:hover": {
+          backgroundColor: "#802026",
+        },
+      },
+      current: {
+        color: "#802026",
+      },
+    },
+    MuiButton: {
+      label: {
+        color: "#802026",
+      },
+    },
+  },
 });
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -108,62 +107,79 @@ export default function ProductForm(props) {
 
   return (
     <>
-    <div className="animated_images">
-      <img src={chineesefood} className="animated_images__food"alt="chineese food" />
-      <img src={pasta} className="animated_images__pasta" alt="pasta" />
-      <img src={coffee} className="animated_images__coffee" alt="coffee" />
-      <img src={plate} className="animated_images__plate" alt="plate" />
-    </div>
-    <h2 style={{marginBottom: '1.5rem'}}>Add new products</h2>
-    
-    <form onSubmit={handleSubmit}>
-      <label className="sr-only" for="name">name</label>
-      <input 
+      <div className="animated_images">
+        <img
+          src={chineesefood}
+          className="animated_images__food"
+          alt="chineese food"
+        />
+        <img src={pasta} className="animated_images__pasta" alt="pasta" />
+        <img src={coffee} className="animated_images__coffee" alt="coffee" />
+        <img src={plate} className="animated_images__plate" alt="plate" />
+      </div>
+      <h2 style={{ marginBottom: "1.5rem" }}>Add new products</h2>
+
+      <form onSubmit={handleSubmit}>
+        <label className="sr-only" for="name">
+          name
+        </label>
+        <input
           className="inputs_form"
           name="name"
           placeholder="product name"
           value={formData.name || ""}
           onChange={handleChange}
-      />
-        
-      <label class="sr-only" for="grams">grams</label>
-      <input 
+        />
+
+        <label class="sr-only" for="grams">
+          grams
+        </label>
+        <input
           className="inputs_form"
           name="quantity_grams"
           placeholder="grams"
           value={formData.quantity_grams || ""}
           onChange={handleChange}
-      />
-      <label class="sr-only" for="units">units</label>
-      <input 
+        />
+        <label class="sr-only" for="units">
+          units
+        </label>
+        <input
           className="inputs_form"
           name="quantity_units"
           placeholder="units"
           value={formData.quantity_units || ""}
           onChange={handleChange}
-      />
+        />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <ThemeProvider theme={materialTheme}>
-          <KeyboardDatePicker
-            margin="normal"
-            id="date-picker-dialog"
-            format="MM/dd/yyyy"
-            name="expiration_date"
-            value={selectedDate || ""}
-            onChange={handleDateChange}
-            KeyboardButtonProps={{
-              "aria-label": "change date",
-            }}
+          <ThemeProvider theme={materialTheme}>
+            <KeyboardDatePicker
+              margin="normal"
+              id="date-picker-dialog"
+              format="MM/dd/yyyy"
+              name="expiration_date"
+              value={selectedDate || ""}
+              onChange={handleDateChange}
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
             />
-        </ThemeProvider>
+          </ThemeProvider>
         </MuiPickersUtilsProvider>
       </form>
       <div className="buttons_form">
-        <button className="button" onClick={handleReset}>cancel</button>
-        <button className="button" disabled={!formData.name} onClick={handleSubmit} type="submit">
+        <button className="button" onClick={handleReset}>
+          cancel
+        </button>
+        <button
+          className="button"
+          disabled={!formData.name}
+          onClick={handleSubmit}
+          type="submit"
+        >
           save
         </button>
       </div>
-      </>
+    </>
   );
 }

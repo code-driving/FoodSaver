@@ -1,32 +1,44 @@
 @import "styles/variables.scss";
 @import "styles/mixins.scss";
 
+.flex-modal {
+  display: flex;
+  justify-content: center;
+}
 .modalTop {
     display: flex ;
     padding-top : .5em ;
     padding-bottom: -.1em;
-   
 }
 
 .modalMiddle {
-    padding : 1em ;
-    width:43.2em;
+    padding: 1em ;
     display:flex;
-    justify-content: flex-end;
-  
+    background-color: #BF834E;
 }
 
 .modalBottom {
-    padding-left: 10em;
+  padding-left: 10em;
   padding: .5em  ;
-  display:flex;
+  display: flex;
   justify-content: flex-end;
 }
 
-
-.modalBottom1{
-  padding-left: .2em;
+.button.modal {
+  background-color: #0BA718;
+  margin-left: 20px;
 }
+
+// .popupHeading {
+//   color: #802026;
+// }
+.popupHeading {
+  color: $white;
+}
+.dialog {
+  background-color: #802026;
+}
+
 input,
   .formButton {
     outline: none;

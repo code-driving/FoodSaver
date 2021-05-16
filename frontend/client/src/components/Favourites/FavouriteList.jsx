@@ -1,4 +1,4 @@
-import React from "react";
+import { React, Fragment } from "react";
 import FavouriteItem from "./FavouriteItem";
 
 export default function FavouriteList(props) {
@@ -9,7 +9,10 @@ export default function FavouriteList(props) {
       <FavouriteItem key={index} {...favourite} deleteRecipe={deleteRecipe} />
     ));
 
-  return <div>
-  <h1>My Favourite Recipes</h1>
-  {favouriteRecipes}</div>;
+  return (
+    <Fragment>
+      <h1>My Favourite Recipes</h1>
+      <div className="fav-list">{favouriteRecipes}</div>
+    </Fragment>
+  );
 }
