@@ -21,9 +21,9 @@ export default function Popup(props) {
   
   return (
     <Dialog open={openPopUp} maxWidth="md">
-      <DialogTitle >
+      <DialogTitle className="dialog">
         <div className="modalTop">
-          <div style ={{flexGrow:1}} >Edit or Consume {selectedName[0]}</div>
+          <div className="popupHeading" style ={{flexGrow:1}}>Edit or Consume {selectedName[0]}</div>
           <Button onClick={() => {setopenPopUp(false)}} variant="contained" color="secondary">
             X
           </Button>

@@ -116,7 +116,7 @@ export default function ProductForm(props) {
   };
 
   return (
-    <Grid container justify="space-around" alignItems="center">
+    // <Grid container justify="space-around" alignItems="center">
       <form
         className={classes.root}
         noValidate
@@ -145,18 +145,7 @@ export default function ProductForm(props) {
           onChange={handleChange}
         />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          {/* <KeyboardDatePicker
-            margin="normal"
-            id="date-picker-dialog"
-            // label="Date picker dialog"
-            format="MM/dd/yyyy"
-            name="expiration_date"
-            value={selectedDate || ""}
-            onChange={handleDateChange}
-            KeyboardButtonProps={{
-              "aria-label": "change date",
-            }}
-          /> */}
+        
           <ThemeProvider theme={materialTheme}>
             <KeyboardDatePicker
               margin="normal"
@@ -171,13 +160,19 @@ export default function ProductForm(props) {
             />
           </ThemeProvider>
         </MuiPickersUtilsProvider>
+        {/* <div className="modalBottom">
+            <Button variant="contained" color="secondary" onClick={handleSubmit} >Edit Ingredient</Button>  
+        <div className="modalBottom1">
+            <Button variant="contained" color="secondary" onClick={handleSubmitConsume} >Use Ingredient</Button>
+        </div> */}
+        {/* </div> */}
         <div className="modalBottom">
-            <Button variant="contained" color="secondary" onClick={handleSubmit} >Edit Ingredient</Button>
-            <div className="modalBottom1">
-            <Button  variant="contained" color="secondary" onClick={handleSubmitConsume} >Use Ingredient</Button>
-            </div>
+        <button className="button modal" onClick={handleSubmit}>edit</button>
+        <div className="modalBottom1">
+        <button className="button modal" onClick={handleSubmitConsume}>consume</button>
+        </div>
         </div>
       </form>
-    </Grid>
+    // </Grid>
   );
 }

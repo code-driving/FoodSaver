@@ -1,3 +1,10 @@
+@import "styles/variables.scss";
+@import "styles/reset.scss";
+@import "styles/typography.scss";
+@import "styles/mixins.scss";
+
+
 body > div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogContent-root.MuiPickersModal-dialog > div > div.MuiPickersBasePicker-pickerView > div:nth-child(1) > div.MuiPickersCalendarHeader-switchHeader > div > p {
   line-height: 0.9
 }
+
