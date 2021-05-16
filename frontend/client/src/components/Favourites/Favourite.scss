@@ -17,14 +17,18 @@
   justify-content: space-center;
   align-items: center;
   width: 200px;
+  width: calc(100% * (1 / 4));
 }
 
 .fav-item {
   display: flex;
   flex-direction: column;
-  width: 200px;
+  margin-left: 100px;
+  width: calc(100% * (1 / 4));
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  font-size: 0.8rem;
+  font-weight: 700;
 }
 
 .favourite-detail {

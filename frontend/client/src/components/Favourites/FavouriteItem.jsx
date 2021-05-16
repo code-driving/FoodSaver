@@ -15,7 +15,8 @@ export default function FavouriteItem(props) {
               style={{
                 color: "orange",
                 margin: "1.5rem 0 1.5rem",
-                // fontSize: "1.4rem",
+
+                // fontSize: "1rem",
               }}
             >
               {props.recipie_name}
@@ -28,7 +29,7 @@ export default function FavouriteItem(props) {
             ></img>
           </Link>
           <button
-            className="favourite-button"
+            className="button"
             style={{ marginTop: "1.5rem" }}
             onClick={() => deleteRecipe(props.recipe_id)}
           >
