@@ -53,6 +53,8 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { purple } from "@material-ui/core/colors";
 import { palette } from "@material-ui/system";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 const theme = createMuiTheme({
   palette: {
@@ -298,6 +300,53 @@ export default function ProductList(props) {
     EditSummary,
   } = props;
 
+  const options = {
+    title: "Title",
+    message: "Message",
+    buttons: [
+      {
+        label: "Yes",
+        onClick: () => alert("Click Yes"),
+      },
+      {
+        label: "No",
+        onClick: () => alert("Click No"),
+      },
+    ],
+    childrenElement: () => <div />,
+    customUI: ({ onClose }) => (
+      <div>
+        <h3 style={{ marginLeft: "2.5rem", color: "orange" }}>
+          {"Are you sure?"}
+        </h3>
+        <button
+          className="button"
+          style={{ marginTop: "1.5rem" }}
+          onClick={() => onClose()}
+        >
+          cancel
+        </button>
+        <button
+          className="button"
+          style={{ marginTop: "1.5rem", marginLeft: "3rem" }}
+          onClick={() => {
+            deleteProduct(selected);
+            setSelected([]);
+            onClose();
+          }}
+        >
+          delete
+        </button>
+      </div>
+    ),
+    closeOnEscape: true,
+    closeOnClickOutside: true,
+    willUnmount: () => {},
+    afterClose: () => {},
+    onClickOutside: () => {},
+    onKeypressEscape: () => {},
+    overlayClassName: "overlay-custom-class-name",
+  };
   const rows = products;
 
   const handleRequestSort = (event, property) => {
@@ -366,6 +415,7 @@ export default function ProductList(props) {
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+
   const warning = (dayLeft) => {
     if (dayLeft === "Expired") {
       return "dot-red";
@@ -452,10 +502,11 @@ export default function ProductList(props) {
           <div className="product_list_buttons">
             <button
               className="button"
-              onClick={() => {
-                deleteProduct(selected);
-                setSelected([]);
-              }}
+              // onClick={() => {
+              //   deleteProduct(selected);
+              //   setSelected([]);
+              // }}
+              onClick={() => confirmAlert(options)}
             >
               delete
             </button>
