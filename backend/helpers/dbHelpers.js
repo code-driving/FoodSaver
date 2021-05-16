@@ -179,12 +179,24 @@ module.exports = (db) => {
   };
 
   const EditSummary= (name, user_id, product_id,  grams_saved, units_saved) => {
-    console.log('gggggggggggggggg',name, user_id, product_id,  grams_saved, units_saved)
+  
     const query = {
       text: `UPDATE product_summary 
              SET name=$1, user_id=$2, product_id= $3, grams_saved=grams_saved + $4, units_saved = units_saved + $5
              WHERE product_id=$3 RETURNING *`,
              values: [name, user_id, product_id, grams_saved, units_saved],
+    };
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
+
+  const addSummary= (name, user_id, product_id,  grams_saved, units_saved) => {
+    const query = {
+      text: `INSERT INTO product_summary ( name, user_id, product_id, grams_wasted, units_wasted, grams_saved, units_saved)
+             VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,
+             values: [name, user_id, product_id, 0, 0, 0, 0],
     };
     return db
         .query(query)
@@ -224,6 +236,7 @@ module.exports = (db) => {
     getUserSavedRecipes,
     getUserSummary,
     getPaticularUsers,
-    deleteProduct
+    deleteProduct,
+    addSummary
   };
 };

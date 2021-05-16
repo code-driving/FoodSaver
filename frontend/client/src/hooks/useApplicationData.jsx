@@ -15,6 +15,7 @@ export default function useApplicationData() {
   const localId = localStorage.getItem("token");
 
   const setProduct = (value) => {
+    console.log('2222222222222', value)
     return axios.post(`/api/products/`, value).then((response) => {
       const dateData = datefunction([response.data]);
       const parseddata = dateData[0];
@@ -24,13 +25,17 @@ export default function useApplicationData() {
         dayLeft: parseddata.dayLeft,
       };
       setState((prev) => ({ ...prev, products: [...prev.products, combined] }));
+      
+      let product_id = response.data.id;
+      let value2 = {...value, product_id:product_id}
+      return axios.post(`/api/summary/`, value2).then((response) => {
+          console.log(response)
+      })
     });
   };
 
   const EditProduct = (value) => {
-      console.log('77777777777777777777',value)
     return axios.put(`/api/products`, value).then((res) => {
-      console.log('ressssssssssssssss',res)
       const product_id =res['data'][0]['id']
       const dateData = datefunction([res['data'][0]]);
       const parseddata = dateData[0];
@@ -54,7 +59,6 @@ export default function useApplicationData() {
   };
 
   const EditSummary = (value) => {
-      console.log('pppppppppp',value)
       const productID=value.product_id
       let StateToChange = {}
 
@@ -64,17 +68,16 @@ export default function useApplicationData() {
         }
       }
       let QuantityG = StateToChange.quantity_grams
-      let QuantityU= value.quantity_units-StateToChange.quantity_units
+      let QuantityU= StateToChange.quantity_units - value.quantity_units
       let newstate = {}
       if(QuantityG != 0 ){
           newstate = {...StateToChange, quantity_grams: (QuantityG - value.quantity_grams) ,product_id:productID};
       } else {
-          newstate = {...StateToChange, quantity_grams: QuantityU ,product_id:productID};
+          newstate = {...StateToChange, quantity_units: QuantityU ,product_id:productID};
           
       }
 
      return axios.put(`/api/summary/`, value).then((res) => {
-      console.log('sssssssssssss',newstate)
       EditProduct(newstate)
     });
   };
