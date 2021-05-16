@@ -9,7 +9,7 @@
   flex-direction: row;
   align-items: flex-end;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 .fav-container {
   // display: flex;
@@ -26,6 +26,7 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .favourite-detail {
   max-width: 200px;
   border-radius: 3px;
