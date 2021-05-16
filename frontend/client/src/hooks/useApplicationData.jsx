@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import datefunction from "../helpers/date";
+import CalculateScoreInc from "../helpers/calculateScoreInc";
+
 
 export default function useApplicationData() {
   const [state, setState] = useState({
@@ -35,9 +37,9 @@ export default function useApplicationData() {
 
   const updateUser = (value) => {
     return axios.put(`/api/users/`,value).then((res) => {
-     console.log(res)
-    });
-      // setState((prev) => ({ ...prev, products: [...prev.products, combined] }));
+     let data = res['data'][0];
+      setState((prev) => ({ ...prev, users: [data] }));
+    })
   };
 
   const EditProduct = (value) => {
@@ -74,17 +76,21 @@ export default function useApplicationData() {
         }
       }
       let QuantityG = StateToChange.quantity_grams
-      let QuantityU= StateToChange.quantity_units - value.quantity_units
+      let QuantityU= StateToChange.quantity_units 
       let newstate = {}
       if(QuantityG != 0 ){
           newstate = {...StateToChange, quantity_grams: (QuantityG - value.quantity_grams) ,product_id:productID};
       } else {
-          newstate = {...StateToChange, quantity_units: QuantityU ,product_id:productID};
+          newstate = {...StateToChange, quantity_units: (QuantityU -value.quantity_units) , product_id:productID};
           
       }
 
      return axios.put(`/api/summary/`, value).then((res) => {
       EditProduct(newstate)
+    
+      const newScore = CalculateScoreInc(state.users[0]['score'],value.quantity_units,value.quantity_grams)
+      const data = {score :newScore, user_id : localId} 
+      updateUser(data)
     });
   };
 
@@ -133,10 +139,10 @@ export default function useApplicationData() {
   //We should not use localId at the end of each endpoint!
   useEffect(() => {
     Promise.all([
-      axios.get(`/api/users`),
+      axios.get(`/api/users/${localId}`),
       axios.get(`/api/products/${localId}`),
       axios.get(`/api/recipes/${localId}`),
-      axios.get(`/api/summary`),
+      axios.get(`/api/summary/${localId}`),
     ]).then(([users, products, recipes, summary]) => {
       const dateData = datefunction(products.data);
       for (let i = 0; i < products.data.length; i++) {

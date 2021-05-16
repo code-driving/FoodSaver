@@ -9,11 +9,9 @@ export default function CalculateScoreDec(productsState , currentScore) {
             expireditemsunits.push(productsState[i]['quantity_units'])
         }
     }
-
     for (let i = 0 ; i < expireditemsgrams.length ; i++) {
       newScore -= expireditemsgrams[i]
     }
-
     for (let i = 0 ; i < expireditemsunits.length ; i++) {
         newScore -= ( expireditemsunits[i] * 2)
       }
