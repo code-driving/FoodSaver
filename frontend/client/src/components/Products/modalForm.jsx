@@ -5,14 +5,13 @@ import "date-fns";
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
-import { Button } from '@material-ui/core';
+import { Button } from "@material-ui/core";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import "./ProductForm";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,7 +26,8 @@ export default function ProductForm(props) {
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
-
+  console.log("props fro modal", props);
+  const { selectedName } = props;
   const classes = useStyles();
   const [formData, setFormData] = useState({
     name: "",
@@ -44,10 +44,10 @@ export default function ProductForm(props) {
       ...formData,
       expiration_date: selectedDate,
       product_id: props.product_id,
-      user_id: localId
+      user_id: localId,
     });
     handleReset();
-  }; 
+  };
 
   const handleSubmitConsume = (event) => {
     const localId = localStorage.getItem("token");
@@ -56,7 +56,7 @@ export default function ProductForm(props) {
       ...formData,
       expiration_date: selectedDate,
       product_id: props.product_id,
-      user_id: localId
+      user_id: localId,
     });
     handleReset();
   };
@@ -87,7 +87,7 @@ export default function ProductForm(props) {
           placeholder="product name"
           inputProps={{ "aria-label": "description" }}
           name="name"
-          value={formData.name || ""}
+          value={formData.name || selectedName}
           onChange={handleChange}
         />
         <Input
@@ -119,13 +119,20 @@ export default function ProductForm(props) {
           />
         </MuiPickersUtilsProvider>
         <div className="modalBottom">
-            <Button variant="contained" color="secondary" onClick={handleSubmit} >Edit Ingredient</Button>
-            <div className="modalBottom1">
-            <Button  variant="contained" color="secondary" onClick={handleSubmitConsume} >Use Ingredient</Button>
-            </div>
-       </div>
+          <Button variant="contained" color="secondary" onClick={handleSubmit}>
+            Edit Ingredient
+          </Button>
+          <div className="modalBottom1">
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handleSubmitConsume}
+            >
+              Use Ingredient
+            </Button>
+          </div>
+        </div>
       </form>
     </Grid>
-   
   );
 }

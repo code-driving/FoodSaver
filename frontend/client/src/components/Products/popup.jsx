@@ -45,6 +45,7 @@ export default function Popup(props) {
             product_id={product_id}
             onSubmitEdit={onSubmitEdit}
             onSubmitconsume={onSubmitconsume}
+            selectedName={selectedName}
           />
         </DialogContent>
       </div>
