@@ -12,8 +12,48 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import "./ProductForm";
+import { createMuiTheme } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/styles";
+import "./modalForm.scss"
 
-
+const materialTheme = createMuiTheme({
+  overrides: {
+    MuiPickersToolbar: {
+      toolbar: {
+        backgroundColor: "#802026",
+      },
+    },
+    MuiPickersCalendarHeader: {
+      switchHeader: {
+        backgroundColor: "white",
+        color: "#802026",
+      },
+      dayLabel: {
+        textTransform: "uppercase",
+        color: "#802026",
+      },
+    },
+    MuiPickersDay: {
+      day: {
+        color: "#802026",
+      },
+      daySelected: {
+        backgroundColor: "#802026",
+        "&:hover": {
+          backgroundColor: "#802026",
+        },
+      },
+      current: {
+        color: "#802026",
+      },
+    },
+    MuiButton: {
+      label: {
+        color: "#802026",
+      },
+    },
+  },
+});
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -105,7 +145,7 @@ export default function ProductForm(props) {
           onChange={handleChange}
         />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <KeyboardDatePicker
+          {/* <KeyboardDatePicker
             margin="normal"
             id="date-picker-dialog"
             // label="Date picker dialog"
@@ -116,16 +156,28 @@ export default function ProductForm(props) {
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
-          />
+          /> */}
+          <ThemeProvider theme={materialTheme}>
+            <KeyboardDatePicker
+              margin="normal"
+              id="date-picker-dialog"
+              format="MM/dd/yyyy"
+              name="expiration_date"
+              value={selectedDate || ""}
+              onChange={handleDateChange}
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+            />
+          </ThemeProvider>
         </MuiPickersUtilsProvider>
         <div className="modalBottom">
             <Button variant="contained" color="secondary" onClick={handleSubmit} >Edit Ingredient</Button>
             <div className="modalBottom1">
             <Button  variant="contained" color="secondary" onClick={handleSubmitConsume} >Use Ingredient</Button>
             </div>
-       </div>
+        </div>
       </form>
     </Grid>
-   
   );
 }
