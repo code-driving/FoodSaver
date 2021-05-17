@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import './Login.scss'
 
 export default function Login() {
   const history = useHistory();
@@ -14,7 +15,7 @@ export default function Login() {
     <>
       <h1 style={{marginBottom: '1.5rem'}}>Please Login</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form className="login_form" onSubmit={handleSubmit}>
         <input type="text" name="email" id="email" placeholder="email" />
         <input
           type="password"

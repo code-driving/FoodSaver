@@ -50,9 +50,10 @@ body {
   background: rgb(167, 144, 121);
   font-family: "Fira Sans", sans-serif;
   color: $black;
-  font-size: 25px;
+  font-size: 18px;
   line-height: 1.3;
-  height: 210%;
+  // height: 210%;
+  height: 175%;
 }
 
 body {
@@ -77,13 +78,7 @@ body {
   .left {
     width: 24%;
   }
-  h1,
-  h2,
-  h6 {
-    color: orange;
-    text-align: center;
-    font-weight: bold;
-  }
+
   li {
     color: $white;
   }
@@ -91,6 +86,15 @@ body {
   a:focus {
     color: orange;
     cursor: pointer;
+  }
+  h1 {
+    color: orange;
+    font-size: 2.5rem;
+    margin-top: 3rem;
+  }
+  h2 {
+    color: orange;
+    font-size: 2.2rem;
   }
 }
 .dot-red {

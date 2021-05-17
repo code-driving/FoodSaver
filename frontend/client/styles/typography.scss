@@ -7,7 +7,7 @@ ul li {
   list-style-type: none;
 }
 a {
-  // color: $white;
+  font-size: 1.2rem;
   color: $black;
   text-transform: uppercase;
   text-decoration: none;
@@ -27,6 +27,7 @@ a:focus {
   outline: none;
   font-weight: bold;
   transition: all 0.3s ease-in-out;
+  font-size: 1.3rem;
 }
 .button:hover,
 .button:active {
@@ -38,47 +39,14 @@ a:focus {
   @include inset;
 }
 
-h1 {
+h1,
+h2,
+h4,
+h6 {
   color: orange;
-}
-body
-  > div.MuiDialog-root
-  > div.MuiDialog-container.MuiDialog-scrollPaper
-  > div
-  > div.MuiDialogContent-root.MuiPickersModal-dialog
-  > div
-  > div.MuiPickersBasePicker-pickerView
-  > div:nth-child(1)
-  > div.MuiPickersCalendarHeader-switchHeader
-  > div
-  > p {
-  line-height: 0.9;
+  text-align: center;
+  font-weight: bold;
 }
 
-body
-  > div:nth-child(7)
-  > div.MuiDialog-container.MuiDialog-scrollPaper
-  > div
-  > div.MuiDialogContent-root.MuiPickersModal-dialog
-  > div
-  > div.MuiPickersBasePicker-pickerView
-  > div:nth-child(1)
-  > div.MuiPickersCalendarHeader-switchHeader
-  > div
-  > p {
-  line-height: 0.9;
-}
 
-body
-  > div.MuiDialog-root-74
-  > div.MuiDialog-container-77.MuiDialog-scrollPaper-75
-  > div
-  > div.MuiDialogContent-root-256.MuiPickersModal-dialog-72
-  > div
-  > div.MuiPickersBasePicker-pickerView-260
-  > div:nth-child(1)
-  > div.MuiPickersCalendarHeader-switchHeader-334
-  > div
-  > p {
-  line-height: 0.9;
-}
+

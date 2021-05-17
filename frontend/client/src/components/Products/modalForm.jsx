@@ -14,7 +14,6 @@ import {
 import "./ProductForm";
 import { createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
-import "./modalForm.scss";
 
 const materialTheme = createMuiTheme({
   overrides: {
@@ -29,7 +28,6 @@ const materialTheme = createMuiTheme({
         color: "#802026",
       },
       dayLabel: {
-        textTransform: "uppercase",
         color: "#802026",
       },
     },
@@ -47,6 +45,7 @@ const materialTheme = createMuiTheme({
         color: "#802026",
       },
     },
+    
     MuiButton: {
       label: {
         color: "#802026",

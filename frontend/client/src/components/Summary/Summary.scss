@@ -9,7 +9,7 @@
     text-align: center;
     color: $white;
     font-weight: bold;
-    margin: 1rem;
+    margin: 1.5rem;
       span {
         font-weight: bold;
         font-size: 2rem;
@@ -19,6 +19,7 @@
 }
 .summary_table {
   border-collapse: collapse;
+  font-size: 1.5rem;
   td, th {
     border: 2px solid orange;
     padding: 0.5rem;

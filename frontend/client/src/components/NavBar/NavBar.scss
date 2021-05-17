@@ -29,8 +29,13 @@
 
     a {
       color: $white;
-      font-size: 1.3rem;
+      font-size: 2rem;
     }
+  }
+  .link_button {
+    background: none;
+    outline: none;
+    border: none;
   }
 }
 @media only screen and (max-width: 960px) {
