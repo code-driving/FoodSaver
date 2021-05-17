@@ -87,9 +87,7 @@ export default function useApplicationData() {
           newstate2.push(state.summary[j]);
         }
       }
-      console.log('66666666666666',newstate2,res['data'][0])
       let newcombined =[...newstate2,res['data'][0]]
-      console.log('combinedddddddddddddddddddddddddd', newcombined)
       setState((prev) => ({ ...prev, summary: newcombined }));
     });
   };
@@ -159,6 +157,7 @@ export default function useApplicationData() {
 
   
 const updateSummary = (id) => {
+  // update summary on expirting stuff
     if (state.users.length > 0) {
       let IdAndScore = CalculateScoreDec(state['products'],state['users'][0]['score'])
       console.log(IdAndScore)
@@ -183,7 +182,7 @@ const updateSummary = (id) => {
       Promise.all(promises).then(() => { 
         //update state
         for (let k = 0; k < productIDs.length ; k++){
-          let combinedState = editSingleProductState({data : [summaryobject[k]]},state,setState)
+           editSingleProductState({data : [summaryobject[k]]},state,setState)
         }
       })
       
@@ -193,17 +192,29 @@ const updateSummary = (id) => {
       let returndata2 = [];
       let promises2 = [];
       for (let j = 0; j < productIDs.length ; j++){
-        console.log('00000000000000000',summaryobject[j])
         promises2.push(axios.put(`/api/summary/waste`, summaryobject[j] ).then((res2) => {
           returndata2.push(res2);
          })
        )  
       }
-      Promise.all(promises2).then(() => { 
-        console.log('888777777777',promises2)
 
+      Promise.all(promises2).then(() => { 
+        console.log('return data promises',)
+        // update waste summarystate
+        if(returndata2.length>0){
+        console.log('ppppppppppppppppppppppp',returndata2[0]['data'][0])
+        let productID = returndata2[0]['data'][0]['product_id']
+        console.log('product)D=',productID)
+        let newstate2 = []
+        for (let k=0; k < state.summary.length; k++) {
+          if (state.summary[k]['product_id']!= productID) {
+            newstate2.push(state.summary[k]);
+          }
+        }
+        let newcombined =[...newstate2, returndata2[0]['data'][0]]
+        setState((prev) => ({ ...prev, summary: newcombined }));
+       }
       })
-    
     }
   };
   

@@ -573,6 +573,7 @@ export default function ProductList(props) {
           EditSummary={EditSummary}
           selected={selected}
           selectedItemDate={selectedItemDate}
+          setOpenPopUp={setOpenPopUp}
         ></Popup>
       </div>
     </ThemeProvider>

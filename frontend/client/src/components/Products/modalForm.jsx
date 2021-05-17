@@ -67,7 +67,7 @@ export default function ProductForm(props) {
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
-  const { selectedName, selectedItemDate } = props;
+  const { selectedName, selectedItemDate, setOpenPopUp } = props;
   const classes = useStyles();
   const [formData, setFormData] = useState({
     name: "",
@@ -86,6 +86,7 @@ export default function ProductForm(props) {
       product_id: props.product_id,
       user_id: localId,
     });
+    setOpenPopUp(false)
     handleReset();
   };
 
@@ -98,6 +99,7 @@ export default function ProductForm(props) {
       product_id: props.product_id,
       user_id: localId,
     });
+    setOpenPopUp(false)
     handleReset();
   };
 
