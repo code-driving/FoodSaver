@@ -157,8 +157,8 @@ export default function useApplicationData() {
       for (let i = 0; i < productIDs.length ; i++){
         promises.push(axios.put(`/api/products/Boolean`, {product_id:productIDs[i]} ).then((res) => {
           returndata.push(res);
-         })
-       )  
+          })
+        )  
       }
 
       // Promise.all(promises).then(() => {
