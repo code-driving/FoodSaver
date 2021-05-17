@@ -38,10 +38,10 @@ export default function Summary(props) {
       <thead>
         <tr>
           <th>Product Name</th>
-          <th> Quantity Wasted(g) </th>
-          <th> Units Wasted</th>
-          <th> Quantity Saved(g) </th>
-          <th> Units Saved</th>
+          <th>Quantity Wasted(g)</th>
+          <th>Units Wasted</th>
+          <th>Quantity Saved(g)</th>
+          <th>Units Saved</th>
         </tr>
       </thead>
         {tabledata}

@@ -5,7 +5,6 @@
 
 .summary_section {
   color: white;
-  
   h2 {
     text-align: center;
     color: $white;
@@ -14,6 +13,7 @@
       span {
         font-weight: bold;
         font-size: 2rem;
+        color: $green;
       }
   }
 }
@@ -22,6 +22,12 @@
   td, th {
     border: 2px solid orange;
     padding: 0.5rem;
+    text-align: center;
+  }
+  tbody {
+    background-color: rgba(0, 0, 0, 0.2)
+  }
+  tbody tr td:nth-child(1) {
     text-align: left;
   }
   thead {
