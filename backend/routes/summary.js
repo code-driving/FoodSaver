@@ -44,7 +44,7 @@ module.exports = ({ EditSummary, getOnlySummary, getUserSummary ,addSummary, Edi
       units_saved 
     )
       .then((result) => {
-        res.status(200).send("Posted Summary");
+        res.json(result);
       })
       .catch((err) =>
         res.json({
@@ -60,14 +60,13 @@ module.exports = ({ EditSummary, getOnlySummary, getUserSummary ,addSummary, Edi
       product_id,
     } = req.body;
 
-    let grams_wasted, units_wasted, grams_saved, units_saved = 0
     addSummary(
       name,
       user_id,
       product_id,
     )
       .then((result) => {
-        res.status(200).send("Posted Summary");
+        res.json(result);
       })
       .catch((err) =>
         res.json({
@@ -84,11 +83,6 @@ module.exports = ({ EditSummary, getOnlySummary, getUserSummary ,addSummary, Edi
       grams_wasted, 
       units_wasted
     } = req.body;
-    console.log( 'qqqqqqqqqqqppppppppp1111111',name,
-      user_id,
-      id,
-      grams_wasted, 
-      units_wasted)
     EditSummaryWaste(
       name,
       user_id,
@@ -97,7 +91,7 @@ module.exports = ({ EditSummary, getOnlySummary, getUserSummary ,addSummary, Edi
       units_wasted 
     )
       .then((result) => {
-        res.status(200).send("Posted Summary");
+        res.json(result);
       })
       .catch((err) =>
         res.json({

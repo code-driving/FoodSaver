@@ -15,7 +15,6 @@ export default function Summary(props) {
     score = users[0]['score']
   }
   
-  console.log('aaaa',users)
   let tabledata=props.summary.map(sum=> (
     <tbody>
       <tr>

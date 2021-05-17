@@ -18,6 +18,7 @@ export default function EditSingleProduct(res,state,setState) {
           deletedState.push(state.products[i])
         }
       }
-    const combinedState = [...deletedState, combined ]
-      setState((prev) => ({ ...prev, products: combinedState }));
+      const combinedState = [...deletedState, combined ]
+      setState((prevState) => ({ ...prevState, products: combinedState }));
+
 }

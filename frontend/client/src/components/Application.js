@@ -29,7 +29,6 @@ export default function Application(props) {
   } = useApplicationData();
   const [ingredientsItems, setIngredientsItems] = useState("");
   const { products, recipes, summary, users } = state;
-  console.log('ggggggggg',users)
 
   return (
     <main className="layout">

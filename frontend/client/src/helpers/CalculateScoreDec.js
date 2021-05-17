@@ -9,11 +9,11 @@ export default function CalculateScoreDec(productsState , currentScore) {
         if (productsState[i]['dayLeft'] === "Expired" && productsState[i]['quantity_units'] === 0 && productsState[i]['addedtosummary'] === false){
             expireditemsgrams.push(productsState[i]['quantity_grams'])
             setTrue.push(productsState[i]['id'])
-            objectarray.push({...productsState[i], grams_wasted: productsState[i]['quantity_grams'] , units_wasted : 0})
+            objectarray.push({...productsState[i], grams_wasted: productsState[i]['quantity_grams'] , units_wasted : 0,  addedtosummary : true})
         } else if(productsState[i]['dayLeft'] === "Expired" && productsState[i]['quantity_grams'] === 0 && productsState[i]['addedtosummary'] === false){
             expireditemsunits.push(productsState[i]['quantity_units'])
             setTrue.push(productsState[i]['id'])
-            objectarray.push({...productsState[i], grams_wasted: 0 , units_wasted : productsState[i]['quantity_units']})
+            objectarray.push({...productsState[i], grams_wasted: 0 , units_wasted : productsState[i]['quantity_units'], addedtosummary : true})
         }
     }
     for (let i = 0 ; i < expireditemsgrams.length ; i++) {
