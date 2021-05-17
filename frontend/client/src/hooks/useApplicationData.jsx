@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 import datefunction from "../helpers/date";
 import CalculateScoreInc from "../helpers/calculateScoreInc";
 import CalculateScoreDec from "../helpers/CalculateScoreDec";
-import editSingleProduct from "../helpers/editsingleproduct"
+import editSingleProductState from "../helpers/editsingleproduct"
+import { startOfYesterday } from "date-fns/esm";
 
 
 
@@ -14,7 +15,7 @@ export default function useApplicationData() {
     products: [],
     recipes: [],
     summary: [],
-    score: 100
+   
   });
 
   const localId = localStorage.getItem("token");
@@ -33,7 +34,8 @@ export default function useApplicationData() {
       let product_id = response.data.id;
       let value2 = {...value, product_id:product_id}
       return axios.post(`/api/summary/`, value2).then((response) => {
-          console.log(response)
+          console.log('addddd res', response.data[0])
+          setState((prev) => ({ ...prev, summary:[...prev.summary, response.data[0]]}))
       })
     });
   };
@@ -46,9 +48,10 @@ export default function useApplicationData() {
   };
 
   const EditProduct = (value) => {
+   
     return axios.put(`/api/products`, value).then((res) => {
-      console.log('1111111111111111',res)
-      editSingleProduct(res,state,setState)
+      console.log('22222222222221111',res)
+      editSingleProductState(res,state,setState)
     });
   };
 
@@ -71,7 +74,7 @@ export default function useApplicationData() {
           
       }
 
-      return axios.put(`/api/summary/`, value).then((res) => {
+     return axios.put(`/api/summary/`, value).then((res) => {
       EditProduct(newstate)
     
       const newScore = CalculateScoreInc(state.users[0]['score'],value.quantity_units,value.quantity_grams)
@@ -145,48 +148,50 @@ export default function useApplicationData() {
 
   
 const updateSummary = (id) => {
-    console.log('8888888888888888888888888888')
     if (state.users.length > 0) {
       let IdAndScore = CalculateScoreDec(state['products'],state['users'][0]['score'])
       console.log(IdAndScore)
       let userdata={ score:IdAndScore.newScore, user_id:localId}
       updateUser(userdata)
       let productIDs=IdAndScore.setTrue
-     console.log('pppppppppppppppppppppp')
+
+
+      let summaryobject =IdAndScore.objectarray;
+      console.log('888888888',summaryobject)
+
       //Run Request in parallel and marks as added to summary true
       let returndata = [];
       let promises = [];
       for (let i = 0; i < productIDs.length ; i++){
         promises.push(axios.put(`/api/products/Boolean`, {product_id:productIDs[i]} ).then((res) => {
           returndata.push(res);
-          })
-        )  
+         })
+       )  
       }
 
       Promise.all(promises).then(() => { 
-        //update state here
-        console.log('Done',promises)
+        //update state
+        for (let k = 0; k < productIDs.length ; k++){
+          let combinedState = editSingleProductState({data : [summaryobject[k]]},state,setState)
+        }
       })
       
-      let summaryobject =IdAndScore.objectarray;
-      console.log('222222222222222222',summaryobject)
       // Add wasted to summary
-      
+     
 
       let returndata2 = [];
       let promises2 = [];
       for (let j = 0; j < productIDs.length ; j++){
+        console.log('00000000000000000',summaryobject[j])
         promises2.push(axios.put(`/api/summary/waste`, summaryobject[j] ).then((res2) => {
           returndata2.push(res2);
          })
        )  
       }
       Promise.all(promises2).then(() => { 
-        //update state here
-        console.log('Done',promises2)
-      })
+        console.log('888777777777',promises2)
 
-     
+      })
     
     }
   };
