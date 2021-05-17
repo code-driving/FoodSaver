@@ -47,12 +47,15 @@ import id from "date-fns/locale/id/index";
 import useRecipesApi from "../../hooks/useRecipesApi";
 import { Link } from "react-router-dom";
 import ingredientsToString from "../../helpers/ingredientsToString";
-import Popup from "./popup"
-import "./ProductList.scss"
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import Popup from "./popup";
+import "./ProductList.scss";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { purple } from '@material-ui/core/colors';
-import { palette } from '@material-ui/system';
+import { purple } from "@material-ui/core/colors";
+import { palette } from "@material-ui/system";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import date from "../../helpers/date";
 
 const theme = createMuiTheme({
   palette: {
@@ -62,11 +65,10 @@ const theme = createMuiTheme({
     },
     secondary: {
       // This is green.A700 as hex.
-      main: '#0DA71A',
+      main: "#0DA71A",
     },
   },
 });
-
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -255,17 +257,16 @@ EnhancedTableToolbar.propTypes = {
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    backgroundColor: "#bf824f"
+    backgroundColor: "#bf824f",
   },
   paper: {
     width: "100%",
     marginBottom: theme.spacing(2),
-    backgroundColor: "#bf824f"
+    backgroundColor: "#bf824f",
   },
   table: {
     minWidth: 750,
-    backgroundColor: "#bf824f"
-    
+    backgroundColor: "#bf824f",
   },
   visuallyHidden: {
     border: 0,
@@ -286,11 +287,11 @@ export default function ProductList(props) {
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [selectedName, setSelectedName] = React.useState([]);
+  const [selectedItemDate, setSelectedItemDate] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [OpenPopUp,setOpenPopUp] =  React.useState(false)
-
+  const [OpenPopUp, setOpenPopUp] = React.useState(false);
 
   const {
     products,
@@ -301,6 +302,53 @@ export default function ProductList(props) {
     EditSummary,
   } = props;
 
+  const options = {
+    title: "Title",
+    message: "Message",
+    buttons: [
+      {
+        label: "Yes",
+        onClick: () => alert("Click Yes"),
+      },
+      {
+        label: "No",
+        onClick: () => alert("Click No"),
+      },
+    ],
+    childrenElement: () => <div />,
+    customUI: ({ onClose }) => (
+      <div>
+        <h3 style={{ marginLeft: "2.5rem", color: "orange" }}>
+          {"Are you sure?"}
+        </h3>
+        <button
+          className="button"
+          style={{ marginTop: "1.5rem" }}
+          onClick={() => onClose()}
+        >
+          cancel
+        </button>
+        <button
+          className="button"
+          style={{ marginTop: "1.5rem", marginLeft: "3rem" }}
+          onClick={() => {
+            deleteProduct(selected);
+            setSelected([]);
+            onClose();
+          }}
+        >
+          delete
+        </button>
+      </div>
+    ),
+    closeOnEscape: true,
+    closeOnClickOutside: true,
+    willUnmount: () => {},
+    afterClose: () => {},
+    onClickOutside: () => {},
+    onKeypressEscape: () => {},
+    overlayClassName: "overlay-custom-class-name",
+  };
   const rows = products;
 
   const handleRequestSort = (event, property) => {
@@ -316,17 +364,20 @@ export default function ProductList(props) {
 
       const newSelectedsName = rows.map((n) => n.name);
       setSelectedName(newSelectedsName);
+
       return;
     }
     setSelected([]);
     setSelectedName([]);
   };
 
-  const handleClick = (event, id, name) => {
+  const handleClick = (event, id, name, date) => {
     const selectedIndex = selected.indexOf(id);
     const selectedIndexName = selectedName.indexOf(name);
+    const selectedIndexItemDate = selectedItemDate.indexOf(date);
     let newSelected = [];
     let newSelectedName = [];
+    let newSelectedItemDate = [];
 
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, id);
@@ -352,9 +403,28 @@ export default function ProductList(props) {
         selectedName.slice(selectedIndexName + 1)
       );
     }
+
+    if (selectedIndexItemDate === -1) {
+      newSelectedItemDate = newSelectedItemDate.concat(selectedItemDate, date);
+    } else if (selectedIndexItemDate === 0) {
+      newSelectedItemDate = newSelectedItemDate.concat(
+        selectedItemDate.slice(1)
+      );
+    } else if (selectedIndexItemDate === selectedItemDate.length - 1) {
+      newSelectedItemDate = newSelectedItemDate.concat(
+        selectedItemDate.slice(0, -1)
+      );
+    } else if (selectedIndexItemDate > 0) {
+      newSelectedItemDate = newSelectedItemDate.concat(
+        selectedItemDate.slice(0, selectedIndexItemDate),
+        selectedItemDate.slice(selectedIndexItemDate + 1)
+      );
+    }
     setSelected(newSelected);
     setSelectedName(newSelectedName);
+    setSelectedItemDate(newSelectedItemDate);
   };
+  console.log(selectedItemDate);
   let ingredientString = ingredientsToString(selectedName);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -369,132 +439,142 @@ export default function ProductList(props) {
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+
   const warning = (dayLeft) => {
     if (dayLeft === "Expired") {
       return "dot-red";
-    } else if (dayLeft === "1 day" || dayLeft.includes("hours")) {
+    } else if (dayLeft === "1 day" || dayLeft.includes("hour")) {
       return "dot-yellow";
     }
     return "dot-green";
   };
   return (
     <ThemeProvider theme={theme}>
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer>
-          <Table 
-            className={classes.table}
-            aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
-            aria-label="enhanced table"
-          >
-            <EnhancedTableHead
-              classes={classes}
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.id);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+      <div className={classes.root}>
+        <Paper className={classes.paper}>
+          <EnhancedTableToolbar numSelected={selected.length} />
+          <TableContainer>
+            <Table
+              className={classes.table}
+              aria-labelledby="tableTitle"
+              size={dense ? "small" : "medium"}
+              aria-label="enhanced table"
+            >
+              <EnhancedTableHead
+                classes={classes}
+                numSelected={selected.length}
+                order={order}
+                orderBy={orderBy}
+                onSelectAllClick={handleSelectAllClick}
+                onRequestSort={handleRequestSort}
+                rowCount={rows.length}
+              />
+              <TableBody>
+                {stableSort(rows, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    const isItemSelected = isSelected(row.id);
+                    const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
-                    <TableRow 
-                      hover
-                      onClick={(event) => handleClick(event, row.id, row.name)}
-                      // onClick={(event) => handleNameClick(event, row.name)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.name}
-                      selected={isItemSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          checked={isItemSelected}
-                          inputProps={{ "aria-labelledby": labelId }}
-                        />
-                      </TableCell>
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) =>
+                          handleClick(event, row.id, row.name, row.expiration)
+                        }
+                        // onClick={(event) => handleNameClick(event, row.name)}
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={row.name}
+                        selected={isItemSelected}
                       >
-                        {row.name}
-                      </TableCell>
-                      <TableCell align="right">{row.expiration}</TableCell>
-                      <TableCell align="right">{row.dayLeft}</TableCell>
-                      <TableCell align="right">{row.quantity_grams}</TableCell>
-                      <TableCell align="right">{row.quantity_units}</TableCell>
-                      <section className={warning(row.dayLeft)}></section>
-                    </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <div className="product_list_buttons">
-        <button
-            className="button"
-            onClick={() => {
-            deleteProduct(selected);
-            setSelected([]);
-          }}
-        >
-          delete
-        </button>
-        {/* <Link to="/recipes"> */}
-        <Link to="/recipes">
-          <button
-            className="button"
-            onClick={setIngredientsItems(ingredientString)}
-          >
-            find recipes
-          </button>
-        </Link>
-        <button
-          classes={classes}
-          onClick={() => {setOpenPopUp(true)}}
-          variant="outlined"
-          color="primary"
-          className="button"
-        >
-          edit/consume
-        </button>
-        </div>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
-      </Paper>
-      <Popup openPopUp={OpenPopUp}
+                        <TableCell padding="checkbox">
+                          <Checkbox
+                            checked={isItemSelected}
+                            inputProps={{ "aria-labelledby": labelId }}
+                          />
+                        </TableCell>
+                        <TableCell
+                          component="th"
+                          id={labelId}
+                          scope="row"
+                          padding="none"
+                        >
+                          {row.name}
+                        </TableCell>
+                        <TableCell align="right">{row.expiration}</TableCell>
+                        <TableCell align="right">{row.dayLeft}</TableCell>
+                        <TableCell align="right">
+                          {row.quantity_grams}
+                        </TableCell>
+                        <TableCell align="right">
+                          {row.quantity_units}
+                        </TableCell>
+                        <section className={warning(row.dayLeft)}></section>
+                      </TableRow>
+                    );
+                  })}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <div className="product_list_buttons">
+            <button
+              className="button"
+              // onClick={() => {
+              //   deleteProduct(selected);
+              //   setSelected([]);
+              // }}
+              onClick={() => confirmAlert(options)}
+            >
+              delete
+            </button>
+            {/* <Link to="/recipes"> */}
+            <Link to="/recipes">
+              <button
+                className="button"
+                onClick={setIngredientsItems(ingredientString)}
+              >
+                find recipes
+              </button>
+            </Link>
+            <button
+              classes={classes}
+              onClick={() => {
+                setOpenPopUp(true);
+              }}
+              variant="outlined"
+              color="primary"
+              className="button"
+            >
+              edit/consume
+            </button>
+          </div>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        </Paper>
+        <Popup
+          openPopUp={OpenPopUp}
           setopenPopUp={setOpenPopUp}
-          selectedName={selectedName} 
+          selectedName={selectedName}
           EditProduct={EditProduct}
           EditSummary={EditSummary}
           selected={selected}
-      >
-      </Popup>
-    </div>
+          selectedItemDate={selectedItemDate}
+        ></Popup>
+      </div>
     </ThemeProvider>
-    
-  )
+  );
 }

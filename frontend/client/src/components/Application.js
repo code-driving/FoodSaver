@@ -10,8 +10,10 @@ import Recipes from "./Recipes";
 import Summary from "./Summary";
 import Login from "./Login";
 import Favourites from "./Favourites";
+import Confirm from "./Confirm/Confirm";
 import RecipesDetails from "./Recipes/Recipedetail";
 import PrivateRoute from "./Login/PrivateRoute";
+import ScrollTop from "./ScrollTop";
 
 export default function Application(props) {
   const {
@@ -31,7 +33,7 @@ export default function Application(props) {
   return (
     <main className="layout">
       <Router>
-        {/* <div> */}
+        <ScrollTop />
         <div className="left">
           <NavBar />
         </div>

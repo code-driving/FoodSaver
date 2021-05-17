@@ -5,7 +5,7 @@ import "date-fns";
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
-import { Button } from '@material-ui/core';
+import { Button } from "@material-ui/core";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -14,7 +14,7 @@ import {
 import "./ProductForm";
 import { createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
-import "./modalForm.scss"
+import "./modalForm.scss";
 
 const materialTheme = createMuiTheme({
   overrides: {
@@ -67,7 +67,7 @@ export default function ProductForm(props) {
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
-
+  const { selectedName, selectedItemDate } = props;
   const classes = useStyles();
   const [formData, setFormData] = useState({
     name: "",
@@ -84,10 +84,10 @@ export default function ProductForm(props) {
       ...formData,
       expiration_date: selectedDate,
       product_id: props.product_id,
-      user_id: localId
+      user_id: localId,
     });
     handleReset();
-  }; 
+  };
 
   const handleSubmitConsume = (event) => {
     const localId = localStorage.getItem("token");
@@ -96,7 +96,7 @@ export default function ProductForm(props) {
       ...formData,
       expiration_date: selectedDate,
       product_id: props.product_id,
-      user_id: localId
+      user_id: localId,
     });
     handleReset();
   };
@@ -117,56 +117,59 @@ export default function ProductForm(props) {
 
   return (
     // <Grid container justify="space-around" alignItems="center">
-      <form
-        className={classes.root}
-        noValidate
-        autoComplete="off"
-        onSubmit={handleSubmit}
-      >
-        <Input
-          placeholder="product name"
-          inputProps={{ "aria-label": "description" }}
-          name="name"
-          value={formData.name || ""}
-          onChange={handleChange}
-        />
-        <Input
-          placeholder="quantity grams"
-          inputProps={{ "aria-label": "description" }}
-          name="quantity_grams"
-          value={formData.quantity_grams || ""}
-          onChange={handleChange}
-        />
-        <Input
-          placeholder="quantity units"
-          inputProps={{ "aria-label": "description" }}
-          name="quantity_units"
-          value={formData.quantity_units || ""}
-          onChange={handleChange}
-        />
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        
-          <ThemeProvider theme={materialTheme}>
-            <KeyboardDatePicker
-              margin="normal"
-              id="date-picker-dialog"
-              format="MM/dd/yyyy"
-              name="expiration_date"
-              value={selectedDate || ""}
-              onChange={handleDateChange}
-              KeyboardButtonProps={{
-                "aria-label": "change date",
-              }}
-            />
-          </ThemeProvider>
-        </MuiPickersUtilsProvider>
-        <div className="modalBottom">
-          <button className="button modal" onClick={handleSubmit}>edit</button>
-          <div className="modalBottom1">
-            <button className="button modal" onClick={handleSubmitConsume}>consume</button>
-          </div>
+    <form
+      className={classes.root}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit}
+    >
+      <Input
+        placeholder="product name"
+        inputProps={{ "aria-label": "description" }}
+        name="name"
+        value={formData.name || selectedName}
+        onChange={handleChange}
+      />
+      <Input
+        placeholder="quantity grams"
+        inputProps={{ "aria-label": "description" }}
+        name="quantity_grams"
+        value={formData.quantity_grams || ""}
+        onChange={handleChange}
+      />
+      <Input
+        placeholder="quantity units"
+        inputProps={{ "aria-label": "description" }}
+        name="quantity_units"
+        value={formData.quantity_units || ""}
+        onChange={handleChange}
+      />
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <ThemeProvider theme={materialTheme}>
+          <KeyboardDatePicker
+            margin="normal"
+            id="date-picker-dialog"
+            format="MM/dd/yyyy"
+            name="expiration_date"
+            value={selectedDate || ""}
+            onChange={handleDateChange}
+            KeyboardButtonProps={{
+              "aria-label": "change date",
+            }}
+          />
+        </ThemeProvider>
+      </MuiPickersUtilsProvider>
+      <div className="modalBottom">
+        <button className="button modal" onClick={handleSubmit}>
+          edit
+        </button>
+        <div className="modalBottom1">
+          <button className="button modal" onClick={handleSubmitConsume}>
+            consume
+          </button>
         </div>
-      </form>
+      </div>
+    </form>
     // </Grid>
   );
 }
