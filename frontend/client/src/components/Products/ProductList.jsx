@@ -216,7 +216,8 @@ const useToolbarStyles = makeStyles((theme) => ({
   title: {
     flex: "1 1 100%",
     fontSize: "1.7rem",
-    color: "#fff",
+    // color: "#fff",
+    color: "#000",
     textShadow: "1px 1px 2px #0ba718"
   },
 }));
