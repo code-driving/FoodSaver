@@ -14,7 +14,8 @@ module.exports = ({
   editProduct,
   deleteProduct,
   getSummary,
-  getPaticularUserProducts
+  getPaticularUserProducts,
+  editProductBoolean
 }) => {
   router.get("/", (req, res) => {
     getUserProducts()
@@ -88,6 +89,22 @@ module.exports = ({
       product_id,
       quantity_grams,
       quantity_units
+    )
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
+  router.put("/Boolean", (req, res) => {
+   console.log('66666666666666666',req.body)
+    const { product_id } = req.body;
+    editProductBoolean(
+      product_id
     )
       .then((data) => {
         res.json(data);

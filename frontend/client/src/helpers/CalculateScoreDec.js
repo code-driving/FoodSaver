@@ -2,11 +2,14 @@ export default function CalculateScoreDec(productsState , currentScore) {
     let newScore = currentScore
     let expireditemsgrams=[]
     let expireditemsunits=[]
+    let setTrue = []
     for (let i = 0 ; i < productsState.length ; i++) {
-        if (productsState[i]['dayLeft'] === "Expired" && productsState[i]['quantity_units'] === 0){
+        if (productsState[i]['dayLeft'] === "Expired" && productsState[i]['quantity_units'] === 0 && productsState[i]['addedtosummary'] === false){
             expireditemsgrams.push(productsState[i]['quantity_grams'])
-        } else if(productsState[i]['dayLeft'] === "Expired" && productsState[i]['quantity_grams'] === 0){
+            setTrue.push(productsState[i]['id'])
+        } else if(productsState[i]['dayLeft'] === "Expired" && productsState[i]['quantity_grams'] === 0 && productsState[i]['addedtosummary'] === false){
             expireditemsunits.push(productsState[i]['quantity_units'])
+            setTrue.push(productsState[i]['id'])
         }
     }
     for (let i = 0 ; i < expireditemsgrams.length ; i++) {
@@ -16,7 +19,7 @@ export default function CalculateScoreDec(productsState , currentScore) {
         newScore -= ( expireditemsunits[i] * 2)
       }
 
-    return newScore;
+    return {newScore,setTrue};
 }
 
 

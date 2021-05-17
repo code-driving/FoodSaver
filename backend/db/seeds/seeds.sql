@@ -8,9 +8,9 @@ INSERT INTO products (name, expiration_date, user_id, quantity_grams, quantity_u
 VALUES ('potato', '2021-08-01', 1, 0, 15),
 ('cheese', '2021-06-01', 1, 2, 0 ),
 ('grapes', '2021-06-01', 1, 14, 0),
-('milk', '2021-09-01', 2, 30, 0),
-('cucumber', '2021-05-27', 2, 0, 5),
-('butter', '2021-05-29', 3, 14 , 0),
+('milk', '2021-04-01', 1, 30, 0),
+('cucumber', '2021-04-27', 1, 0, 5),
+('butter', '2021-05-29', 1, 14 , 0),
 ('strawberries', '2021-05-25', 3 , 0 , 15);
 
 
@@ -23,6 +23,9 @@ VALUES ('CRISPY BUTTERMIL FRIED CHICKEN',1, 640803,'https://spoonacular.com/reci
 
 
 INSERT INTO product_summary ( name, user_id, product_id, grams_wasted, units_wasted, grams_saved, units_saved)
-VALUES ('potato',1, 1, 0, 7, 0, 5),
-('cheese',1,2, 3,  0, 4, 0),
-('grapes',1,3, 4, 0, 9, 0);
+VALUES ('potato',1, 1, 0, 10, 0, 15),
+('cheese',1, 2, 3,  0, 15, 0),
+('grapes',1,3, 5, 0, 20, 0),
+('milk', 1, 4, 2, 0, 12,0),
+('cucumber',1, 4, 0, 5, 0,10),
+('butter', 1,5, 3,0,9 ,0)
