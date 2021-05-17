@@ -114,9 +114,8 @@ export default function ProductForm(props) {
       formData: [{}],
     });
   };
-
+  // console.log("selectedName from modal -->", selectedName);
   return (
-    // <Grid container justify="space-around" alignItems="center">
     <form
       className={classes.root}
       noValidate
@@ -127,7 +126,8 @@ export default function ProductForm(props) {
         placeholder="product name"
         inputProps={{ "aria-label": "description" }}
         name="name"
-        value={formData.name || selectedName}
+        value={formData.name || ""}
+        // value={formData.name || ""}
         onChange={handleChange}
       />
       <Input
@@ -170,6 +170,5 @@ export default function ProductForm(props) {
         </div>
       </div>
     </form>
-    // </Grid>
   );
 }
