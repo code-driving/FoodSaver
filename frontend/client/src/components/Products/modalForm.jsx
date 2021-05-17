@@ -27,7 +27,6 @@ const materialTheme = createMuiTheme({
       switchHeader: {
         backgroundColor: "white",
         color: "#802026",
-        lineHeight: "0.9",
       },
       dayLabel: {
         color: "#802026",
