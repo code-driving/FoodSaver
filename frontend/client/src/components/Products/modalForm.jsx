@@ -29,7 +29,7 @@ const materialTheme = createMuiTheme({
       },
       dayLabel: {
         color: "#802026",
-      }
+      },
     },
     MuiPickersDay: {
       day: {
@@ -113,7 +113,7 @@ export default function ProductForm(props) {
       formData: [{}],
     });
   };
-
+  // console.log("selectedName from modal -->", selectedName);
   return (
     <form
       className={classes.root}
@@ -125,7 +125,8 @@ export default function ProductForm(props) {
         placeholder="product name"
         inputProps={{ "aria-label": "description" }}
         name="name"
-        value={formData.name || selectedName}
+        value={formData.name || ""}
+        // value={formData.name || ""}
         onChange={handleChange}
       />
       <Input
