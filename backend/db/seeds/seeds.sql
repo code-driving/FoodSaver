@@ -15,7 +15,7 @@ VALUES ('potato', '2021-08-01', 1, 0, 15),
 
 
 INSERT INTO saved_recipes (recipie_name, user_id, recipe_id ,imageSRC)
-VALUES ('CRISPY BUTTERMIL FRIED CHICKEN',1, 640803,'https://spoonacular.com/recipeImages/640803-556x370.jpg'),
+VALUES ('CRISPY BUTTERMILK FRIED CHICKEN',1, 640803,'https://spoonacular.com/recipeImages/640803-556x370.jpg'),
 ('EASY CHICKEN POT PIE',1, 641901,'https://spoonacular.com/recipeImages/641901-556x370.jpg'),
 ('DETOX ORANGE CARROT JUICE',1, 641443,'https://spoonacular.com/recipeImages/641443-556x370.jpg'),
 ('Pizza',2, 4 , ''),
@@ -23,7 +23,7 @@ VALUES ('CRISPY BUTTERMIL FRIED CHICKEN',1, 640803,'https://spoonacular.com/reci
 
 
 INSERT INTO product_summary ( name, user_id, product_id, grams_wasted, units_wasted, grams_saved, units_saved)
-VALUES ('potato',1, 1, 0, 10, 0, 15),
+VALUES ('potato',1, 1, 0, 0, 0, 15),
 ('cheese',1, 2, 3,  0, 15, 0),
 ('grapes',1,3, 5, 0, 20, 0),
 ('milk', 1, 4, 0, 0, 12,0),
