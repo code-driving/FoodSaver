@@ -14,7 +14,7 @@ export default function useApplicationData() {
     products: [],
     recipes: [],
     summary: [],
-   
+    score: 100
   });
 
   const localId = localStorage.getItem("token");
@@ -71,7 +71,7 @@ export default function useApplicationData() {
           
       }
 
-     return axios.put(`/api/summary/`, value).then((res) => {
+      return axios.put(`/api/summary/`, value).then((res) => {
       EditProduct(newstate)
     
       const newScore = CalculateScoreInc(state.users[0]['score'],value.quantity_units,value.quantity_grams)
@@ -159,8 +159,8 @@ const updateSummary = (id) => {
       for (let i = 0; i < productIDs.length ; i++){
         promises.push(axios.put(`/api/products/Boolean`, {product_id:productIDs[i]} ).then((res) => {
           returndata.push(res);
-         })
-       )  
+          })
+        )  
       }
 
       Promise.all(promises).then(() => { 

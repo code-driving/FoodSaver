@@ -17,11 +17,11 @@ export default function CalculateScoreDec(productsState , currentScore) {
         }
     }
     for (let i = 0 ; i < expireditemsgrams.length ; i++) {
-      newScore -= expireditemsgrams[i]
+        newScore -= expireditemsgrams[i]
     }
     for (let i = 0 ; i < expireditemsunits.length ; i++) {
         newScore -= ( expireditemsunits[i] * 2)
-      }
+        }
 
     return {newScore,setTrue,objectarray};
 }

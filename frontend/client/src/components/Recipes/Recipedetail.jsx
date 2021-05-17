@@ -75,8 +75,9 @@ export default function RecipeDetail(props) {
   console.log("value from Recipe Detail", value);
 
   const EachStep = steps.map((step, index) => {
-    return <li key={index}>{step.step}</li>;
+    return <li key={index}>{step.step}</li> 
   });
+  
   return (
     <section className="recipe-details-container">
       <h1 style={{alignSelf: 'center'}}>Recipe Details</h1>

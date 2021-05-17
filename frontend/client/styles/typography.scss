@@ -31,22 +31,54 @@ a:focus {
 .button:hover,
 .button:active {
   cursor: pointer;
-  background-color: #706B64;
+  background-color: #706b64;
   color: $white;
 }
 .button:active {
   @include inset;
 }
 
-
 h1 {
   color: orange;
 }
-body > div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogContent-root.MuiPickersModal-dialog > div > div.MuiPickersBasePicker-pickerView > div:nth-child(1) > div.MuiPickersCalendarHeader-switchHeader > div > p {
-  line-height: 0.9
+body
+  > div.MuiDialog-root
+  > div.MuiDialog-container.MuiDialog-scrollPaper
+  > div
+  > div.MuiDialogContent-root.MuiPickersModal-dialog
+  > div
+  > div.MuiPickersBasePicker-pickerView
+  > div:nth-child(1)
+  > div.MuiPickersCalendarHeader-switchHeader
+  > div
+  > p {
+  line-height: 0.9;
 }
 
+body
+  > div:nth-child(7)
+  > div.MuiDialog-container.MuiDialog-scrollPaper
+  > div
+  > div.MuiDialogContent-root.MuiPickersModal-dialog
+  > div
+  > div.MuiPickersBasePicker-pickerView
+  > div:nth-child(1)
+  > div.MuiPickersCalendarHeader-switchHeader
+  > div
+  > p {
+  line-height: 0.9;
+}
 
-body > div.MuiDialog-root-74 > div.MuiDialog-container-77.MuiDialog-scrollPaper-75 > div > div.MuiDialogContent-root-256.MuiPickersModal-dialog-72 > div > div.MuiPickersBasePicker-pickerView-260 > div:nth-child(1) > div.MuiPickersCalendarHeader-switchHeader-334 > div > p {
-  line-height: 0.9
+body
+  > div.MuiDialog-root-74
+  > div.MuiDialog-container-77.MuiDialog-scrollPaper-75
+  > div
+  > div.MuiDialogContent-root-256.MuiPickersModal-dialog-72
+  > div
+  > div.MuiPickersBasePicker-pickerView-260
+  > div:nth-child(1)
+  > div.MuiPickersCalendarHeader-switchHeader-334
+  > div
+  > p {
+  line-height: 0.9;
 }
