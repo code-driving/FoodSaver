@@ -34,7 +34,6 @@ export default function useApplicationData() {
       let product_id = response.data.id;
       let value2 = {...value, product_id:product_id}
       return axios.post(`/api/summary/`, value2).then((response) => {
-          console.log('addddd res', response.data[0])
           setState((prev) => ({ ...prev, summary:[...prev.summary, response.data[0]]}))
       })
     });
@@ -50,7 +49,6 @@ export default function useApplicationData() {
   const EditProduct = (value) => {
    
     return axios.put(`/api/products`, value).then((res) => {
-      console.log('22222222222221111',res)
       editSingleProductState(res,state,setState)
     });
   };
@@ -75,11 +73,24 @@ export default function useApplicationData() {
       }
 
      return axios.put(`/api/summary/`, value).then((res) => {
+       console.log('555555555555',res['data'][0])
       EditProduct(newstate)
     
       const newScore = CalculateScoreInc(state.users[0]['score'],value.quantity_units,value.quantity_grams)
       const data = {score :newScore, user_id : localId} 
       updateUser(data)
+      
+      //update Summary State
+      let newstate2 = []
+      for (let j=0; j < state.summary.length; j++) {
+        if (state.summary[j]['product_id']!= productID) {
+          newstate2.push(state.summary[j]);
+        }
+      }
+      console.log('66666666666666',newstate2,res['data'][0])
+      let newcombined =[...newstate2,res['data'][0]]
+      console.log('combinedddddddddddddddddddddddddd', newcombined)
+      setState((prev) => ({ ...prev, summary: newcombined }));
     });
   };
 

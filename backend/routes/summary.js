@@ -44,7 +44,7 @@ module.exports = ({ EditSummary, getOnlySummary, getUserSummary ,addSummary, Edi
       units_saved 
     )
       .then((result) => {
-        res.status(200).send("Posted Summary");
+        res.json(result);
       })
       .catch((err) =>
         res.json({
