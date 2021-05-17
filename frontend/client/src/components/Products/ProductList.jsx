@@ -61,7 +61,7 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       // Purple and green play nicely together.
-      main: purple[500],
+      main: "#802026",
     },
     secondary: {
       // This is green.A700 as hex.
@@ -201,6 +201,7 @@ const useToolbarStyles = makeStyles((theme) => ({
   root: {
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(1),
+    textSize: "1.3rem",
   },
   highlight:
     theme.palette.type === "light"
@@ -214,6 +215,9 @@ const useToolbarStyles = makeStyles((theme) => ({
         },
   title: {
     flex: "1 1 100%",
+    fontSize: "1.7rem",
+    color: "#fff",
+    textShadow: "1px 1px 2px #0ba718"
   },
 }));
 
@@ -258,18 +262,18 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     backgroundColor: "#bf824f",
-    fontSize: "26px",
+    fontSize: "1.3rem",
   },
   paper: {
     width: "100%",
     marginBottom: theme.spacing(2),
     backgroundColor: "#bf824f",
-    fontSize: "26px",
+    fontSize: "1.3rem",
   },
   table: {
     minWidth: 750,
     backgroundColor: "#bf824f",
-    fontSize: "26px",
+    fontSize: "1.3rem",
   },
   visuallyHidden: {
     border: 0,
