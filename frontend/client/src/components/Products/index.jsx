@@ -18,7 +18,7 @@ export default function Products(props) {
     deleteProduct,
     setIngredientsItems,
     EditSummary,
-    EditProduct,
+    EditProduct
   } = props;
   const onSubmit = (formData) => {
     setProduct(formData);

@@ -24,10 +24,11 @@ export default function Application(props) {
     deleteRecipe,
     consumeProduct,
     EditProduct,
-    EditSummary,
+    EditSummary
   } = useApplicationData();
   const [ingredientsItems, setIngredientsItems] = useState("");
   const { products, recipes, summary, users } = state;
+  console.log('ggggggggg',users)
 
   return (
     <main className="layout">
@@ -67,7 +68,7 @@ export default function Application(props) {
             <RecipesDetails id={props.match.params.id}/>
           }} /> */}
             <Route exact path="/summary">
-              <Summary />
+              <Summary summary={summary} users={users} />
             </Route>
 
             <Route path="/login">

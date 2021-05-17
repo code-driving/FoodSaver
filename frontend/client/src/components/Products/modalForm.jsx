@@ -12,7 +12,48 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import "./ProductForm";
+import { createMuiTheme } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/styles";
+import "./modalForm.scss";
 
+const materialTheme = createMuiTheme({
+  overrides: {
+    MuiPickersToolbar: {
+      toolbar: {
+        backgroundColor: "#802026",
+      },
+    },
+    MuiPickersCalendarHeader: {
+      switchHeader: {
+        backgroundColor: "white",
+        color: "#802026",
+      },
+      dayLabel: {
+        textTransform: "uppercase",
+        color: "#802026",
+      },
+    },
+    MuiPickersDay: {
+      day: {
+        color: "#802026",
+      },
+      daySelected: {
+        backgroundColor: "#802026",
+        "&:hover": {
+          backgroundColor: "#802026",
+        },
+      },
+      current: {
+        color: "#802026",
+      },
+    },
+    MuiButton: {
+      label: {
+        color: "#802026",
+      },
+    },
+  },
+});
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -75,64 +116,60 @@ export default function ProductForm(props) {
   };
 
   return (
-    <Grid container justify="space-around" alignItems="center">
-      <form
-        className={classes.root}
-        noValidate
-        autoComplete="off"
-        onSubmit={handleSubmit}
-      >
-        <Input
-          placeholder="product name"
-          inputProps={{ "aria-label": "description" }}
-          name="name"
-          value={formData.name || selectedName}
-          onChange={handleChange}
-        />
-        <Input
-          placeholder="quantity grams"
-          inputProps={{ "aria-label": "description" }}
-          name="quantity_grams"
-          value={formData.quantity_grams || ""}
-          onChange={handleChange}
-        />
-        <Input
-          placeholder="quantity units"
-          inputProps={{ "aria-label": "description" }}
-          name="quantity_units"
-          value={formData.quantity_units || ""}
-          onChange={handleChange}
-        />
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    // <Grid container justify="space-around" alignItems="center">
+    <form
+      className={classes.root}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit}
+    >
+      <Input
+        placeholder="product name"
+        inputProps={{ "aria-label": "description" }}
+        name="name"
+        value={formData.name || selectedName}
+        onChange={handleChange}
+      />
+      <Input
+        placeholder="quantity grams"
+        inputProps={{ "aria-label": "description" }}
+        name="quantity_grams"
+        value={formData.quantity_grams || ""}
+        onChange={handleChange}
+      />
+      <Input
+        placeholder="quantity units"
+        inputProps={{ "aria-label": "description" }}
+        name="quantity_units"
+        value={formData.quantity_units || ""}
+        onChange={handleChange}
+      />
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <ThemeProvider theme={materialTheme}>
           <KeyboardDatePicker
             margin="normal"
             id="date-picker-dialog"
-            // label="Date picker dialog"
             format="MM/dd/yyyy"
             name="expiration_date"
             value={selectedDate || ""}
-            // value={selectedItemDate}
             onChange={handleDateChange}
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
           />
-        </MuiPickersUtilsProvider>
-        <div className="modalBottom">
-          <Button variant="contained" color="secondary" onClick={handleSubmit}>
-            Edit Ingredient
-          </Button>
-          <div className="modalBottom1">
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={handleSubmitConsume}
-            >
-              Use Ingredient
-            </Button>
-          </div>
+        </ThemeProvider>
+      </MuiPickersUtilsProvider>
+      <div className="modalBottom">
+        <button className="button modal" onClick={handleSubmit}>
+          edit
+        </button>
+        <div className="modalBottom1">
+          <button className="button modal" onClick={handleSubmitConsume}>
+            consume
+          </button>
         </div>
-      </form>
-    </Grid>
+      </div>
+    </form>
+    // </Grid>
   );
 }
