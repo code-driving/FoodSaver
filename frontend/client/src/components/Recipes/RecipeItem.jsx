@@ -11,12 +11,12 @@ export default function RecipeItem(props) {
     <div className='item'>
       <Link to={`/recipes/${props.id}`}>
       <img src={props.image} alt={props.alt} ></img>
-      <h6>{props.title}</h6> </Link> 
-     <hr/> 
-     <ul> 
+      <h4>{props.title}</h4></Link> 
+      <hr/> 
+      <ul> 
       {usedIng}
       {missedIng}
-     </ul>
+      </ul>
     </div>
   )
 }

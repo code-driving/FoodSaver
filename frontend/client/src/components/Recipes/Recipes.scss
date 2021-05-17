@@ -7,7 +7,6 @@
 h1,
 h2 {
   color: orange;
-  // margin-left: 0.3em;
   margin: 1rem 0 1rem;
   text-align: center;
   font-weight: bold;
@@ -47,7 +46,6 @@ img {
   object-fit: cover;
 }
 
-
 hr {
   height: 0.1em;
   background-color: black;
@@ -59,8 +57,6 @@ ul {
 
 input {
   width: 51vw;
-  // margin-left: 0.68em;
-  // margin-right: 0.5em;
 }
 
 .recipe-details-container {
@@ -69,6 +65,9 @@ input {
 }
 .recipe_detail li {
   color: rgb(255, 255, 255);
+}
+.recipe_detail {
+  font-size: 1.2rem;
 }
 
 .recipe-image {

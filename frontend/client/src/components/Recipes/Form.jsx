@@ -16,7 +16,7 @@ export default function Form(props) {
 
   return (
     <form className="Form" onSubmit={handleSubmit}>
-      <h1 style={{marginBottom: '1.5rem'}}>Enter ingredients to search</h1>
+      <h1 style={{marginBottom: '2rem'}}>Enter ingredients to search</h1>
       <input
           type="text"
           name='ingredients'

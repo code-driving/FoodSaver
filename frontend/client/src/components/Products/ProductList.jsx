@@ -258,15 +258,18 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     backgroundColor: "#bf824f",
+    fontSize: "26px",
   },
   paper: {
     width: "100%",
     marginBottom: theme.spacing(2),
     backgroundColor: "#bf824f",
+    fontSize: "26px",
   },
   table: {
     minWidth: 750,
     backgroundColor: "#bf824f",
+    fontSize: "26px",
   },
   visuallyHidden: {
     border: 0,

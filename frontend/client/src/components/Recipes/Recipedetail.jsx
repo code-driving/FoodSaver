@@ -83,7 +83,6 @@ export default function RecipeDetail(props) {
       <h1 style={{alignSelf: 'center'}}>Recipe Details</h1>
       <div>
         <img src={img} alt={"food image"} className="recipe-image"></img>
-        {/* <div style={{ marginLeft: 10 }}> */}
         <div className="recipe_detail">
           <h2>Recipe Info</h2>
           <ul>

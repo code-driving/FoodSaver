@@ -14,7 +14,6 @@ import {
 import "./ProductForm";
 import { createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
-import "./modalForm.scss";
 
 const materialTheme = createMuiTheme({
   overrides: {
