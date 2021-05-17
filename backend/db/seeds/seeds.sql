@@ -26,6 +26,6 @@ INSERT INTO product_summary ( name, user_id, product_id, grams_wasted, units_was
 VALUES ('potato',1, 1, 0, 10, 0, 15),
 ('cheese',1, 2, 3,  0, 15, 0),
 ('grapes',1,3, 5, 0, 20, 0),
-('milk', 1, 4, 2, 0, 12,0),
-('cucumber',1, 4, 0, 5, 0,10),
-('butter', 1,5, 3,0,9 ,0)
+('milk', 1, 4, 0, 0, 12,0),
+('cucumber',1, 5, 0, 0, 0,10),
+('butter', 1,6, 3,0,9 ,0)

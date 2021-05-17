@@ -3,11 +3,19 @@ import { useState, Fragment } from 'react'
 import ScrollToTop from "../ScrollToTop/index"
 
 
+
 export default function Summary(props) {
   
   const { summary ,users } = props;
 
-  console.log('aaaa',users)
+  let name= ''
+  let score = 0
+ 
+  if (users){
+    name= users[0]['name']
+    score = users[0]['score']
+  }
+
   let tabledata=props.summary.map(sum=> (
     <tr>
           <td>{sum.name}</td>
@@ -22,7 +30,7 @@ export default function Summary(props) {
     
     <section>
       <h1>Summary Page</h1>
-      <h3> Hello {users[0]['name']} Your Current Score is: <strong>{users[0]['score']}</strong> </h3>
+      <h3> Hello {name} Your Current Score is: <strong>{score}</strong> </h3>
 
       <table>
         <tr>
