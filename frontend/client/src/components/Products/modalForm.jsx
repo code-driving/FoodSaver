@@ -31,7 +31,7 @@ const materialTheme = createMuiTheme({
       dayLabel: {
         textTransform: "uppercase",
         color: "#802026",
-      },
+      }
     },
     MuiPickersDay: {
       day: {
@@ -116,7 +116,6 @@ export default function ProductForm(props) {
   };
 
   return (
-    // <Grid container justify="space-around" alignItems="center">
     <form
       className={classes.root}
       noValidate
@@ -170,6 +169,5 @@ export default function ProductForm(props) {
         </div>
       </div>
     </form>
-    // </Grid>
   );
 }
