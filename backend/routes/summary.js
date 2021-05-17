@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = ({ EditSummary, getOnlySummary, getUserSummary ,addSummary}) => {
+module.exports = ({ EditSummary, getOnlySummary, getUserSummary ,addSummary, EditSummaryWaste}) => {
   router.get("/", (req, res) => {
     getOnlySummary()
       .then((summary) => {
@@ -75,6 +75,37 @@ module.exports = ({ EditSummary, getOnlySummary, getUserSummary ,addSummary}) =>
         })
       );
   });
+
+  router.put("/waste", (req, res) => {
+    const {
+      name,
+      user_id,
+      id,
+      grams_wasted, 
+      units_wasted
+    } = req.body;
+    console.log( 'qqqqqqqqqqqppppppppp1111111',name,
+      user_id,
+      id,
+      grams_wasted, 
+      units_wasted)
+    EditSummaryWaste(
+      name,
+      user_id,
+      id,
+      grams_wasted,
+      units_wasted 
+    )
+      .then((result) => {
+        res.status(200).send("Posted Summary");
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
 
   return router;
 };

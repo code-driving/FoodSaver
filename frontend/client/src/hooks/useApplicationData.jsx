@@ -7,6 +7,7 @@ import CalculateScoreDec from "../helpers/CalculateScoreDec";
 import editSingleProduct from "../helpers/editsingleproduct"
 
 
+
 export default function useApplicationData() {
   const [state, setState] = useState({
     users: [],
@@ -138,20 +139,21 @@ export default function useApplicationData() {
         products: products.data,
         recipes: recipes.data,
         summary: summary.data,
-      }));
-    });
+      }))
+    })
   }, []);
 
   
-  useEffect(() => {
-
+const updateSummary = (id) => {
+    console.log('8888888888888888888888888888')
     if (state.users.length > 0) {
       let IdAndScore = CalculateScoreDec(state['products'],state['users'][0]['score'])
       console.log(IdAndScore)
       let userdata={ score:IdAndScore.newScore, user_id:localId}
       updateUser(userdata)
       let productIDs=IdAndScore.setTrue
-      //Run Request in parallel
+     console.log('pppppppppppppppppppppp')
+      //Run Request in parallel and marks as added to summary true
       let returndata = [];
       let promises = [];
       for (let i = 0; i < productIDs.length ; i++){
@@ -161,13 +163,33 @@ export default function useApplicationData() {
         )  
       }
 
-      // Promise.all(promises).then(() => {
-          
-      // })
+      Promise.all(promises).then(() => { 
+        //update state here
+        console.log('Done',promises)
+      })
+      
+      let summaryobject =IdAndScore.objectarray;
+      console.log('222222222222222222',summaryobject)
+      // Add wasted to summary
+      
+
+      let returndata2 = [];
+      let promises2 = [];
+      for (let j = 0; j < productIDs.length ; j++){
+        promises2.push(axios.put(`/api/summary/waste`, summaryobject[j] ).then((res2) => {
+          returndata2.push(res2);
+         })
+       )  
+      }
+      Promise.all(promises2).then(() => { 
+        //update state here
+        console.log('Done',promises2)
+      })
+
      
     
     }
-  }, []);
+  };
   
   return {
     state,
@@ -177,7 +199,9 @@ export default function useApplicationData() {
     deleteRecipe,
     consumeProduct,
     EditProduct,
-    EditSummary
+    EditSummary,
+    updateUser,
+    updateSummary
   };
 
 

@@ -101,7 +101,6 @@ module.exports = ({
   });
 
   router.put("/Boolean", (req, res) => {
-   console.log('66666666666666666',req.body)
     const { product_id } = req.body;
     editProductBoolean(
       product_id

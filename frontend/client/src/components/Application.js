@@ -24,7 +24,8 @@ export default function Application(props) {
     deleteRecipe,
     consumeProduct,
     EditProduct,
-    EditSummary
+    EditSummary,
+    updateSummary
   } = useApplicationData();
   const [ingredientsItems, setIngredientsItems] = useState("");
   const { products, recipes, summary, users } = state;
@@ -35,7 +36,7 @@ export default function Application(props) {
       <Router>
         <ScrollTop />
         <div className="left">
-          <NavBar />
+          <NavBar updateSummary={updateSummary} />
         </div>
         <div className="right">
           <Switch>

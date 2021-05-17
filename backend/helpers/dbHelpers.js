@@ -210,6 +210,22 @@ module.exports = (db) => {
         .catch((err) => err);
   };
 
+
+  const EditSummaryWaste= (name, user_id, id,  grams_wasted, units_wasted) => {
+     console.log('insside', name, user_id, id,  grams_wasted, units_wasted)
+    const query = {
+      text: `UPDATE product_summary 
+             SET name=$1, user_id=$2, product_id= $3, grams_wasted=$4, units_wasted = $5
+             WHERE product_id=$3 RETURNING *`,
+             values: [name, user_id, id, grams_wasted, units_wasted],
+    };
+    return db
+        .query(query)
+        .then((result) => result.rows)
+        .catch((err) => err);
+  };
+
+
   const addSummary= (name, user_id, product_id,  grams_saved, units_saved) => {
     const query = {
       text: `INSERT INTO product_summary ( name, user_id, product_id, grams_wasted, units_wasted, grams_saved, units_saved)
@@ -268,6 +284,7 @@ module.exports = (db) => {
     deleteProduct,
     addSummary,
     updatescore,
-    editProductBoolean
+    editProductBoolean,
+    EditSummaryWaste
   };
 };

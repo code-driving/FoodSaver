@@ -3,6 +3,7 @@ import { useState, Fragment } from 'react'
 import ScrollToTop from "../ScrollToTop/index"
 import './Summary.scss'
 
+
 export default function Summary(props) {
   
   const { summary, users } = props;
