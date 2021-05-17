@@ -26,8 +26,7 @@ export default function ProductForm(props) {
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
-  console.log("props fro modal", props);
-  const { selectedName } = props;
+  const { selectedName, selectedItemDate } = props;
   const classes = useStyles();
   const [formData, setFormData] = useState({
     name: "",
@@ -112,6 +111,7 @@ export default function ProductForm(props) {
             format="MM/dd/yyyy"
             name="expiration_date"
             value={selectedDate || ""}
+            // value={selectedItemDate}
             onChange={handleDateChange}
             KeyboardButtonProps={{
               "aria-label": "change date",

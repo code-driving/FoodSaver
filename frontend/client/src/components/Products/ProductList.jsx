@@ -287,7 +287,7 @@ export default function ProductList(props) {
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [selectedName, setSelectedName] = React.useState([]);
-  const [selectedDate, setSelectedDate] = React.useState([]);
+  const [selectedItemDate, setSelectedItemDate] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -374,10 +374,10 @@ export default function ProductList(props) {
   const handleClick = (event, id, name, date) => {
     const selectedIndex = selected.indexOf(id);
     const selectedIndexName = selectedName.indexOf(name);
-    const selectedIndexDate = selectedDate.indexOf(date);
+    const selectedIndexItemDate = selectedItemDate.indexOf(date);
     let newSelected = [];
     let newSelectedName = [];
-    let newSelectedDate = [];
+    let newSelectedItemDate = [];
 
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, id);
@@ -404,23 +404,27 @@ export default function ProductList(props) {
       );
     }
 
-    if (selectedIndexDate === -1) {
-      newSelectedDate = newSelectedDate.concat(selectedDate, date);
-    } else if (selectedIndexDate === 0) {
-      newSelectedDate = newSelectedDate.concat(selectedDate.slice(1));
-    } else if (selectedIndexDate === selectedDate.length - 1) {
-      newSelectedDate = newSelectedDate.concat(selectedDate.slice(0, -1));
-    } else if (selectedIndexDate > 0) {
-      newSelectedDate = newSelectedDate.concat(
-        selectedDate.slice(0, selectedIndexDate),
-        selectedDate.slice(selectedIndexDate + 1)
+    if (selectedIndexItemDate === -1) {
+      newSelectedItemDate = newSelectedItemDate.concat(selectedItemDate, date);
+    } else if (selectedIndexItemDate === 0) {
+      newSelectedItemDate = newSelectedItemDate.concat(
+        selectedItemDate.slice(1)
+      );
+    } else if (selectedIndexItemDate === selectedItemDate.length - 1) {
+      newSelectedItemDate = newSelectedItemDate.concat(
+        selectedItemDate.slice(0, -1)
+      );
+    } else if (selectedIndexItemDate > 0) {
+      newSelectedItemDate = newSelectedItemDate.concat(
+        selectedItemDate.slice(0, selectedIndexItemDate),
+        selectedItemDate.slice(selectedIndexItemDate + 1)
       );
     }
     setSelected(newSelected);
     setSelectedName(newSelectedName);
-    setSelectedDate(newSelectedDate);
+    setSelectedItemDate(newSelectedItemDate);
   };
-  console.log(selectedDate);
+  console.log(selectedItemDate);
   let ingredientString = ingredientsToString(selectedName);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -439,7 +443,7 @@ export default function ProductList(props) {
   const warning = (dayLeft) => {
     if (dayLeft === "Expired") {
       return "dot-red";
-    } else if (dayLeft === "1 day" || dayLeft.includes("hours")) {
+    } else if (dayLeft === "1 day" || dayLeft.includes("hour")) {
       return "dot-yellow";
     }
     return "dot-green";
@@ -568,7 +572,7 @@ export default function ProductList(props) {
           EditProduct={EditProduct}
           EditSummary={EditSummary}
           selected={selected}
-          rows={products}
+          selectedItemDate={selectedItemDate}
         ></Popup>
       </div>
     </ThemeProvider>

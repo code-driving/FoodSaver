@@ -12,6 +12,7 @@ export default function Popup(props) {
     EditProduct,
     EditSummary,
     selected,
+    selectedItemDate,
   } = props;
   let product_id = selected[0];
 
@@ -46,6 +47,7 @@ export default function Popup(props) {
             onSubmitEdit={onSubmitEdit}
             onSubmitconsume={onSubmitconsume}
             selectedName={selectedName}
+            selectedItemDate={selectedItemDate}
           />
         </DialogContent>
       </div>
