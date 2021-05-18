@@ -69,10 +69,12 @@ export default function ProductForm(props) {
   const { selectedName, selectedItemDate, setOpenPopUp } = props;
   const classes = useStyles();
   const [formData, setFormData] = useState({
-    name: "",
+    name: selectedName[0],
     quantity_grams: 0,
     quantity_units: 0,
   });
+ console.log('SelectedNAME',selectedName)
+ console.log('Selecteddate',selectedItemDate)
 
   const localId = localStorage.getItem("token");
 
@@ -115,7 +117,7 @@ export default function ProductForm(props) {
       formData: [{}],
     });
   };
-  // console.log("selectedName from modal -->", selectedName);
+  
   return (
     <form
       className={classes.root}

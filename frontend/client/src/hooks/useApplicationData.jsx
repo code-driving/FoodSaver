@@ -1,13 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import datefunction from "../helpers/date";
 import CalculateScoreInc from "../helpers/calculateScoreInc";
 import CalculateScoreDec from "../helpers/CalculateScoreDec";
 import editSingleProductState from "../helpers/editsingleproduct"
-import { startOfYesterday } from "date-fns/esm";
-
-
 
 export default function useApplicationData() {
   const [state, setState] = useState({
@@ -73,7 +69,6 @@ export default function useApplicationData() {
       }
 
      return axios.put(`/api/summary/`, value).then((res) => {
-       console.log('555555555555',res['data'][0])
       EditProduct(newstate)
     
       const newScore = CalculateScoreInc(state.users[0]['score'],value.quantity_units,value.quantity_grams)
@@ -128,7 +123,7 @@ export default function useApplicationData() {
   };
 
   const consumeProduct = (id) => {
-    console.log("product consumed", id);
+  
   };
 
   //We should not use localId at the end of each endpoint!
@@ -160,14 +155,11 @@ const updateSummary = (id) => {
   // update summary on expirting stuff
     if (state.users.length > 0) {
       let IdAndScore = CalculateScoreDec(state['products'],state['users'][0]['score'])
-      console.log(IdAndScore)
       let userdata={ score:IdAndScore.newScore, user_id:localId}
       updateUser(userdata)
       let productIDs=IdAndScore.setTrue
 
-
       let summaryobject =IdAndScore.objectarray;
-      console.log('888888888',summaryobject)
 
       //Run Request in parallel and marks as added to summary true
       let returndata = [];
@@ -199,12 +191,9 @@ const updateSummary = (id) => {
       }
 
       Promise.all(promises2).then(() => { 
-        console.log('return data promises',)
         // update waste summarystate
         if(returndata2.length>0){
-        console.log('ppppppppppppppppppppppp',returndata2[0]['data'][0])
         let productID = returndata2[0]['data'][0]['product_id']
-        console.log('product)D=',productID)
         let newstate2 = []
         for (let k=0; k < state.summary.length; k++) {
           if (state.summary[k]['product_id']!= productID) {
