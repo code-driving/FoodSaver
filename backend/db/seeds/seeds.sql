@@ -23,9 +23,9 @@ VALUES ('CRISPY BUTTERMIL FRIED CHICKEN',1, 640803,'https://spoonacular.com/reci
 
 
 INSERT INTO product_summary ( name, user_id, product_id, grams_wasted, units_wasted, grams_saved, units_saved)
-VALUES ('potato',1, 1, 0, 10, 0, 15),
-('cheese',1, 2, 3,  0, 15, 0),
-('grapes',1,3, 5, 0, 20, 0),
+VALUES ('potato',1, 1, 0,0,0,0),
+('cheese',1, 2, 0,0,0,0),
+('grapes',1,3, 0,0,0,0),
 ('milk', 1, 4, 0, 0, 12,0),
-('cucumber',1, 5, 0, 0, 0,10),
-('butter', 1,6, 3,0,9 ,0)
+('cucumber',1, 5, 0,0,0,0),
+('butter', 1,6, 0,0,0,0)
