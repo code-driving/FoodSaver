@@ -126,7 +126,6 @@ export default function useApplicationData() {
   
   };
 
-  //We should not use localId at the end of each endpoint!
   useEffect(() => {
     Promise.all([
       axios.get(`/api/users/${localId}`),
@@ -179,8 +178,6 @@ const updateSummary = (id) => {
       })
       
       // Add wasted to summary
-     
-
       let returndata2 = [];
       let promises2 = [];
       for (let j = 0; j < productIDs.length ; j++){
@@ -219,10 +216,4 @@ const updateSummary = (id) => {
     updateUser,
     updateSummary
   };
-
-
-
-
-  //6. create handleIncrement, handleDecrement, handleReset to update the score based on the product_saved, product_expired
-  //IF SCORE == 0 THEN HE WILL HAVE TO DONATE TO FOODBANK AND HAVE A POSSIBILITY TO RESET A SCORE
 }

@@ -56,8 +56,6 @@ export default function FavouriteItem(props) {
     overlayClassName: "overlay-custom-class-name",
   };
 
-  // confirmAlert(options);
-
   return (
     <>
       <section className="fav-container">
@@ -67,7 +65,6 @@ export default function FavouriteItem(props) {
               style={{
                 color: "orange",
                 margin: "1.5rem 0 1.5rem",
-                // fontSize: "1rem",
               }}
             >
               {props.recipie_name}
@@ -81,7 +78,6 @@ export default function FavouriteItem(props) {
           <button
             className="button"
             style={{ marginTop: "1.5rem" }}
-            // onClick={() => deleteRecipe(props.recipe_id)}
             onClick={() => confirmAlert(options)}
           >
             delete

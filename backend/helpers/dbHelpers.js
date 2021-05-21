@@ -23,7 +23,6 @@ module.exports = (db) => {
   };
 
   const addUser = (name, email, password, phone_number) => {
-    console.log(name, email, password, phone_number);
     const query = {
       text: `INSERT INTO users (name, email, password, phone_number) VALUES ($1, $2, $3, $4) RETURNING *`,
       values: [name, email, password, phone_number],
@@ -115,7 +114,6 @@ module.exports = (db) => {
  };
 
   const editProductBoolean = (product_id) => {
-    console.log('insidehelper',product_id)
     const query = {
      text: `UPDATE products
             SET AddedToSummary = True
@@ -212,7 +210,6 @@ module.exports = (db) => {
 
 
   const EditSummaryWaste= (name, user_id, id,  grams_wasted, units_wasted) => {
-     console.log('insside', name, user_id, id,  grams_wasted, units_wasted)
     const query = {
       text: `UPDATE product_summary 
              SET name=$1, user_id=$2, product_id= $3, grams_wasted=$4, units_wasted = $5

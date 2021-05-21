@@ -1,5 +1,4 @@
 const getProductsByUsers = (usersProducts) => {
-  console.log("usersProducts===> ", usersProducts);
   const productsByUsers = {};
   for (let product of usersProducts) {
     if (!productsByUsers[product.user_id]) {

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import "./details.scss";
 import useApplicationData from '../../hooks/useApplicationData'
 import { useParams, Redirect } from 'react-router-dom';
 import "./Recipes.scss"
@@ -42,16 +41,6 @@ export default function RecipeDetail(props) {
     }
   }, []);
 
-  // still working on this
-  ////////////////////////////////////
-  // const stepCheck = (steps) => {
-  //   const noInstuctions = ["No instructions found :("];
-  //   if (!steps) {
-  //     return noInstuctions;
-  //   }
-  //   return steps;
-  // };
-
   let steps = details.steps[0]["steps"];
 
   let name = details.info["title"];
@@ -63,7 +52,6 @@ export default function RecipeDetail(props) {
   let vegetarian = details.info["vegetarian"];
   let servings = details.info["servings"];
   const localId = localStorage.getItem("token");
-  // let recipe_id = props.match.params.id;
   console.log("id from useParams after call", id);
 
   const value = {

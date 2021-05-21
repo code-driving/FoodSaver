@@ -8,7 +8,6 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
-import './Products.scss'
 import ScrollToTop from "../ScrollToTop/index"
 
 export default function Products(props) {

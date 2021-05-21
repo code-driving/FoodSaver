@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-//we will use this hook in a form
 
 export default function useFormControl(initialFields, action) {
   const [formData, setFormData] = useState(initialFields)

@@ -48,10 +48,8 @@ module.exports = ({
 
   router.delete("/:id", (req, res) => {
     const id = Number(req.params.id);
-    console.log("id from route", id)
     deleteRecipe(id)
       .then((data) => {
-        console.log("data from route", data)
         res.json(data)
       })
       .catch((err) =>
