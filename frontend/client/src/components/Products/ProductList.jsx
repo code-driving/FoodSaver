@@ -189,7 +189,6 @@ const useToolbarStyles = makeStyles((theme) => ({
   title: {
     flex: "1 1 100%",
     fontSize: "1.7rem",
-    // color: "#fff",
     color: "#000",
     textShadow: "1px 1px 2px #0ba718"
   },
@@ -405,7 +404,6 @@ export default function ProductList(props) {
     setSelectedName(newSelectedName);
     setSelectedItemDate(newSelectedItemDate);
   };
-  console.log(selectedItemDate);
   let ingredientString = ingredientsToString(selectedName);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -463,7 +461,6 @@ export default function ProductList(props) {
                         onClick={(event) =>
                           handleClick(event, row.id, row.name, row.expiration)
                         }
-                        // onClick={(event) => handleNameClick(event, row.name)}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
